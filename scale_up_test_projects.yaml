@@ -1,0 +1,6 @@
+---
+ - hosts: AWX
+   become_user: azureuser
+   tasks:
+    - name: Scale Down test projects
+      shell: ./scale_up_ent64.sh
