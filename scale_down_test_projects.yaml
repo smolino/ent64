@@ -4,3 +4,8 @@
    tasks:
     - name: Scale Down test projects
       shell: ./scale_down_ent64.sh
+      register: output
+
+   - name: Print Results Tickets
+     debug:
+       msg: "{{output }}"
