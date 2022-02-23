@@ -3,4 +3,4 @@
   connection: local
   tasks:
     - name: Scale Down test projects
-      command: oc get deploy -A --no-headers | grep 'test-' | awk '{print $2,$1}' | while read DEPLOY NAMESPACE;do oc scale --replicas=0 deployment/$DEPLOY -n $NAMESPACE; done
+      command: /opt/./scale_down_ent64.sh
