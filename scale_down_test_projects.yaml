@@ -3,4 +3,4 @@
    become_user: azureuser
    tasks:
     - name: Scale Down test projects
-      command: /opt/./scale_down_ent64.sh
+      command: ./scale_down_ent64.sh
