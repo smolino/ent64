@@ -6,6 +6,6 @@
       shell: ./scale_down_ent64.sh
       register: output
 
-    - name: Print Results Tickets
+    - name: Print Scaled deployment
       debug:
        msg: "{{output }}"
