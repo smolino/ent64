@@ -4,3 +4,8 @@
    tasks:
     - name: Scale Up test projects
       shell: ./scale_up_ent64.sh
+       register: output
+
+    - name: Print Scaled deployment
+      debug:
+       msg: "{{output }}"
