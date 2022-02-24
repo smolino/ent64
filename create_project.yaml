@@ -1,0 +1,11 @@
+---
+ - hosts: AWX
+   become_user: azureuser
+   tasks:
+    - name: Create Project
+      shell: ./create_project.sh
+      register: output
+
+    - name: Print Results
+      debug:
+       msg: "{{output }}"
