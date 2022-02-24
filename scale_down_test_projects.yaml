@@ -9,3 +9,11 @@
     - name: Print Scaled deployment
       debug:
        msg: "{{output }}"
+       
+    - name: Scale Down qe projects
+      shell: ./scale_down_mainline.sh
+      register: output
+
+    - name: Print Scaled deployment
+      debug:
+       msg: "{{output }}"
