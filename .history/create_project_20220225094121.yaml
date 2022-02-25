@@ -11,5 +11,4 @@
     - name: Create Catalog
       template:
         src: ./templates/entando-catalog.j2
-        dest: entando-catalog.yaml
-        
+        dest:
