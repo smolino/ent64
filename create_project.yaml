@@ -7,8 +7,3 @@
 
     - name: Create Project
       shell: oc create namespace {{ namespaces }}
-      register: output
-
-    - name: Print Results
-      debug:
-       msg: "{{output }}"
