@@ -2,18 +2,27 @@
  - hosts: AWX
    become_user: azureuser
    tasks:
-    - name: Scale Down test projects
-      shell: ./scale_down_ent64.sh
-      register: output
+#    - name: Scale Down test projects
+#      shell: ./scale_down_ent64.sh
+#      register: output
 
-    - name: Print Scaled deployment
-      debug:
-       msg: "{{output }}"
+#    - name: Print Scaled deployment
+#      debug:
+#       msg: "{{output }}"
        
-    - name: Scale Down qe projects
-      shell: ./scale_down_mainline.sh
-      register: output
+#    - name: Scale Down qe projects
+#      shell: ./scale_down_mainline.sh
+#      register: output
 
-    - name: Print Scaled deployment
-      debug:
-       msg: "{{output }}"
+#    - name: Print Scaled deployment
+#      debug:
+#       msg: "{{output }}"
+
+    - name: Login in
+      shell: oc login {{ openshift_url }} -u admin -p {{ password }} --insecure-skip-tls-verify=true
+      
+    - name: Scale Down test projects
+      shell: oc get deploy -A --no-headers | grep 'test-' | awk '{print $2,$1}' | while read DEPLOY NAMESPACE;do oc scale --replicas=0 deployment/$DEPLOY -n $NAMESPACE; done
+      
+    - name: Scale Down qe projects
+      shell: oc get deploy -A --no-headers | grep 'qe-' | awk '{print $2,$1}' | while read DEPLOY NAMESPACE;do oc scale --replicas=0 deployment/$DEPLOY -n $NAMESPACE; done
