@@ -2,8 +2,12 @@
  - hosts: AWX
    become_user: azureuser
    tasks:
+    - name: Login in
+      shell: oc login {{ openshift_url }} -u admin -p {{ password1 }} --insecure-skip-tls-verify=true
+      register: output
+
     - name: Create Project
-      shell: ./create_project.sh
+      shell: oc login {{ openshift_url }} -u admin -p {{ password1 }} --insecure-skip-tls-verify=true
       register: output
 
     - name: Print Results
