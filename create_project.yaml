@@ -4,10 +4,9 @@
    tasks:
     - name: Login in
       shell: oc login {{ openshift_url }} -u admin -p {{ password1 }} --insecure-skip-tls-verify=true
-      register: output
 
     - name: Create Project
-      shell: oc login {{ openshift_url }} -u admin -p {{ password1 }} --insecure-skip-tls-verify=true
+      shell: oc create namespace {{ namespaces }}
       register: output
 
     - name: Print Results
