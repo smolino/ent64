@@ -12,6 +12,4 @@
       template:
         src: ./templates/entando-catalog.j2
         dest: entando-catalog.yaml
-
-    - name: Install operator on namespace scope
-      shell: oc apply -f entando-catalog.yaml -n {{ namespaces }}
+    

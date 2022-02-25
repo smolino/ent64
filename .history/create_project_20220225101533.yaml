@@ -14,4 +14,5 @@
         dest: entando-catalog.yaml
 
     - name: Install operator on namespace scope
-      shell: oc apply -f entando-catalog.yaml -n {{ namespaces }}
+
+      shell: oc apply -f entando-catalog.yaml -n {{}}
