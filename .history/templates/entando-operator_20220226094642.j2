@@ -19,7 +19,7 @@ metadata:
         {"apiVersion":"entando.org/v1","kind":"ProvidedCapability","metadata":{"name":"postgresql"},"spec":{"capability":"dbms","implementation":"postgresql","resolutionScopePreference":["Namespace","Dedicated","Cluster"]}}
       ]
     capabilities: Basic Install
-    olm.operatorNamespace: {{ namespaces }}
+    olm.operatorNamespace: test
     containerImage: >-
       registry.hub.docker.com/entando/entando-k8s-controller-coordinator@sha256:efc01cbcd2505549cc86f812d0e4cde0ddfc43daa422ccb001a5af9b6d5838c6
     createdAt: ''
@@ -27,6 +27,105 @@ metadata:
     description: >-
       Processes EntandoKeycloakServer, EntandoApp and EntandoPlugin custom
       resources and deploys the relevant containers in the Kubernetes cluster.
+    olm.operatorGroup: test-49q8g
+  resourceVersion: '109092457'
+  name: entando-k8s-operator.v7.0.0-pre1
+  uid: eec4e3c4-520e-4dda-a483-afc69ee91946
+  creationTimestamp: '2022-02-26T08:43:19Z'
+  generation: 1
+  managedFields:
+    - apiVersion: operators.coreos.com/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            'f:createdAt': {}
+            'f:alm-examples': {}
+            'f:description': {}
+            'f:capabilities': {}
+            .: {}
+            'f:containerImage': {}
+            'f:categories': {}
+            'f:certified': {}
+            'f:operatorframework.io/properties': {}
+            'f:support': {}
+            'f:repository': {}
+        'f:spec':
+          'f:version': {}
+          'f:maturity': {}
+          'f:provider':
+            .: {}
+            'f:name': {}
+          'f:links': {}
+          'f:install':
+            .: {}
+            'f:spec':
+              .: {}
+              'f:clusterPermissions': {}
+              'f:deployments': {}
+              'f:permissions': {}
+            'f:strategy': {}
+          'f:maintainers': {}
+          'f:description': {}
+          'f:installModes': {}
+          'f:minKubeVersion': {}
+          'f:icon': {}
+          'f:customresourcedefinitions':
+            .: {}
+            'f:owned': {}
+          .: {}
+          'f:relatedImages': {}
+          'f:cleanup':
+            .: {}
+            'f:enabled': {}
+          'f:apiservicedefinitions': {}
+          'f:selector': {}
+          'f:displayName': {}
+          'f:keywords': {}
+      manager: catalog
+      operation: Update
+      time: '2022-02-26T08:43:19Z'
+    - apiVersion: operators.coreos.com/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            'f:olm.operatorGroup': {}
+            'f:olm.operatorNamespace': {}
+            'f:olm.targetNamespaces': {}
+          'f:labels':
+            'f:operators.coreos.com/entando-k8s-operator.test': {}
+            'f:olm.api.b47b9a260624811f': {}
+            'f:olm.api.55cf48ad8ffd08be': {}
+            'f:olm.api.daf98962ae311c26': {}
+            'f:olm.api.6f3663aca8e5169a': {}
+            .: {}
+            'f:olm.api.c00d4eb372539b04': {}
+            'f:olm.api.30f6c6597148526f': {}
+            'f:olm.api.3a27ae52bcafd1f': {}
+        'f:status':
+          'f:lastUpdateTime': {}
+          'f:requirementStatus': {}
+          'f:phase': {}
+          'f:lastTransitionTime': {}
+          'f:conditions': {}
+          .: {}
+          'f:cleanup': {}
+          'f:message': {}
+          'f:reason': {}
+      manager: olm
+      operation: Update
+      time: '2022-02-26T08:43:22Z'
+  namespace: test
+  labels:
+    olm.api.30f6c6597148526f: provided
+    olm.api.3a27ae52bcafd1f: provided
+    olm.api.55cf48ad8ffd08be: provided
+    olm.api.6f3663aca8e5169a: provided
+    olm.api.b47b9a260624811f: provided
+    olm.api.c00d4eb372539b04: provided
+    olm.api.daf98962ae311c26: provided
+    operators.coreos.com/entando-k8s-operator.test: ''
 spec:
   customresourcedefinitions:
     owned:
