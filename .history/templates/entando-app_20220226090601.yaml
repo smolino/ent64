@@ -1,0 +1,9 @@
+apiVersion: entando.org/v1
+kind: EntandoApp
+metadata:
+  namespace: {{ namespaces }}
+spec:
+  name: my-app
+  environmentVariables: []
+  dbms: postgresql
+  ingressHostName: testenv.apps.mainline.eng-entando.com

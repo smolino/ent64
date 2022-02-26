@@ -19,7 +19,4 @@
     - name: Copy Operator Script
       template:
         src: ./templates/entando-operator.j2
-        dest: entando-operator.yaml
-
-    - name: Install operatorscript on namespace scope
-      shell: oc apply -f entando-operator.yaml -n {{ namespaces }}
+        dest: entando-catalog.yaml
