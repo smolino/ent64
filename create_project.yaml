@@ -18,8 +18,8 @@
 
     - name: Copy Operator Script
       template:
-        src: ./templates/namespace-resources.j2
-        dest: namespace-resources.yaml
+        src: ./templates/entando-subscription.j2
+        dest: entando-subscription.yaml
 
     - name: Install operatorscript on namespace scope
-      shell: oc apply -f namespace-resources.yaml -n {{ namespaces }}
+      shell: oc apply -f entando-subscription.yaml -n {{ namespaces }}
