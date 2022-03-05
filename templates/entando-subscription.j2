@@ -2,8 +2,8 @@ apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
   name: entando-k8s-operator
-  namespace: {{ namespaces }}
+  namespace: opensift-operators
 spec:
   name: entando-k8s-operator
   source: entando-catalog
-  sourceNamespace: {{ namespaces }}
+  sourceNamespace: openshift-operators
