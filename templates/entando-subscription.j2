@@ -1,0 +1,9 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: entando-k8s-operator
+  namespace: {{ namespace }}
+spec:
+  name: entando-k8s-operator
+  source: entando-catalog
+  sourceNamespace: {{ namespace }}
