@@ -23,3 +23,11 @@
 
     - name: Install operatorscript on namespace scope
       shell: oc apply -f entando-subscription.yaml -n {{ namespaces }}
+
+    - name: Copy Entando App Script
+      template:
+        src: ./templates/entando-app.j2
+        dest: entando-app.yaml
+
+    - name: Install Entando App on namespace scope
+      shell: oc apply -f entando-app.yaml -n {{ namespaces }}
