@@ -14,7 +14,7 @@
         dest: "{{ operatorconfig }}.yaml"
 
     - name: Install operatorscript on namespace scope
-      shell: oc apply -f {{operatorconfig}} -n {{ namespaces }}      
+      shell: oc apply -f {{operatorconfig}}.yaml -n {{ namespaces }}      
 
 #    - name: Create Catalog
 #      template:
