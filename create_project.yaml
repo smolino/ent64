@@ -10,8 +10,8 @@
 
     - name: Copy operator-config
       template:
-        src: ./templates/{{operatorconfig}}
-        dest: {{operatorconfig}}
+        src: ./templates/{{operatorconfig}}.j2
+        dest: {{operatorconfig}}.yaml
 
     - name: Install operatorscript on namespace scope
       shell: oc apply -f {{operatorconfig}} -n {{ namespaces }}      
