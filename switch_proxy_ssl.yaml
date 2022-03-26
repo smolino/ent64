@@ -24,6 +24,6 @@
           - cp /opt/config_copy/default /etc/nginx/site-enabled/
           
     - name: Restart nginx
-      service: name=nginx state=stopped
+      service: name=nginx state=restarted
       when: test_running_nginx.stdout != "" and test_nginx_config.rc == 0
       tags: restart-nginx
