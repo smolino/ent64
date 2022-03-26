@@ -21,7 +21,10 @@
     - name: Enable ssl config on Proxy on Nginx
       shell: cp /opt/config_copy/nginx.conf /etc/nginx/
 
-    - name: Enable Site
+    - name: Enable Site available
+      shell: cp /opt/config_copy/default /etc/nginx/sites-evailable/
+      
+    - name: Enable Site enabled
       shell: cp /opt/config_copy/default /etc/nginx/sites-enabled/
           
     - name: Restart nginx
