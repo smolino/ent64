@@ -22,7 +22,7 @@
       shell: cp /opt/config_copy/nginx.conf /etc/nginx/
 
     - name: Enable Site available
-      shell: cp /opt/config_copy/default /etc/nginx/sites-evailable/
+      shell: cp /opt/config_copy/default /etc/nginx/sites-available/
       
     - name: Enable Site enabled
       shell: cp /opt/config_copy/default /etc/nginx/sites-enabled/
