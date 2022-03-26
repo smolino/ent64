@@ -20,10 +20,10 @@
       shell: cp /opt/config_copy/nginx.conf.passthrough /etc/nginx/nginx.conf
 
     - name: Disable Site Enabled
-      shell: rm /etc/nginx/sites-enabled/default
+      shell: cp /opt/config_copy/blank /etc/nginx/sites-enabled/default
       
     - name: Disable site available
-      shell: rm /etc/nginx/sites-available/default
+      shell: cp /opt/config_copy/blank /etc/nginx/sites-available/default
           
     - name: Restart nginx
       service: name=nginx state=restarted
