@@ -18,10 +18,11 @@
       ignore_errors: True
       tags: restart-nginx
       
-    - name: Enable ssl config on Proxy
-      shell: |
-          - cp /opt/config_copy/nginx.conf /etc/nginx/
-          - cp /opt/config_copy/default /etc/nginx/site-enabled/
+    - name: Enable ssl config on Proxy on Nginx
+      shell: cp /opt/config_copy/nginx.conf /etc/nginx/
+
+    - name: Enable Site
+      shell: cp /opt/config_copy/default /etc/nginx/site-enabled/
           
     - name: Restart nginx
       service: name=nginx state=restarted
