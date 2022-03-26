@@ -22,7 +22,7 @@
       shell: cp /opt/config_copy/nginx.conf /etc/nginx/
 
     - name: Enable Site
-      shell: cp /opt/config_copy/default /etc/nginx/site-enabled/
+      shell: cp /opt/config_copy/default /etc/nginx/sites-enabled/
           
     - name: Restart nginx
       service: name=nginx state=restarted
