@@ -2,6 +2,7 @@
 ---
  - hosts: awx-proxy
    become_user: azureuser
+   become: true
    tasks:
     - name: Test for running nginx
       shell: ps axuf|grep 'nginx'|grep -v "grep" | tr -d "\n" | cat
