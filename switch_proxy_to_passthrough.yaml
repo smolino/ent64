@@ -1,5 +1,5 @@
 ---
- - hosts: awx-proxy
+ - hosts: awx_proxy
    become: yes
    tasks:
     - name: Test for running nginx
