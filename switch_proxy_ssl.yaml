@@ -1,6 +1,6 @@
 
 ---
- - hosts: awx-proxy
+ - hosts: awx_proxy
    #become_user: azureuser
    become: yes
    tasks:
