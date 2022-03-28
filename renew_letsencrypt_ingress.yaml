@@ -1,0 +1,7 @@
+---
+ - hosts: AWX
+   become_user: azureuser
+   tasks:
+
+    - name: Login in
+      shell: oc login {{ openshift_url }} -u admin -p {{ password }} --insecure-skip-tls-verify=true
