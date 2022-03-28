@@ -2,6 +2,14 @@
  - hosts: AWX
    become: yes
    tasks:
-
-    - name: Login in
-      shell: oc login {{ openshift_url }} -u admin -p {{ password }} --insecure-skip-tls-verify=true
+   
+    - name: renew certificate
+      shell: /etc/letsencrypt/certbot renew --cert-name=*.apps.mainline.eng-entando.com --dns-google-credentials config.json
+      register: cert_results
+      
+    - name: Print the results
+      debug:
+      msg: "{{ cert_results }}"
+    
+ #   - name: Login in
+ #     shell: oc login {{ openshift_url }} -u admin -p {{ password }} --insecure-skip-tls-verify=true
