@@ -4,7 +4,7 @@
    tasks:
    
     - name: renew certificate
-      command: chdir=/etc/letsencrypt certbot renew --cert-name=*.apps.mainline.eng-entando.com --dns-google-credentials config.json
+      command: chdir=/etc/letsencrypt certbot renew --cert-name=apps.mainline.eng-entando.com --dns-google-credentials config.json
       register: cert_results
       
     - name: Print the results
