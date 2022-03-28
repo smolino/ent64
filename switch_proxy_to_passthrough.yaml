@@ -24,7 +24,10 @@
       
     - name: Disable site available
       shell: cp /opt/config_copy/blank /etc/nginx/sites-available/default
-          
+
+    - name: Enable passthrough to http
+      shell: cp /opt/config_copy/passthrough.conf /etc/nginx/passthrough.conf
+
     - name: Restart nginx
       service: name=nginx state=restarted
       when: test_running_nginx.stdout != "" and test_nginx_config.rc == 0
