@@ -9,7 +9,7 @@
       
     - name: Print the results
       debug:
-      msg: "{{ cert_results }}"
+        msg: "{{ cert_results }}"
     
  #   - name: Login in
  #     shell: oc login {{ openshift_url }} -u admin -p {{ password }} --insecure-skip-tls-verify=true
