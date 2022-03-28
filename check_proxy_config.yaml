@@ -3,7 +3,7 @@
    become: yes
    tasks:
     - name: Check Proxy configuration
-      command: cat /etc/nginx/nginx.conf |grep /etc/nginx/passthrough.conf
+      shell: cat /etc/nginx/nginx.conf |grep /etc/nginx/passthrough.conf
       register: results
 
     - name: Print the results
