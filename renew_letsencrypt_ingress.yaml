@@ -1,6 +1,6 @@
 ---
  - hosts: AWX
-   become_user: azureuser
+   become: yes
    tasks:
 
     - name: Login in
