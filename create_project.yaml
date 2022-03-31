@@ -41,4 +41,4 @@
       shell: oc apply -f entando-app.yaml -n {{ namespaces }}
       
     roles:
-      - certificates
+    - certificates
