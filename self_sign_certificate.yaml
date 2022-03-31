@@ -1,3 +1,6 @@
 ---
-
-openssl req -x509 -nodes -days 365 -subj  "/C=CA/ST=QC/O=Company Inc/CN=example.com" -newkey rsa:2048 -keyout nginx-selfsigned.key -out nginx-selfsigned.crt;
+ - hosts: AWX
+   become_user: azureuser
+   tasks:
+    - name: Login in
+      shell: openssl req -x509 -nodes -days 365 -subj  "/C=IT/ST=QC/O=Entando Inc/CN=" -newkey rsa:2048 -keyout nginx-selfsigned.key -out nginx-selfsigned.crt;
