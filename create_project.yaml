@@ -39,8 +39,11 @@
 
     - name: Install Entando App on namespace scope
       shell: oc apply -f entando-app.yaml -n {{ namespaces }}
+      
+    - name: Generate Certificates
+      shell: openssl req -x509 -nodes -days 365 -subj  "/C=IT/ST=QC/O=Entando Inc/CN={{ appname }}.apps.{{ openshift_url }}" -newkey rsa:2048 -keyout {{ appname }}.apps.{{ openshift_url }}.key -out {{ appname }}.apps.{{ openshift_url }}.crt;
  
- - name: Setup Apache Tomcat and Maven
+ - name: Launch Roles
    hosts: AWX
    become_user: azureuser
    roles:
