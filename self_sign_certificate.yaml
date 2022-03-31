@@ -3,4 +3,5 @@
    become_user: azureuser
    tasks:
     - name: Login in
-      shell: openssl req -x509 -nodes -days 365 -subj  "/C=IT/ST=QC/O=Entando Inc/CN=" -newkey rsa:2048 -keyout nginx-selfsigned.key -out nginx-selfsigned.crt;
+      shell: openssl req -x509 -nodes -days 365 -subj  "/C=IT/ST=QC/O=Entando Inc/CN={{ appname }}.apps.{{ openshift_url }}" -newkey rsa:2048 -keyout {{ appname }}.apps.{{ openshift_url }}.key -out {{ appname }}.apps.{{ openshift_url }}.crt;
+      
