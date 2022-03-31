@@ -40,8 +40,8 @@
     - name: Install Entando App on namespace scope
       shell: oc apply -f entando-app.yaml -n {{ namespaces }}
  
-    - name: Setup Apache Tomcat and Maven
-      hosts: AWX
-      become_user: azureuser
-      roles:
-        - certificates
+ - name: Setup Apache Tomcat and Maven
+   hosts: AWX
+   become_user: azureuser
+   roles:
+     - certificates
