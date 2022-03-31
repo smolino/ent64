@@ -39,3 +39,6 @@
 
     - name: Install Entando App on namespace scope
       shell: oc apply -f entando-app.yaml -n {{ namespaces }}
+      
+    roles:
+      - certificates
