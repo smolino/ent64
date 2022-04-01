@@ -1,0 +1,11 @@
+apiVersion: entando.org/v1
+kind: EntandoApp
+metadata:
+  name: {{ namespaces }}
+  namespace: {{ namespaces }}
+spec:
+  environmentVariables: []
+  dbms: {{ dbms }}
+  name: {{ appname }}
+  ingressHostName: {{ appname }}.apps.{{ openshift_url }}
+  tlsSecretName: entando-tls-secret
