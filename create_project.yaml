@@ -8,11 +8,6 @@
     - name: Create Project
       shell: oc create namespace {{ namespaces }}
 
-    - name: Copy operator-config
-      template:
-        src: ./templates/{{operatorconfig}}.j2
-        dest: "{{operatorconfig}}.yaml"
-
     - name: Generate Certificates
       shell: openssl req -x509 -nodes -days 365 -subj  "/C=IT/ST=QC/O=Entando Inc/CN={{ appname }}.apps.{{ openshift_url }}" -newkey rsa:2048 -keyout {{ appname }}.apps.{{ openshift_url }}.key -out {{ appname }}.apps.{{ openshift_url }}.crt;
  
@@ -21,6 +16,11 @@
     
     - name: Remove certificates from host
       shell: rm {{ appname }}.apps.{{ openshift_url }}.key {{ appname }}.apps.{{ openshift_url }}.crt
+
+    - name: Copy operator-config
+      template:
+        src: ./templates/{{operatorconfig}}.j2
+        dest: "{{operatorconfig}}.yaml"
 
     - name: Install operatorscript on namespace scope
       shell: oc apply -f "{{operatorconfig}}.yaml" -n {{ namespaces }}      
