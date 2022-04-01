@@ -15,7 +15,7 @@
       shell: oc create secret tls entando-tls-secret --key="{{ appname }}.apps.{{ openshift_url }}.key" --cert="{{ appname }}.apps.{{ openshift_url }}.crt" -n {{ namespaces }}
     
     - name: Create ca secret
-      shell: oc create secret tls entando-ca-cert-secret --cert="{{ appname }}.apps.{{ openshift_url }}.crt" -n {{ namespaces }} 
+      shell: oc create secret tls entando-ca-cert-secret --key="{{ appname }}.apps.{{ openshift_url }}.key" --cert="{{ appname }}.apps.{{ openshift_url }}.crt" -n {{ namespaces }} 
     
     - name: Remove certificates from host
       shell: rm {{ appname }}.apps.{{ openshift_url }}.key {{ appname }}.apps.{{ openshift_url }}.crt
