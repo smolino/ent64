@@ -19,14 +19,8 @@
     - name: Run certificates script
       shell: ./certificates-script.sh
 
-    - name: Make script executable
-      shell: cat {{ appname }}.apps.{{ openshift_url }}.key | base64 > {{ appname }}.apps.{{ openshift_url }}1.key
-
-    - name: Make script executable
-      shell: cat {{ appname }}.apps.{{ openshift_url }}.crt | base64 > {{ appname }}.apps.{{ openshift_url }}1.crt
-
     - name: Create secret
-      shell: oc create secret tls entando-tls-secret --key="{{ appname }}.apps.{{ openshift_url }}1.key" --cert="{{ appname }}.apps.{{ openshift_url }}1.crt" -n {{ namespaces }}
+      shell: oc create secret tls entando-tls-secret --key="{{ appname }}.apps.{{ openshift_url }}.key" --cert="{{ appname }}.apps.{{ openshift_url }}.crt" -n {{ namespaces }}
     
     - name: Create ca secret
       shell: oc create secret tls entando-ca-cert-secret --key="ca.key" --cert="ca.crt" -n {{ namespaces }}
