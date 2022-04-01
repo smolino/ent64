@@ -12,7 +12,7 @@
       shell: openssl genrsa -out ca.key 4096
 
     - name: Generate CA Certificate
-      shell: openssl req -x509 -new -nodes -key ca.key -subj "/C=IT/ST=QC/O=Entando Inc/CN=apps-eng-entando.com" -sha512 -days 7300 -out ca.crt
+      shell: openssl req -x509 -new -nodes -key ca.key -subj "/C=IT/ST=QC/O=Entando Inc/CN=eng-entando.com" -sha512 -days 7300 -out ca.crt
       
     - name: Generate App key Certificate
       shell: openssl genrsa -out {{ appname }}.apps.{{ openshift_url }}.key 4096
