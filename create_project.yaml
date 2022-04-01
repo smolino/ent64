@@ -46,10 +46,10 @@
 
     - name: Copy Entando App Script
       template:
-        src: ./templates/entando-app.j2
-        dest: entando-app.yaml
+        src: ./templates/{{entandoappconfig}}.j2
+        dest: {{entandoappconfig}}.yaml
 
     - name: Install Entando App on namespace scope
-      shell: oc apply -f entando-app.yaml -n {{ namespaces }}
+      shell: oc apply -f {{entandoappconfig}}.yaml -n {{ namespaces }}
       
 
