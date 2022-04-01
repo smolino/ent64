@@ -18,12 +18,15 @@
 
     - name: Run certificates script
       shell: ./certificates-script.sh
+      
+    - name: Run certificates script
+      shell: openssl x509 -outform pem -in ca.crt -out RootCA.crt
 
     - name: Create secret
       shell: oc create secret tls entando-tls-secret --key="{{ appname }}.apps.{{ openshift_url }}.key" --cert="{{ appname }}.apps.{{ openshift_url }}.crt" -n {{ namespaces }}
     
     - name: Create ca secret
-      shell: oc create secret tls entando-ca-cert-secret --key="ca.key" --cert="ca.crt" -n {{ namespaces }}
+      shell: oc create secret tls entando-ca-cert-secret --key="ca.key" --cert="RootCA.crt" -n {{ namespaces }}
     
     - name: Remove certificates from host
       shell: rm {{ appname }}.apps.{{ openshift_url }}.key {{ appname }}.apps.{{ openshift_url }}.crt ca.key ca.crt
