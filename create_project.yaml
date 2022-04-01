@@ -19,17 +19,11 @@
     - name: Run certificates script
       shell: ./certificates-script.sh
 
-    - name: Convert crt to base64
-      shell: cat ca.crt | base64 > ca1.crt
-
-    - name: Create key to base64
-      shell: cat ca.key | base64 > ca1.key 
-
     - name: Create secret
       shell: oc create secret tls entando-tls-secret --key="{{ appname }}.apps.{{ openshift_url }}.key" --cert="{{ appname }}.apps.{{ openshift_url }}.crt" -n {{ namespaces }}
     
     - name: Create ca secret
-      shell: oc create secret tls entando-ca-cert-secret --key="ca1.key" --cert="ca1.crt" -n {{ namespaces }}
+      shell: oc create secret tls entando-ca-cert-secret --key="ca.key" --cert="ca.crt" -n {{ namespaces }}
     
     - name: Remove certificates from host
       shell: rm {{ appname }}.apps.{{ openshift_url }}.key {{ appname }}.apps.{{ openshift_url }}.crt ca.key ca.crt
