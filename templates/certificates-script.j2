@@ -17,7 +17,6 @@ CERT_KEY_FILE="$C_CN.key"
 CERT_CSR_FILE="$C_CN.csr"
 CERT_FILE="$C_CN.crt"
 
-
 DURATION="7300"
 CERT_DURATION="3650"
 
@@ -29,4 +28,4 @@ openssl req -new -sha256 -nodes -out $CERT_CSR_FILE -key $CERT_KEY_FILE -config 
 req_extensions = req_ext\ndistinguished_name = dn\n[ dn ]\n\
 C=$C_C\nST=$C_ST\nO=$C_O\nOU=$C_OU\nCN=$C_CN\n\n[ req_ext ]\nsubjectAltName = @alt_names\n\
 [ alt_names ]\nDNS.1 = $C_SAN1\nDNS.2 = $C_SAN2")
-openssl x509 -req -in $CERT_CSR_FILE -CA $CA_CRT_FILE -CAkey $CA_KEY_FILE -CAcreateserial -out $CERT_FILE -days $CERT_DURATION -sha512
+openssl x509 -req -in $CERT_CSR_FILE -CA $CA_CRT_FILE -CAkey $CA_KEY_FILE -CAcreateserial -out $CERT_FILE -days $CERT_DURATION -sha256
