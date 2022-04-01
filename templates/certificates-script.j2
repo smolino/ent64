@@ -1,11 +1,11 @@
 #!/bin/bash
-CA_KEY_SIZE="2048"
+CA_KEY_SIZE="1024"
 C="CA"
 ST="Cagliari"
 O="eng-entando.com"
 OU="ENG"
 CN="ENG CA"
-CERT_KEY_SIZE="2048"
+CERT_KEY_SIZE="1024"
 C_C="SA"
 C_ST="Cagliari"
 C_O="eng-entando.com"
@@ -24,7 +24,7 @@ openssl genrsa -out $CA_KEY_FILE $CA_KEY_SIZE
 openssl req -x509 -new -nodes -key $CA_KEY_FILE -subj "/C=$C/ST=$ST/O=$O/OU=$OU/CN=$CN" -sha256 -days $DURATION -out $CA_CRT_FILE
 openssl genrsa -out $CERT_KEY_FILE $CERT_KEY_SIZE
 openssl req -new -sha256 -nodes -out $CERT_CSR_FILE -key $CERT_KEY_FILE -config \
-<(printf "\n[req]\ndefault_bits = 2048\nprompt = no\ndefault_md = sha256\n\
+<(printf "\n[req]\ndefault_bits = 1024\nprompt = no\ndefault_md = sha256\n\
 req_extensions = req_ext\ndistinguished_name = dn\n[ dn ]\n\
 C=$C_C\nST=$C_ST\nO=$C_O\nOU=$C_OU\nCN=$C_CN\n\n[ req_ext ]\nsubjectAltName = @alt_names\n\
 [ alt_names ]\nDNS.1 = $C_SAN1\nDNS.2 = $C_SAN2")
