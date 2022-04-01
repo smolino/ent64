@@ -9,3 +9,6 @@ spec:
   name: {{ appname }}
   ingressHostName: {{ appname }}.apps.{{ openshift_url }}
   tlsSecretName: entando-tls-secret
+  entandoAppVersion: '7.0'
+  standardServerimage: eap
+  replicas: 1
