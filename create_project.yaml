@@ -8,17 +8,32 @@
     - name: Create Project
       shell: oc create namespace {{ namespaces }}
 
+    - name: Generate ca key
+      shell: openssl genrsa -out ca.key 4096
+
+    - name: Generate CA Certificate
+      shell: openssl req -x509 -new -nodes -key ca.key -subj "/C=IT/ST=QC/O=Entando Inc/CN=apps-eng-entando.com" -sha512 -days 7300 -out ca.crt
+      
+    - name: Generate App key Certificate
+      shell: openssl genrsa -out {{ appname }}.apps.{{ openshift_url }}.key 4096
+      
+    - name: Generate App certificate
+      shell: openssl req -new -sha256 -nodes -out {{ appname }}.apps.{{ openshift_url }}.csr -key {{ appname }}.apps.{{ openshift_url }}.key -config
+      
     - name: Generate Certificates
-      shell: openssl req -x509 -nodes -days 365 -subj  "/C=IT/ST=QC/O=Entando Inc/CN={{ appname }}.apps.{{ openshift_url }}" -newkey rsa:2048 -keyout {{ appname }}.apps.{{ openshift_url }}.key -out {{ appname }}.apps.{{ openshift_url }}.crt;
+      shell: openssl x509 -req -in {{ appname }}.apps.{{ openshift_url }}.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out {{ appname }}.apps.{{ openshift_url }}.crt -days 3650 -sha512
+
+#    - name: Generate Certificates
+#      shell: openssl req -x509 -nodes -days 365 -subj  "/C=IT/ST=QC/O=Entando Inc/CN={{ appname }}.apps.{{ openshift_url }}" -newkey rsa:2048 -keyout {{ appname }}.apps.{{ openshift_url }}.key -out {{ appname }}.apps.{{ openshift_url }}.crt;
  
     - name: Create secret
       shell: oc create secret tls entando-tls-secret --key="{{ appname }}.apps.{{ openshift_url }}.key" --cert="{{ appname }}.apps.{{ openshift_url }}.crt" -n {{ namespaces }}
     
     - name: Create ca secret
-      shell: oc create secret tls entando-ca-cert-secret --key="{{ appname }}.apps.{{ openshift_url }}.key" --cert="{{ appname }}.apps.{{ openshift_url }}.crt" -n {{ namespaces }} 
+      shell: oc create secret tls entando-ca-cert-secret --key="ca.key" --cert="ca.crt" -n {{ namespaces }} 
     
     - name: Remove certificates from host
-      shell: rm {{ appname }}.apps.{{ openshift_url }}.key {{ appname }}.apps.{{ openshift_url }}.crt
+      shell: rm {{ appname }}.apps.{{ openshift_url }}.key {{ appname }}.apps.{{ openshift_url }}.crt ca.key ca.crt
 
     - name: Copy operator-config
       template:
