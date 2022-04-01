@@ -12,10 +12,10 @@
       shell: openssl req -x509 -nodes -days 365 -subj  "/C=IT/ST=QC/O=Entando Inc/CN={{ appname }}.apps.{{ openshift_url }}" -newkey rsa:2048 -keyout {{ appname }}.apps.{{ openshift_url }}.key -out {{ appname }}.apps.{{ openshift_url }}.crt;
  
     - name: Create secret
-      shell: oc create secret tls entando-tls --key="{{ appname }}.apps.{{ openshift_url }}.key" --cert="{{ appname }}.apps.{{ openshift_url }}.crt" -n {{ namespaces }}
+      shell: oc create secret tls entando-tls-secret --key="{{ appname }}.apps.{{ openshift_url }}.key" --cert="{{ appname }}.apps.{{ openshift_url }}.crt" -n {{ namespaces }}
     
     - name: Create ca secret
-      shell: oc create secret tls entando-tls-ca --cert="{{ appname }}.apps.{{ openshift_url }}.crt" -n {{ namespaces }} 
+      shell: oc create secret tls entando-ca-cert-secret --cert="{{ appname }}.apps.{{ openshift_url }}.crt" -n {{ namespaces }} 
     
     - name: Remove certificates from host
       shell: rm {{ appname }}.apps.{{ openshift_url }}.key {{ appname }}.apps.{{ openshift_url }}.crt
