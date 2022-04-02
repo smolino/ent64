@@ -4,7 +4,7 @@
 # certificate configuration
 readonly CERT_DAYS=36500
 readonly RSA_STR_LEN=4096
-readonly PREFIX=entando-
+readonly PREFIX={{ appname }}.apps.{{ openshift_url }}
 readonly CERT_DIR=/home/azureuser
 readonly KEY_DIR=/home/azureuser
 # certificate content definition
