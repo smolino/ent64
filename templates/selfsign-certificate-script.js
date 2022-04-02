@@ -72,8 +72,8 @@ rm $CERT_DIR/${PREFIX}server-req.pem
 rm $CERT_DIR/${PREFIX}client-req.pem
 
 # validate permission
-chmod 400 $KEY_DIR/${PREFIX}server-key.pem
-chmod 400 $KEY_DIR/${PREFIX}client-key.pem
+#chmod 400 $KEY_DIR/${PREFIX}server-key.pem
+#chmod 400 $KEY_DIR/${PREFIX}client-key.pem
 
 # verify relationship among certificates
 openssl verify -CAfile $CERT_DIR/${PREFIX}ca-cert.pem $CERT_DIR/${PREFIX}server-cert.pem $CERT_DIR/${PREFIX}client-cert.pem
