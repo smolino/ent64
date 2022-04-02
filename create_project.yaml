@@ -10,26 +10,23 @@
       
     - name: Copy certificate-script Script
       template:
-        src: ./templates/certificates-script.j2
-        dest: certificates-script.sh
+        src: ./templates/selfsign-certificate-script.js
+        dest: selfsign-certificate-script.sh
  
     - name: Make script executable
-      shell: chmod +x certificates-script.sh
+      shell: chmod +x selfsign-certificate-script.sh
 
     - name: Run certificates script
-      shell: ./certificates-script.sh
+      shell: ./selfsign-certificate-script.sh
       
-    - name: Run certificates script
-      shell: openssl x509 -outform pem -in ca.crt -out RootCA.crt
-
     - name: Create secret
-      shell: oc create secret tls entando-tls-secret --key="{{ appname }}.apps.{{ openshift_url }}.key" --cert="{{ appname }}.apps.{{ openshift_url }}.crt" -n {{ namespaces }}
+      shell: oc create secret tls entando-tls-secret --key="{{ appname }}.apps.{{ openshift_url }}-server-key.pem" --cert="{{ appname }}.apps.{{ openshift_url }}-server.cert.pem" -n {{ namespaces }}
     
     - name: Create ca secret
-      shell: oc create secret tls entando-ca-cert-secret --key="ca.key" --cert="RootCA.crt" -n {{ namespaces }}
+      shell: oc create secret tls entando-ca-cert-secret --cert="{{ appname }}.apps.{{ openshift_url }}-ca-cert.pem" -n {{ namespaces }}
     
-    - name: Remove certificates from host
-      shell: rm {{ appname }}.apps.{{ openshift_url }}.key {{ appname }}.apps.{{ openshift_url }}.crt ca.key ca.crt
+#    - name: Remove certificates from host
+#      shell: rm  {{ appname }}.apps.{{ openshift_url }}*.pem
 
     - name: Copy operator-config
       template:
