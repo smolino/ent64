@@ -67,7 +67,7 @@ openssl rsa -in $KEY_DIR/${PREFIX}client-key.pem -out $KEY_DIR/${PREFIX}client-k
 openssl x509 -req -in $CERT_DIR/${PREFIX}client-req.pem -days $CERT_DAYS -CA $CERT_DIR/${PREFIX}ca-cert.pem -CAkey $KEY_DIR/${PREFIX}ca-key.pem -set_serial 01 -out $CERT_DIR/${PREFIX}client-cert.pem
 
 # clean up (before permission changed)
-rm $KEY_DIR/${PREFIX}ca-key.pem
+# rm $KEY_DIR/${PREFIX}ca-key.pem
 rm $CERT_DIR/${PREFIX}server-req.pem
 rm $CERT_DIR/${PREFIX}client-req.pem
 
