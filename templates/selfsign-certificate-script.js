@@ -15,7 +15,7 @@ readonly COMPANY_NAME=Entando
 readonly COMPANY_SECTION=Entando
 readonly CERT_PASSWORD= # no password
 # - ca
-readonly CA_DOMAIN=eng-entando.com
+readonly CA_DOMAIN=mainline.eng-entando.com
 readonly CA_EMAIL=s.molino@entando.com
 # - server
 readonly SERVER_DOMAIN=mainline.eng-entando.com
