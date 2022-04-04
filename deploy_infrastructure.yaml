@@ -7,12 +7,16 @@
       command: cd terraform-test/learn-terraform-provision-eks-cluster/
 
     - name: INIT Terraform
-      command: terraform init
+      shell: terraform init
+      args:
+        chdir: terraform-test/learn-terraform-provision-eks-cluster/
 
     - name: Cluster provisioning
-      command: terraform apply -auto-approve
+      shell: terraform apply -auto-approve
       register: logs
-      
-    - name: Print Logs
+      args:
+        chdir: terraform-test/learn-terraform-provision-eks-cluster/
+
+- name: Print Logs
       debug:
         msg: "{{ logs }}"
