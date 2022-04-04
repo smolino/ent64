@@ -5,7 +5,7 @@
    
    - name: Get url
      shell: kubectl get svc -n ingress-nginx |grep LoadBalancer | awk '{print $4}' | while read HOST;do 
-            curl "http://$HOST/auth/";done
+            echo "http://$HOST/auth/";done
      register: url
      
    - name: Print the results
