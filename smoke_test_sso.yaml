@@ -7,7 +7,7 @@
      shell: kubectl get svc -n ingress-nginx |grep LoadBalancer | awk '{print $4}' | while read HOST;do 
             curl "http://$HOST/auth/";done
 
-- name: Get url
+   - name: Get url
      shell: kubectl get svc -n ingress-nginx |grep LoadBalancer | awk '{print $4}' | while read HOST;do 
             entando_application_var=http://$HOST/app-builder/;done            
 
