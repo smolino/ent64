@@ -17,6 +17,6 @@
       args:
         chdir: terraform-test/learn-terraform-provision-eks-cluster/
 
-- name: Print Logs
+    - name: Print Logs
       debug:
         msg: "{{ logs }}"
