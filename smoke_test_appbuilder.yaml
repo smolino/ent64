@@ -1,0 +1,19 @@
+---
+ - hosts: AWX
+   become_user: azureuser
+   tasks:
+   
+   - name: Get url
+     shell: kubectl get svc -n ingress-nginx |grep LoadBalancer | awk '{print $4}' | while read HOST;do 
+            echo "http://$HOST/app-builder/" > entando;done            
+     
+   - name: Curl Entando website
+     shell: cat entando | awk '{print $1}' | while read WEBPORTAL;do 
+            curl $WEBPORTAL;done
+     register: webpage
+   - debug: var=webpage.stdout
+   - name: Fail
+     fail:
+     when: "'entando' not in webpage.stdout" 
+   - name: Success
+     debug: msg="Entando App is up and running"
