@@ -16,7 +16,7 @@
      fail:
      when: "'keycloak' not in webpage.stdout" 
    - name: Success
-     debug: msg="Congrats Yours HW Assignment is completed"
+     debug: msg="Keycloak is up and running"
 
    - name: Get url
      shell: kubectl get svc -n ingress-nginx |grep LoadBalancer | awk '{print $4}' | while read HOST;do 
@@ -35,6 +35,6 @@
    - debug: var=webpage.stdout
    - name: Fail
      fail:
-     when: "'sergio' not in webpage.stdout" 
+     when: "'entando' not in webpage.stdout" 
    - name: Success
-     debug: msg="Congrats Yours HW Assignment is completed"
+     debug: msg="Entando App is up and running"
