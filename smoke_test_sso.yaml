@@ -8,6 +8,6 @@
    
    - name: Curl website
      uri:
-      url: "http://{{ HOST }}/auth/"
+      url: "http://{{ $HOST }}/auth/"
       return_content: yes
      register: webpage
