@@ -9,7 +9,7 @@
 
    - name: Get url
      shell: kubectl get svc -n ingress-nginx |grep LoadBalancer | awk '{print $4}' | while read HOST;do 
-            entando_application_var="http://$HOST/app-builder/";done            
+            export entando_application_var="http://$HOST/app-builder/";done            
 
    - name: Curl website
      uri:
