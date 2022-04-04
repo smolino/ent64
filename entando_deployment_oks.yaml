@@ -23,5 +23,5 @@
         msg: "{{ results }}"
         
     - name: Wait untill the Application is up
-      wait_for: timeout=300
+      wait_for: timeout=350
       delegate_to: localhost
