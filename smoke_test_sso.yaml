@@ -12,8 +12,8 @@
      debug:
        msg: "{{ url }}"
    
-#   - name: Curl website
-#     uri:
-#      url: "http://{{ url }}/auth/"
-#      return_content: yes
-#     register: webpage
+   - name: Curl website
+     uri:
+      url: "http://{{ url }}/auth/"
+      return_content: yes
+     register: webpage
