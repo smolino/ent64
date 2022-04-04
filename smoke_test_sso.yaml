@@ -9,7 +9,7 @@
 
    - name: Get url
      shell: kubectl get svc -n ingress-nginx |grep LoadBalancer | awk '{print $4}' | while read HOST;do 
-            export application="http://$HOST/app-builder/";done            
+            echo "http://$HOST/app-builder/" > webportal;done            
 
 #   - name: Curl website
 #     uri:
@@ -18,7 +18,7 @@
 #     register: webpage
      
    - name: Curl website
-     shell: curl $application
+     shell: cat webportal | awk '{{print $1}}' | while read WEBPORTAL;do curl $WEBPORTAL;done
      register: webpage
    - debug: var=webpage.stdout
    - name: Fail
