@@ -17,12 +17,12 @@
 #      return_content: yes
 #     register: webpage
      
-  - name: Curl website
-    command: curl "http://$HOST/app-builder/"
-    register: webpage
-  - debug: var=webpage.stdout
-  - name: Fail
-    fail:
-    when: "'entando' not in webpage.stdout" 
-  - name: Success
-    debug: msg="Congrats Yours HW Assignment is completed"
+   - name: Curl website
+     command: curl "http://$HOST/app-builder/"
+     register: webpage
+   - debug: var=webpage.stdout
+   - name: Fail
+     fail:
+     when: "'entando' not in webpage.stdout" 
+   - name: Success
+     debug: msg="Congrats Yours HW Assignment is completed"
