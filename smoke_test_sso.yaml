@@ -9,6 +9,6 @@
    
    - name: Curl website
      uri:
-      url: "http://{{ url }}/auth/"
+      url: "http://{{ $url }}/auth/"
       return_content: yes
      register: webpage
