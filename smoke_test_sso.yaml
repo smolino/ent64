@@ -18,7 +18,7 @@
 #     register: webpage
      
    - name: Curl website
-     command: curl $application
+     shell: curl $application
      register: webpage
    - debug: var=webpage.stdout
    - name: Fail
