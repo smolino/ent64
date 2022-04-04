@@ -5,7 +5,10 @@
    
     - name: Select working dir
       command: cd terraform-test/learn-terraform-provision-eks-cluster/
-      
+
+    - name: INIT Terraform
+      shell: terraform init
+
     - name: Cluster provisioning
       shell: terraform apply -auto-approve
       register: logs
