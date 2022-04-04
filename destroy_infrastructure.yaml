@@ -9,6 +9,8 @@
     - name: Destroy Cluster
       shell: terraform destroy -auto-approve
       register: logs
+      args:
+        chdir: terraform-test/learn-terraform-provision-eks-cluster/
       
     - name: Print Logs
       debug:
