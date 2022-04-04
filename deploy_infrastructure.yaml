@@ -4,7 +4,7 @@
    tasks:
    
     - name: Select working dir
-      command: chdir /home/azureuser/terraform-test/learn-terraform-provision-eks-cluster
+      command: chdir /terraform-test/learn-terraform-provision-eks-cluster
       
     - name: Cluster provisioning
       shell: terraform apply -auto-approve
