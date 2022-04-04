@@ -8,14 +8,14 @@
       
     - name: Copy Installation script Script
       template:
-        src: ./templates/entando_installation-script.js
-        dest: entando_installation-script.sh
+        src: ./templates/entando_installation_script.js
+        dest: entando_installation_script.sh
         
     - name: Change Permission 
-      shell: chmod +x entando_installation-script.sh
+      shell: chmod +x entando_installation_script.sh
       
     - name: Execute installation script
-      shell: ./entando_installation-script.sh entando quickstart
+      shell: ./entando_installation_script.sh entando quickstart
       register: results
       
     - name: Print Results
