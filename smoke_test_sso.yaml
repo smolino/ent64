@@ -4,7 +4,7 @@
    tasks:
    
    - name: Get url
-     command: kubectl get svc -n ingress-nginx |grep LoadBalancer | awk '{print &4}' | while read HOST;do echo "http://$HOST/auth/";done
+     command: kubectl get svc -n ingress-nginx |grep LoadBalancer | awk '{print $4}' | while read HOST;do echo "http://$HOST/auth/";done
    
    - name: Curl website
      uri:
