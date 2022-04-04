@@ -1,0 +1,15 @@
+---
+ - hosts: AWX
+   become_user: azureuser
+   tasks:
+   
+    - name: Select working dir
+      command: chdir /home/azureuser/terraform-test/learn-provision-eks-cluster
+      
+    - name: Destroy Cluster
+      shell: terraform destroy -auto-approve
+      register: logs
+      
+    - name: Print Logs
+      debug:
+        msg: "{{ logs }}"
