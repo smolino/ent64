@@ -5,9 +5,10 @@
    
    - name: Get url
      shell: kubectl get svc -n ingress-nginx |grep LoadBalancer | awk '{print $4}' | while read HOST;do echo "http://$HOST/auth/";done
+     register: url
    
    - name: Curl website
      uri:
-      url: "http://{{ $HOST }}/auth/"
+      url: "http://{{ url }}/auth/"
       return_content: yes
      register: webpage
