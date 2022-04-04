@@ -13,6 +13,6 @@
 
    - name: Curl website
      uri:
-      url: "http://$entando_application_var/auth/"
+      url: "$entando_application_var"
       return_content: yes
      register: webpage
