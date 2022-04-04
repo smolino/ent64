@@ -9,10 +9,20 @@
 
    - name: Get url
      shell: kubectl get svc -n ingress-nginx |grep LoadBalancer | awk '{print $4}' | while read HOST;do 
-            export entando_application_var="http://$HOST/app-builder/";done            
+            HOST="http://$HOST/app-builder/";done            
 
-   - name: Curl website
-     uri:
-      url: "{{ entando_application_var }}"
-      return_content: yes
-     register: webpage
+#   - name: Curl website
+#     uri:
+#      url: "{{ entando_application_var }}"
+#      return_content: yes
+#     register: webpage
+     
+  - name: Curl website
+    command: curl "http://$HOST/app-builder/"
+    register: webpage
+  - debug: var=webpage.stdout
+  - name: Fail
+    fail:
+    when: "'entando' not in webpage.stdout" 
+  - name: Success
+    debug: msg="Congrats Yours HW Assignment is completed"
