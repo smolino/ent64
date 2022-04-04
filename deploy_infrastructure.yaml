@@ -7,10 +7,10 @@
       command: cd terraform-test/learn-terraform-provision-eks-cluster/
 
     - name: INIT Terraform
-      shell: terraform init
+      command: terraform init
 
     - name: Cluster provisioning
-      shell: terraform apply -auto-approve
+      command: terraform apply -auto-approve
       register: logs
       
     - name: Print Logs
