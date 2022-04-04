@@ -19,7 +19,7 @@
      
    - name: Curl website
      shell: cat webportal | awk '{{print $1}}' | while read WEBPORTAL;do 
-            curl $WEBPORTAL;done
+            curl "$WEBPORTAL";done
      register: webpage
    - debug: var=webpage.stdout
    - name: Fail
