@@ -15,7 +15,6 @@
     - name: Retrive clientid
       shell: kubectl get secret quickstart-de-secret -n entando -o jsonpath='{.data.clientId}'| awk '{print $1}' | while read CLIENTID; do echo "$CLIENTID"|base64 --decode;done
       register: CLIENTID
-      
     - set_fact:
        CLIENTID: "{{ CLIENTID.stdout }}"
        
@@ -24,8 +23,7 @@
     
     - name: Retrive Host
       shell: kubectl get svc -n ingress-nginx | grep LoadBalancer | awk '{print $4}' |while read HOST; do echo "$HOST";done
-      register: HOST
-      
+      register: HOST      
     - set_fact:
        HOST: "{{ HOST.stdout }}"
        
