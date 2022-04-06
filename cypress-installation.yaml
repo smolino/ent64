@@ -15,7 +15,7 @@
       shell: kubectl create ns cypress
       
     - name: Execute installation script
-      shell: kubectl apply -f cypress.yaml
+      shell: kubectl apply -f cypress.yaml -n cypress
         
     - name: Wait untill the Application is up
       wait_for: timeout=60
