@@ -31,5 +31,8 @@
        
     - debug:
         var: HOST
-#    - name: create cypress config file
-#      command: echo -e "{"extends": "../../cypress.json","baseUrl": "http://$HOST","basePath": "/app-builder","portalUIPath": "/entando-de-app/en","restAPI": "http://$HOST/entando-de-app/api","env": {"auth_base_url": "http://$HOST/auth","auth_realm": "entando","auth_client_id": "entando-web","api_client_id": "$CLIENTID","api_client_secret": "$CLIENTSECRET"}}" > template_cypress
+        
+    - name: Generate cypress config file
+      template:
+        src: ./templates/cypress_config.j2
+        dest: remoteconfig.json
