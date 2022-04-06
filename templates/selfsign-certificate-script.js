@@ -5,8 +5,8 @@
 readonly CERT_DAYS=36500
 readonly RSA_STR_LEN=4096
 readonly PREFIX={{ appname }}.apps.{{ openshift_url }}-
-readonly CERT_DIR=/home/azureuser
-readonly KEY_DIR=/home/azureuser
+readonly CERT_DIR=/home/openshift
+readonly KEY_DIR=/home/openshift
 # certificate content definition
 readonly ADDRESS_COUNTRY_CODE=IT
 readonly ADDRESS_PREFECTURE=CA
