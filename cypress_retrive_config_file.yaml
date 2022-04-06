@@ -38,4 +38,4 @@
         dest: remoteconfig.json
 
     - name: Copy Cypress configuration file to pod
-      shell: kubectl cp remoteconfig.json cypress/cypress:/opt/entando-test-automation
+      shell: kubectl cp remoteconfig.json cypress/cypress:/opt/entando-test-automation/ui-tests/configs/ent64azure/
