@@ -4,7 +4,7 @@
    become_user: openshift
    tasks:
     - name: Login in
-      shell: ./oc login api.{{ openshift_url }}:6443 -u admin -p {{ password1 }} --insecure-skip-tls-verify=true
+      command: chdir:/home/openshift ./oc login api.{{ openshift_url }}:6443 -u admin -p {{ password1 }} --insecure-skip-tls-verify=true
 
     - name: Create Project
       shell: oc create namespace {{ namespaces }}
