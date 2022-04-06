@@ -1,5 +1,6 @@
 ---
  - hosts: AWX
+   become: yes
    become_user: openshift
    tasks:
     - name: Login in
