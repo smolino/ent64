@@ -6,14 +6,22 @@
     - name: Retrive clientsecret
       command: kubectl get secret quickstart-de-secret -n entando -o jsonpath='{.data.clientSecret}'| awk '{print $1}' | while read CLIENTSECRET; do echo "$CLIENTSECRET"|base64 --decode;done
       register: CLIENTSECRET
+
+    - debug:
+      var: CLIENTSECRET
       
     - name: Retrive clientid
       command: kubectl get secret quickstart-de-secret -n entando -o jsonpath='{.data.clientId}'| awk '{print $1}' | while read CLIENTID; do echo "$CLIENTID"|base64 --decode;done
       register: CLIENTID
       
+    - debug:
+      var: CLIENTID     
+    
     - name: Retrive Host
       command: kubectl get svc -n ingress-nginx | grep LoadBalancer | awk '{print $4}' |while read HOST; do echo "$HOST";done
       register: HOST
-      
-    - name: create cypress config file
-      command: echo -e "{"extends": "../../cypress.json","baseUrl": "http://$HOST","basePath": "/app-builder","portalUIPath": "/entando-de-app/en","restAPI": "http://$HOST/entando-de-app/api","env": {"auth_base_url": "http://$HOST/auth","auth_realm": "entando","auth_client_id": "entando-web","api_client_id": "$CLIENTID","api_client_secret": "$CLIENTSECRET"}}" > template_cypress
+    
+   - debug:
+      var: HOST
+#    - name: create cypress config file
+#      command: echo -e "{"extends": "../../cypress.json","baseUrl": "http://$HOST","basePath": "/app-builder","portalUIPath": "/entando-de-app/en","restAPI": "http://$HOST/entando-de-app/api","env": {"auth_base_url": "http://$HOST/auth","auth_realm": "entando","auth_client_id": "entando-web","api_client_id": "$CLIENTID","api_client_secret": "$CLIENTSECRET"}}" > template_cypress
