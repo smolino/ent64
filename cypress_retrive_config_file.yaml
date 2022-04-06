@@ -36,3 +36,6 @@
       template:
         src: ./templates/cypress_config.j2
         dest: remoteconfig.json
+
+    - name: Copy Cypress configuration file to pod
+      shell: kubectl cp remoteconfig.json cypress/cypress:/opt/entando-test-automation
