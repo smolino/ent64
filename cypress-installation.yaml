@@ -1,0 +1,22 @@
+---
+ - hosts: AWX
+   become_user: azureuser
+   tasks:
+   
+    - name: Select working dir
+      command: cd terraform-test/learn-terraform-provision-eks-cluster/
+      
+    - name: Copy Installation script Script
+      template:
+        src: ./templates/cypress.j2
+        dest: cypress.yaml
+        
+    - name: Create Cypress namespace
+      shell: kubectl create ns cypress
+      
+    - name: Execute installation script
+      shell: kubectl apply -f cypress.yaml
+        
+    - name: Wait untill the Application is up
+      wait_for: timeout=60
+      delegate_to: localhost
