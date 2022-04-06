@@ -7,7 +7,7 @@
       command: chdir=/home/openshift ./oc login api.{{ openshift_url }}:6443 -u admin -p {{ password1 }} --insecure-skip-tls-verify=true
 
     - name: Create Project
-      shell: oc create namespace {{ namespaces }}
+      shell: ./oc create namespace {{ namespaces }}
       
     - name: Copy certificate-script Script
       template:
