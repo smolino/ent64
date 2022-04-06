@@ -1,11 +1,11 @@
 {
   "extends": "../../cypress.json",
-  "baseUrl": "http://test-7-0-0-final-cypress.apps.ent64azure.com",
+  "baseUrl": "http://$HOST",
   "basePath": "/app-builder",
   "portalUIPath": "/entando-de-app/en",
-  "restAPI": "http://test-7-0-0-final-cypress.apps.ent64azure.com/entando-de-app/api",
+  "restAPI": "http://$HOST/entando-de-app/api",
   "env": {
-    "auth_base_url": "http://test-7-0-0-final-cypress.apps.ent64azure.com/auth",
+    "auth_base_url": "http://$HOST/auth",
     "auth_realm": "entando",
     "auth_client_id": "entando-web",
     "api_client_id": "$CLIENTID",
