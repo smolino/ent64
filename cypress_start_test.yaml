@@ -4,4 +4,5 @@
    tasks:
    
     - name: Start cypress test
-      
+      command: kubectl exec -ti cypress -n cypress -- npx cypress run --config-file configs/ent64azure/remoteconfig.json --spec /opt/entando-test-automation/ui-tests/cypress/integration/keyCloak.spec.js
+      register: output
