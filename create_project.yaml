@@ -4,7 +4,7 @@
    become_user: openshift
    tasks:
     - name: Login in
-      shell: oc login api.{{ openshift_url }}:6443 -u admin -p {{ password1 }} --insecure-skip-tls-verify=true
+      shell: ./oc login api.{{ openshift_url }}:6443 -u admin -p {{ password1 }} --insecure-skip-tls-verify=true
 
     - name: Create Project
       shell: oc create namespace {{ namespaces }}
@@ -21,10 +21,10 @@
       shell: ./selfsign-certificate-script.sh
       
     - name: Create secret
-      shell: oc create secret tls entando-tls-secret --key="{{ appname }}.apps.{{ openshift_url }}-server-key.pem" --cert="{{ appname }}.apps.{{ openshift_url }}-server-cert.pem" -n {{ namespaces }}
+      shell: ./oc create secret tls entando-tls-secret --key="{{ appname }}.apps.{{ openshift_url }}-server-key.pem" --cert="{{ appname }}.apps.{{ openshift_url }}-server-cert.pem" -n {{ namespaces }}
     
     - name: Create ca secret
-      shell: oc create secret generic entando-ca-cert-secret --from-file="{{ appname }}.apps.{{ openshift_url }}-ca-cert.pem" -n {{ namespaces }}
+      shell: ./oc create secret generic entando-ca-cert-secret --from-file="{{ appname }}.apps.{{ openshift_url }}-ca-cert.pem" -n {{ namespaces }}
     
     - name: Remove certificates from host
       shell: rm  {{ appname }}.apps.{{ openshift_url }}*.pem
@@ -35,7 +35,7 @@
         dest: "{{operatorconfig}}.yaml"
 
     - name: Install operatorscript on namespace scope
-      shell: oc apply -f "{{operatorconfig}}.yaml" -n {{ namespaces }}      
+      shell: ./oc apply -f "{{operatorconfig}}.yaml" -n {{ namespaces }}      
 
     - name: Copy Operator Script
       template:
@@ -43,7 +43,7 @@
         dest: entando-subscription.yaml
 
     - name: Install operatorscript on namespace scope
-      shell: oc apply -f entando-subscription.yaml -n {{ namespaces }}
+      shell: ./oc apply -f entando-subscription.yaml -n {{ namespaces }}
 
     - name: Copy Entando App Script
       template:
@@ -51,6 +51,4 @@
         dest: "{{entandoappconfig}}.yaml"
 
     - name: Install Entando App on namespace scope
-      shell: oc apply -f "{{entandoappconfig}}.yaml" -n {{ namespaces }}
-      
-
+      shell: ./oc apply -f "{{entandoappconfig}}.yaml" -n {{ namespaces }}
