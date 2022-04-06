@@ -6,6 +6,8 @@
     - name: Retrive clientsecret
       shell: kubectl get secret quickstart-de-secret -n entando -o jsonpath='{.data.clientSecret}'| awk '{print $1}' | while read CLIENTSECRET; do echo "$CLIENTSECRET"|base64 --decode;done
       register: CLIENTSECRET
+    - set_fact:
+       ip_addr: "{{ CLIENTSECRET.stdout }}"
 
     - debug:
         var: CLIENTSECRET
