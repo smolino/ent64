@@ -1,0 +1,7 @@
+---
+ - hosts: AWX
+   become_user: azureuser
+   tasks:
+   
+    - name: Start cypress test
+      
