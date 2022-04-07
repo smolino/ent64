@@ -1,0 +1,8 @@
+---
+ - hosts: AWX
+   become_user: azureuser
+   tasks:
+
+    - name: Collect all Entando application logs from pods
+      command: oc get pods -n entando --no-headers | awk '{print $1}' | while read PODS:do kubectl logs $PODS -n entando > /home/azureuser/log-collector/$PODS-$(date).log;done
+      
