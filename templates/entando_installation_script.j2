@@ -56,7 +56,8 @@ metadata:
   name: entando-operator-config
   namespace: entando
 data:
-  entando.requires.filesystem.group.override: 'true'" | kubectl apply -f -
+  entando.requires.filesystem.group.override: 'true'
+  entando.ingress.name: 'nginx'" | kubectl apply -f -
 
 
 echo ""
