@@ -6,3 +6,5 @@
     - name: Collect all Entando application logs from pods
       command: oc get pods -n entando --no-headers | awk '{print $1}' | while read PODS:do kubectl logs $PODS -n entando > /home/azureuser/log-collector/$PODS-$(date).log;done
       
+    - name: Collect all Cypress logs from pods
+      command: oc get pods -n cypress --no-headers | awk '{print $1}' | while read PODS:do kubectl logs $PODS -n cypress > /home/azureuser/log-collector/$PODS-$(date).log;done
