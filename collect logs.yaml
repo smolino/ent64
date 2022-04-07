@@ -4,7 +4,7 @@
    tasks:
 
     - name: Collect all Entando application logs from pods
-      command: kubectl get pods -n entando --no-headers | awk '{print $1}' | while read PODS;do kubectl logs -n entando > /home/azureuser/log-collector/$PODS.log;done
+      command: kubectl get all -n entando --no-headers | awk '{print $1}' | while read PODS;do kubectl logs $PODS -n entando > /home/azureuser/log-collector/$PODS.log;done
       
     - name: Collect all Cypress logs to local
       command: kubectl get pods -n cypress --no-headers | awk '{print $1}' | while read PODS;do kubectl logs $PODS -n cypress > /home/azureuser/log-collector/$PODS.log;done
