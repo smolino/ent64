@@ -5,9 +5,6 @@
    
     - name: Select working dir
       command: cd terraform-test/learn-terraform-provision-eks-cluster/
-      
-    - name: Delete namespace resources
-      shell: kubectl delete -f /home/azureuser/terraform-test/learn-terraform-provision-eks-cluster/namespace-resources.yaml -n entando
         
     - name: Delete cluster resources 
       shell: kubectl delete -f https://raw.githubusercontent.com/entando-k8s/entando-k8s-operator-bundle/v7.0.0-pre5/manifests/k8s-116-and-later/namespace-scoped-deployment/cluster-resources.yaml
