@@ -18,10 +18,10 @@
     - name: Copy script to change password
       template:
         src: ./templates/keycloak_change_password.j2
-        dest: /home/azureuser/changepassword.sh
+        dest: /home/azureuser/terraform-test/learn-terraform-provision-eks-cluster/ changepassword.sh
         
     - name: Change Permission
-      shell: chdir=/home/azureuser chmod +x changepassword.sh
+      shell: chdir=/home/azureuser/terraform-test/learn-terraform-provision-eks-cluster chmod +x changepassword.sh
       
     - name: Eecute script
-      shell: chdir=/home/azureuser ./changepassword.sh
+      shell: chdir=/home/azureuser/terraform-test/learn-terraform-provision-eks-cluster ./changepassword.sh
