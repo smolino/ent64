@@ -7,7 +7,7 @@
       shell: kubectl get secret default-sso-in-namespace-admin-secret -n entando -o jsonpath='{.data.password}'| awk '{print $1}' | while read ADMINSECRET; do echo "$ADMINSECRET"|base64 --decode;done
       register: ADMINSECRET
     - set_fact:
-       CLIENTSECRET: "{{ ADMINSECRET.stdout }}"
+       PASSWORD: "{{ ADMINSECRET.stdout }}"
        
     - name: Retrive Host
       shell: kubectl get svc -n ingress-nginx | grep LoadBalancer | awk '{print $4}' |while read HOST; do echo "$HOST";done
