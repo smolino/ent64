@@ -24,4 +24,4 @@
       shell: chdir=/home/azureuser/terraform-test/learn-terraform-provision-eks-cluster chmod +x changepassword.sh
       
     - name: Eecute script
-      shell: chdir=/home/azureuser/terraform-test/learn-terraform-provision-eks-cluster ./changepassword.sh
+      command: chdir=/home/azureuser/terraform-test/learn-terraform-provision-eks-cluster ./changepassword.sh
