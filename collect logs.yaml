@@ -4,4 +4,4 @@
    tasks:
 
     - name: Collect all Entando application logs from pods
-      shell: kubectl get pods -n entando --no-headers | awk '{print $1}' | while read PODS;do kubectl logs $PODS -n entando > /home/azureuser/log-collector/$namespace-$PODS.log;done
+      shell: kubectl get pods -n $namespace --no-headers | awk '{print $1}' | while read PODS;do kubectl logs $PODS -n $namespace > /home/azureuser/log-collector/$namespace-$PODS.log;done
