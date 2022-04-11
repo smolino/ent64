@@ -4,7 +4,7 @@
    tasks:
       
     - name: Collect all Cypress logs to local
-      shell: kubectl get pods -n cypress --no-headers | awk '//{print $1}' | while read PODS;do kubectl logs $PODS -n cypress > /home/azureuser/log-collector/$namespace-$PODS.log;done
+      shell: kubectl get pods -n cypress --no-headers | awk '//{print $1}' | while read PODS;do kubectl logs $PODS -n cypress > /home/azureuser/log-collector/$PODS.log;done
 
     - name: Copy Cypress results
       shell: kubectl cp cypress/cypress:/opt/entando-test-automation/ui-tests/cypress/results /home/azureuser/log-collector/results
