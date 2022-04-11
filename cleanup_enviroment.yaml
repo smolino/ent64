@@ -10,7 +10,7 @@
       shell: kubectl delete -f https://raw.githubusercontent.com/entando-k8s/entando-k8s-operator-bundle/v7.0.0-pre5/manifests/k8s-116-and-later/namespace-scoped-deployment/cluster-resources.yaml
             
     - name: Delete namespace entando 
-      shell: kubectl delete ns entando
+      shell: kubectl delete ns $namespace
       
     - name: delet namespace cypress 
       shell: kubectl delete ns cypress
