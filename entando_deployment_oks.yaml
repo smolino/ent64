@@ -6,6 +6,11 @@
     - name: Select working dir
       command: cd terraform-test/learn-terraform-provision-eks-cluster/
       
+    - name: Get kubernetes config
+      shell: aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name)
+      args:
+        chdir: terraform-test/learn-terraform-provision-eks-cluster/
+      
     - name: Copy Installation script Script
       template:
         src: ./templates/entando_installation_script.j2
