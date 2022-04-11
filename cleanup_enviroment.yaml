@@ -5,6 +5,11 @@
    
     - name: Select working dir
       command: cd terraform-test/learn-terraform-provision-eks-cluster/
+
+    - name: Get kubernetes config
+      shell: aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name)
+      args:
+        chdir: terraform-test/learn-terraform-provision-eks-cluster/
         
  #   - name: Delete cluster resources 
  #     shell: kubectl delete -f https://raw.githubusercontent.com/entando-k8s/entando-k8s-operator-bundle/v7.0.0/manifests/k8s-116-and-later/namespace-scoped-deployment/cluster-resources.yaml
