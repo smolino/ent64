@@ -54,7 +54,7 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: entando-operator-config
-  namespace: entando
+  namespace: $namespace
 data:
   entando.requires.filesystem.group.override: 'true'
   entando.ingress.class: 'nginx'" | kubectl apply -f -
