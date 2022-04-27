@@ -11,3 +11,6 @@
       
     - name: Scale Down qe projects
       shell: oc get deploy -A --no-headers | grep 'qe-' | awk '{print $2,$1}' | while read DEPLOY NAMESPACE;do oc scale --replicas=0 deployment/$DEPLOY -n $NAMESPACE; done
+      
+    - name: Logout
+      shell: oc logout
