@@ -10,10 +10,10 @@
     - name: Copy Installation script Script
       template:
         src: ./templates/cypress.j2
-        dest: cypress.yaml
+        dest: /home/{{ username }}/cypress.yaml
         
     - name: Create Cypress namespace
       shell: kubectl create ns cypress
       
     - name: Execute installation script
-      shell: kubectl apply -f cypress.yaml -n cypress
+      shell: kubectl apply -f /home/{{ username }}/cypress.yaml -n cypress
