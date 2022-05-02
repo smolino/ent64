@@ -4,8 +4,8 @@
    become_user: "{{ username }}"
    tasks:
    
-    - name: Select working dir
-      command: cd /home/{{ username }}
+   - name: Select working dir
+     command: cd /home/{{ username }}
    
    - name: Get url
      shell: kubectl get svc -n ingress-nginx |grep LoadBalancer | awk '{print $4}' | while read HOST;do 
