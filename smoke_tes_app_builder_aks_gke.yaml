@@ -12,7 +12,7 @@
             echo "http://$HOST.nip.io/app-builder/" > /home/{{ username }}/entando;done            
      
    - name: Curl Entando website
-     shell: cat entando | awk '{print $1}' | while read WEBPORTAL;do 
+     shell: cat /home/{{ username }}/entando | awk '{print $1}' | while read WEBPORTAL;do 
             curl $WEBPORTAL;done
      register: webpage
    - debug: var=webpage.stdout
