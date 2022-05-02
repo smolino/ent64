@@ -19,6 +19,3 @@
       
     - name: Delete namespace cypress 
       shell: kubectl delete ns cypress
-
-    - name: Delete namespace ingress
-      shell: kubectl delete ns ingress-nginx
