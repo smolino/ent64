@@ -1,0 +1,15 @@
+---
+ - hosts: AWX
+   become_user: "{{ username }}"
+   tasks:
+   
+    - name: Select working dir
+      command: cd home/{{ username }}
+      
+    - name: Copy Bundle script Script
+      template:
+        src: ./templates/simple_bundle.j2
+        dest: simple_bundle.yaml
+        
+    - name: Install bundle
+      shell: kubectl apply -f simple_bundle.yaml -n entando
