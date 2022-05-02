@@ -1,6 +1,5 @@
 ---
  - hosts: AWX
-   become: yes
    become_user: "{{ username }}"
    tasks:
    
