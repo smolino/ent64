@@ -1,13 +1,14 @@
 ---
  - hosts: AWX
-   become_user: {{ username }}
+   become: yes
+   become_user: "{{ username }}"
    tasks:
    
     - name: Select working dir
       command: cd /home/{{ username }}
 
     - name: Delete namespace entando 
-      shell: kubectl delete ns entando
+      shell: chdir=/home/{{ username }} kubectl delete ns entando
       
     - name: Delete namespace cypress 
-      shell: kubectl delete ns cypress
+      shell: chdir=/home/{{ username }} kubectl delete ns cypress
