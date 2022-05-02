@@ -9,7 +9,7 @@
       
     - name: Copy Installation script Script
       template:
-        src: ./templates/entando_installation_script.j2
+        src: ./templates/entando_installation_script_nip_io.j2
         dest: /home/{{ username }}/entando_installation_script.sh
         
     - name: Change Permission 
