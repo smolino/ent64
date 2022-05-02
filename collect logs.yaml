@@ -2,6 +2,9 @@
  - hosts: AWX
    become_user: azureuser
    tasks:
-
+   
+    - name: Create Dir Logs
+      shell: mkdir -p /home/azureuser/log-collector/{{ APPNAME }}/results
+      
     - name: Collect all Entando application logs from pods
-      shell: kubectl get pods -n entando --no-headers | awk '{print $1}' | while read PODS;do kubectl logs $PODS -n entando > /home/azureuser/log-collector/$PODS.log;done
+      shell: kubectl get pods -n entando --no-headers | awk '{print $1}' | while read PODS;do kubectl logs $PODS -n entando > /home/azureuser/log-collector/{{ APPNAME }}/$PODS.log;done
