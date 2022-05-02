@@ -17,5 +17,8 @@
     - name: Delete namespace entando 
       shell: kubectl delete ns entando
       
-    - name: delet namespace cypress 
+    - name: Delete namespace cypress 
       shell: kubectl delete ns cypress
+
+    - name: Delete namespace ingress
+      shell: kubectl delete ns ingress-nginx
