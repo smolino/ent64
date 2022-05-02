@@ -1,6 +1,6 @@
 ---
  - hosts: AWX
-   become_user: azureuser
+   become_user: "{{ username }}"
    tasks:
    
     - name: Retrive clientsecret
