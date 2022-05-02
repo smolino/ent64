@@ -9,7 +9,7 @@
    
    - name: Get url
      shell: kubectl get svc -n ingress-nginx |grep LoadBalancer | awk '{print $4}' | while read HOST;do 
-            echo "http://$HOST.nip.io/app-builder/" > entando;done            
+            echo "http://$HOST.nip.io/app-builder/" > /home/{{ username }}/entando;done            
      
    - name: Curl Entando website
      shell: cat entando | awk '{print $1}' | while read WEBPORTAL;do 
