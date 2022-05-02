@@ -1,10 +1,10 @@
 ---
  - hosts: AWX
-   become_user: gke
+   become_user: {{ username }}
    tasks:
    
     - name: Select working dir
-      command: cd /home/gke
+      command: cd /home/{{ username }}
       
     - name: Copy Installation script Script
       template:
