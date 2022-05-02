@@ -1,0 +1,24 @@
+---
+ - hosts: AWX
+   become_user: gke
+   tasks:
+   
+    - name: Select working dir
+      command: cd /ome/gke
+      
+    - name: Copy Installation script Script
+      template:
+        src: ./templates/entando_installation_script.j2
+        dest: entando_installation_script.sh
+        
+    - name: Change Permission 
+      shell: chmod +x entando_installation_script.sh
+      
+    - name: Execute installation script
+      shell: ./entando_installation_script.sh entando {{ APPNAME }}
+      register: results
+      
+    - name: Print Results
+      debug:
+        msg: "{{ results }}"
+        
