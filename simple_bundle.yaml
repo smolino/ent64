@@ -1,0 +1,15 @@
+---
+ - hosts: AWX
+   become_user: azureuser
+   tasks:
+   
+    - name: Select working dir
+      command: cd terraform-test/learn-terraform-provision-eks-cluster/
+      
+    - name: Copy Bundle script Script
+      template:
+        src: ./templates/simple_bundle.j2
+        dest: simple_bundle.yaml
+        
+    - name: Install bundle
+      shell: kubectl apply -f simple_bundle.yaml -n entando
