@@ -8,8 +8,8 @@
      command: cd /home/{{ username }}
    
    - name: Get url
-     shell: kubectl get svc -n ingress-nginx |grep LoadBalancer | awk '{print $4}' | while read HOST;do 
-            echo "http://$HOST.nip.io/auth/" > keycloak;done
+     shell: kubectl get ingress -n entando |grep default | awk '{print $3}' | while read HOST;do 
+            echo "http://$HOST/auth/" > keycloak;done
             
    - name: Curl Keycloak website
      shell: cat keycloak | awk '{print $1}' | while read keycloak;do 
