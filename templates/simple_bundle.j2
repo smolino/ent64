@@ -1,0 +1,22 @@
+---
+apiVersion: entando.org/v1
+kind: EntandoDeBundle
+metadata:
+  name: app1
+  labels:
+    plugin: 'true'
+    widget: 'true'
+    bundle-type: standard-bundle
+spec:
+  details:
+    name: app1-bundle
+    description: This is the app1 bundle
+    dist-tags:
+      latest: v1.0.0
+    versions:
+      - v1.0.0
+  tags:
+    - version: v1.0.0
+      shasum: bb0855b0adb5f32ce3a64559f08f7df8f5f40023
+      integrity: bb0855b0adb5f32ce3a64559f08f7df8f5f40023
+      tarball: 'https://github.com/excess17/app1.git'
