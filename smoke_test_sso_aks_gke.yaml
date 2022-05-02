@@ -12,7 +12,7 @@
             echo "http://$HOST/auth/" > /home/{{ username }}/keycloak;done
             
    - name: Curl Keycloak website
-     shell: cat keycloak | awk '{print $1}' | while read keycloak;do 
+     shell: cat /home/{{ username }}/keycloak | awk '{print $1}' | while read keycloak;do 
             curl $keycloak;done
      register: webpage
    - debug: var=webpage.stdout
