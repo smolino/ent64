@@ -5,7 +5,7 @@
    tasks:
    
     - name: Select working dir
-      command: cd home/{{ username }}
+      command: cd /home/{{ username }}
       
     - name: Copy Bundle script Script
       template:
