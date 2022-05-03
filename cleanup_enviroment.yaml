@@ -1,6 +1,6 @@
 ---
  - hosts: AWX
-   become_user: {{ username }}
+   become_user: "{{ username }}"
    tasks:
    
     - name: Select working dir
