@@ -21,4 +21,4 @@
       shell: kubectl delete ns cypress
       
     - name: Publish Logs 
-      shell: mv /home/{{ username }}/log-collector/ /var/www/html/logs/eks1.21/
+      shell: mv /home/{{ username }}/log-collector/* /var/www/html/logs/eks1.21/
