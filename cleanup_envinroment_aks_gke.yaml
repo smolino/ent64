@@ -14,4 +14,4 @@
       shell: chdir=/home/{{ username }} kubectl delete ns cypress
       
     - name: Publish Logs 
-      shell: mv /home/{{ username }}/log-collector/ /var/www/html/logs/{{ username }}1.21/$(date)/
+      shell: mv /home/{{ username }}/log-collector/ /var/www/html/logs/{{ username }}1.21/
