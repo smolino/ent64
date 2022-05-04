@@ -8,7 +8,7 @@
       command: cd /home/{{ username }}
    
     - name: Start cypress test
-      command: kubectl exec -ti cypress -n cypress -- npx cypress run --config-file configs/ent64azure/remoteconfig.json --spec "/opt/entando-test-automation/ui-tests/cypress/integration/**/*.spec.js"
+      command: kubectl exec -ti cypress -n cypress -- npx cypress run --config-file configs/ent64azure/remoteconfig.json --spec "/opt/entando-test-automation/ui-tests/cypress/integration/*.spec.js"
       register: output
       
 #    - name: Start cypress test
