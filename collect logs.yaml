@@ -12,12 +12,3 @@
       
     - name: Copy Cypress results
       shell: kubectl cp cypress/cypress:/opt/entando-test-automation/ui-tests/cypress/results /home/{{ username }}/log-collector/{{ APPNAME }}/results
-      
-    - name: Delete namespace entando 
-      shell: kubectl delete ns entando
-      
-    - name: Delete namespace cypress 
-      shell: kubectl delete ns cypress
-      
-    - name: Publish Logs 
-      shell: mv /home/{{ username }}/log-collector/* /var/www/html/logs/eks1.21/
