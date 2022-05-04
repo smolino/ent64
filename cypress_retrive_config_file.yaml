@@ -22,7 +22,7 @@
 #        var: CLIENTID     
     
     - name: Retrive Host
-      shell: chdir=/home/{{ username }} kubectl get ingress -n {{ namespace }} | grep default | awk '{print $3}' |while read HOST; do echo "$HOST";done
+      shell: chdir=/home/{{ username }} kubectl get ingress -n entando | grep default | awk '{print $3}' |while read HOST; do echo "$HOST";done
       register: HOST      
     - set_fact:
        HOST: "{{ HOST.stdout }}"
