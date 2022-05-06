@@ -1,0 +1,36 @@
+---
+ - hosts: AWX
+   become_user: "{{ username }}"
+   tasks:
+   
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }}/terraform-test/learn-terraform-provision-eks-cluster kubectl get secret {{ APPNAME }}-de-secret -n {{ namespace }} -o jsonpath='{.data.clientSecret}'| awk '{print $1}' | while read CLIENTSECRET; do echo "$CLIENTSECRET"|base64 --decode;done
+      register: CLIENTSECRET
+    - set_fact:
+       CLIENTSECRET: "{{ CLIENTSECRET.stdout }}"
+       
+#    - debug:
+#        var: CLIENTSECRET
+      
+    - name: Retrive clientid
+      shell: chdir=/home/{{ username }}/terraform-test/learn-terraform-provision-eks-cluster kubectl get secret {{ APPNAME }}-de-secret -n {{ namespace }} -o jsonpath='{.data.clientId}'| awk '{print $1}' | while read CLIENTID; do echo "$CLIENTID"|base64 --decode;done
+      register: CLIENTID
+    - set_fact:
+       CLIENTID: "{{ CLIENTID.stdout }}"
+       
+#    - debug:
+#        var: CLIENTID     
+    
+    - name: Retrive Host
+      shell: chdir=/home/{{ username }}/terraform-test/learn-terraform-provision-eks-cluster kubectl get ingress -n {{ namespace }} | grep default | awk '{print $3}' |while read HOST; do echo "$HOST";done
+      register: HOST      
+    - set_fact:
+       HOST: "{{ HOST.stdout }}"
+       
+#    - debug:
+#        var: HOST
+        
+    - name: Generate cypress config file
+      template:
+        src: ./templates/namepscae-resources_custom.j2
+        dest: /home/{{ username }}/namepscae-resources_custom.yaml
