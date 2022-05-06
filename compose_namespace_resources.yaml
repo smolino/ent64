@@ -26,5 +26,5 @@
 
     - name: Generate cypress config file
       template:
-        src: ./templates/namepscae-resources_custom.j2
-        dest: /home/{{ username }}/namepscae-resources_custom.yaml
+        src: ./templates/namespace-resources_custom.j2
+        dest: /home/{{ username }}/namespace-resources_custom.yaml
