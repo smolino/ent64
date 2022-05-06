@@ -8,21 +8,72 @@
       register: ENTANDOCOMPONENTMANAGER
     - set_fact:
        CLIENTSECRET: "{{ ENTANDOCOMPONENTMANAGER.stdout }}"
-       
-#    - debug:
-#        var: CLIENTSECRET
-      
+           
     - name: Retrive clientsecret
-      shell: chdir=/home/{{ username }}/terraform-test/learn-terraform-provision-eks-cluster ./hub-tool tag ls entando/entando-de-app-wildfly --sort updated | awk 'FNR==2{print $1}' | sed 's/entando-de-app-wildfly://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDODEAPPWILDFLY; do echo "$ENTANDODEAPPWILDFLY";done
+      shell: chdir=/home/{{ username }}/terraform-test/learn-terraform-provision-eks-cluster hub-tool tag ls entando/entando-de-app-wildfly --sort updated | awk 'FNR==2{print $1}' | sed 's/entando-de-app-wildfly://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDODEAPPWILDFLY; do echo "$ENTANDODEAPPWILDFLY";done
       register: ENTANDODEAPPWILDFLY
     - set_fact:
        CLIENTSECRET: "{{ ENTANDODEAPPWILDFLY.stdout }}"
 
     - name: Retrive clientsecret
-      shell: chdir=/home/{{ username }}/terraform-test/learn-terraform-provision-eks-cluster ./hub-tool tag ls entando/entando-de-app-eap --sort updated | awk 'FNR==2{print $1}' | sed 's/entando-de-app-eap://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDODEAPPEAP; do echo "$ENTANDODEAPPEAP";done
+      shell: chdir=/home/{{ username }}/terraform-test/learn-terraform-provision-eks-cluster hub-tool tag ls entando/entando-de-app-eap --sort updated | awk 'FNR==2{print $1}' | sed 's/entando-de-app-eap://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDODEAPPEAP; do echo "$ENTANDODEAPPEAP";done
       register: ENTANDODEAPPEAP
     - set_fact:
        CLIENTSECRET: "{{ ENTANDODEAPPEAP.stdout }}"
+
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }}/terraform-test/learn-terraform-provision-eks-cluster hub-tool tag ls entando/entando-k8s-app-controller  --sort updated | awk 'FNR==2{print $1}' | sed 's/entando-k8s-app-controller://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDOAPPCONTROLLER; do echo "$ENTANDOAPPCONTROLLER";done
+      register: ENTANDOAPPCONTROLLER
+    - set_fact:
+       CLIENTSECRET: "{{ ENTANDOAPPCONTROLLER.stdout }}"
+
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }}/terraform-test/learn-terraform-provision-eks-cluster hub-tool tag ls entando/entando-k8s-plugin-controller --sort updated | awk 'FNR==2{print $1}' | sed 's/entando-k8s-plugin-controller://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDOPLUGINCONTROLLER; do echo "$ENTANDOPLUGINCONTROLLER";done
+      register: ENTANDOPLUGINCONTROLLER
+    - set_fact:
+       CLIENTSECRET: "{{ ENTANDOPLUGINCONTROLLER.stdout }}"
+       
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }}/terraform-test/learn-terraform-provision-eks-cluster hub-tool tag ls entando/entando-k8s-dbjob --sort updated | awk 'FNR==2{print $1}' | sed 's/entando-k8s-dbjob://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDODBJOB; do echo "$ENTANDODBJOB";done
+      register: ENTANDODBJOB
+    - set_fact:
+       CLIENTSECRET: "{{ ENTANDODBJOB.stdout }}"
+
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }}/terraform-test/learn-terraform-provision-eks-cluster hub-tool tag ls entando/entando-k8s-keycloak-controller  --sort updated | awk 'FNR==2{print $1}' | sed 's/entando-k8s-keycloak-controller://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDOKKCONTROLLER; do echo "$ENTANDOKKCONTROLLER";done
+      register: ENTANDOKKCONTROLLER
+    - set_fact:
+       CLIENTSECRET: "{{ ENTANDOKKCONTROLLER.stdout }}"
+
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }}/terraform-test/learn-terraform-provision-eks-cluster hub-tool tag ls entando/entando-k8s-database-service-controller  --sort updated | awk 'FNR==2{print $1}' | sed 's/entando-k8s-database-service-controller://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDODBSVCCONTROLLER; do echo "$ENTANDODBSVCCONTROLLER";done
+      register: ENTANDODBSVCCONTROLLER
+    - set_fact:
+       CLIENTSECRET: "{{ ENTANDODBSVCCONTROLLER.stdout }}"
+
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }}/terraform-test/learn-terraform-provision-eks-cluster hub-tool tag ls entando/entando-k8s-app-plugin-link-controller  --sort updated | awk 'FNR==2{print $1}' | sed 's/entando-k8s-app-plugin-link-controller://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDOAPPPLUGINCONTROLLER; do echo "$ENTANDOAPPPLUGINCONTROLLER";done
+      register: ENTANDOAPPPLUGINCONTROLLER
+    - set_fact:
+       CLIENTSECRET: "{{ ENTANDOAPPPLUGINCONTROLLER.stdout }}"
+
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }}/terraform-test/learn-terraform-provision-eks-cluster hub-tool tag ls entando/entando-k8s-service   --sort updated | awk 'FNR==2{print $1}' | sed 's/entando-k8s-service://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDOSERVICE; do echo "$ENTANDOSERVICE";done
+      register: ENTANDOSERVICE
+    - set_fact:
+       CLIENTSECRET: "{{ ENTANDOSERVICE.stdout }}"
+
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }}/terraform-test/learn-terraform-provision-eks-cluster hub-tool tag ls entando/entando-process-driven-plugin   --sort updated | awk 'FNR==2{print $1}' | sed 's/entando-process-driven-plugin://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDOPDPLUGIN; do echo "$ENTANDOPDPLUGIN";done
+      register: ENTANDOPDPLUGIN
+    - set_fact:
+       CLIENTSECRET: "{{ ENTANDOPDPLUGIN.stdout }}"
+
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }}/terraform-test/learn-terraform-provision-eks-cluster hub-tool tag ls entando/entando-keycloak   --sort updated | awk 'FNR==2{print $1}' | sed 's/entando-keycloak://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDOKK; do echo "$ENTANDOKK";done
+      register: ENTANDOKK
+    - set_fact:
+       CLIENTSECRET: "{{ ENTANDOKK.stdout }}"
 
     - name: Generate cypress config file
       template:
