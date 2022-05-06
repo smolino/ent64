@@ -4,7 +4,7 @@
    tasks:
    
     - name: Retrive clientsecret
-      shell: chdir=/home/{{ username }}/terraform-test/learn-terraform-provision-eks-cluster ./hub-tool tag ls entando/entando-component-manager --sort updated | awk 'FNR==2{print $1}' | sed 's/entando-component-manager://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDOCOMPONENTMANAGER; do echo "$ENTANDOCOMPONENTMANAGER";done
+      shell: chdir=/home/{{ username }}/terraform-test/learn-terraform-provision-eks-cluster hub-tool tag ls entando/entando-component-manager --sort updated | awk 'FNR==2{print $1}' | sed 's/entando-component-manager://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDOCOMPONENTMANAGER; do echo "$ENTANDOCOMPONENTMANAGER";done
       register: ENTANDOCOMPONENTMANAGER
     - set_fact:
        ENTANDOCOMPONENTMANAGER: "{{ ENTANDOCOMPONENTMANAGER.stdout }}"
