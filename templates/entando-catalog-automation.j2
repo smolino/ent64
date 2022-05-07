@@ -1,0 +1,12 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: entando-catalog
+  namespace: {{ namespaces }}
+spec:
+  displayName: Entando Catalog pre
+  image: registry.hub.docker.com/entandobuilduser/entando-k8s-index:{{ ENTANDOKI }}@{{ SHAENTANDOKI }}
+  sourceType: grpc
+  updateStrategy:
+    registryPoll:
+      interval: 5m
