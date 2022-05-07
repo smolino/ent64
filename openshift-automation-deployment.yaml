@@ -4,23 +4,31 @@
    become_user: {{ username }}
    tasks:
     - name: Login in
-      command: chdir=/home/openshift ./oc login api.{{ openshift_url }}:6443 -u admin -p {{ password1 }} --insecure-skip-tls-verify=true
+      command: chdir=/home/{{ username }} ./oc login api.{{ openshift_url }}:6443 -u admin -p {{ password1 }} --insecure-skip-tls-verify=true
 
     - name: Create Project
-      shell: chdir=/home/{{ username }} ./oc create namespace {{ namespaces }}       
+      shell: chdir=/home/{{ username }} ./oc create namespace {{ namespaces }}
+      
+     - name: Create catalog source
+      template:
+        src: ./templates/entando-catalog-automation.j2
+        dest: /home/{{ username }}/entando-catalog-automation.yaml
+
+    - name: Install catalog source
+      shell: chdir=/home/{{ username }} ./oc apply -f entando-catalog-automation.yaml -n {{ namespaces }}
 
     - name: Create subscription
       template:
         src: ./templates/entando-subscription-automation.j2
-        dest: /home/openshift/entando-subscription.yaml
+        dest: /home/{{ username }}/entando-subscription.yaml
 
     - name: Install operatorscript on namespace scope
-      shell: chdir=/home/openshift ./oc apply -f entando-subscription-automation.yaml -n {{ namespaces }}
+      shell: chdir=/home/{{ username }} ./oc apply -f entando-subscription-automation.yaml -n {{ namespaces }}
 
     - name: Copy Entando App Script
       template:
-        src: ./templates/{{entandoappconfig}}.j2
-        dest: /home/openshift/{{entandoappconfig}}.yaml
+        src: ./templates/entando-app.j2
+        dest: /home/{{ username }}/entando-app.yaml
 
     - name: Install Entando App on namespace scope
-      shell: chdir=/home/openshift ./oc apply -f {{entandoappconfig}}.yaml -n {{ namespaces }}
+      shell: chdir=/home/{{ username }} ./oc apply -f entando-app.yaml -n {{ namespaces }}
