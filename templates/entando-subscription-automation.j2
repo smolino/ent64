@@ -1,0 +1,20 @@
+---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: {{namespaces}}
+  namespace: {{namespaces}}
+spec:
+  targetNamespaces:
+  - {{namespaces}}
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: entando-k8s-operator
+  namespace: {{namespaces}}
+spec:
+  channel: "final"
+  name: entando-k8s-operator
+  source: entando-catalog-automation
+  sourceNamespace: openshift-marketplace
