@@ -8,7 +8,20 @@
 
     - name: Create Project
       shell: chdir=/home/{{ username }} ./oc create namespace {{ namespaces }}
-      
+
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} hub-tool tag ls entandobuilduser/entando-k8s-index --sort updated | awk 'FNR==2{print $1}' | sed 's/entando-k8s-index://g' | sed 's/entandobuilduser//g' |sed 's/\///g' | while read  ENTANDOKI; do echo "$ENTANDOKI";done
+      register: ENTANDOKI
+    - set_fact:
+       ENTANDOKI: "{{ ENTANDOKI.stdout }}"
+           
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} hub-tool tag ls entando/entando-k8s-index --sort updated |awk 'FNR==2{print $2}' | while read  SHAENTANDOKI;do echo  "$SHAENTANDOKI";done
+      register: SHAENTANDOKI
+    - set_fact:
+       SHAENTANDOKI: "{{ SHAENTANDOKI.stdout }}"
+
+
      - name: Create catalog source
       template:
         src: ./templates/entando-catalog-automation.j2
