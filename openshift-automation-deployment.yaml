@@ -165,6 +165,18 @@
     - set_fact:
        SHAENTANDOKK: "{{ SHAENTANDOKK.stdout }}"
 
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} hub-tool tag ls entando/entando-k8s-controller-coordinator --sort updated | awk 'FNR==2{print $1}' | sed 's/entando-k8s-controller-coordinator://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDOCONTROLLERCOORDINATOR; do echo "$ENTANDOCONTROLLERCOORDINATOR";done
+      register: ENTANDOCONTROLLERCOORDINATOR
+    - set_fact:
+       ENTANDOCONTROLLERCOORDINATOR: "{{ ENTANDOCONTROLLERCOORDINATOR.stdout }}"
+       
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} hub-tool tag ls entando/entando-k8s-controller-coordinator --sort updated |awk 'FNR==2{print $2}' | while read  SHAENTANDOCONTROLLERCOORDINATOR;do echo  "$SHAENTANDOCONTROLLERCOORDINATOR";done
+      register: SHAENTANDOCONTROLLERCOORDINATOR
+    - set_fact:
+       SHAENTANDOCONTROLLERCOORDINATOR: "{{ SHAENTANDOCONTROLLERCOORDINATOR.stdout }}"
+
     - name: Create catalog source
       template:
         src: ./templates/entando-catalog-automation.j2
