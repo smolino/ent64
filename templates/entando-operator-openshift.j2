@@ -4,7 +4,7 @@ metadata:
   namespace: {{ namespaces }}
     spec:
       nodeSelector:
-        beta.kubernetes.io/os: linux
+        beta.kubernetes.io/os: 'linux'
       restartPolicy: Always
       serviceAccountName: entando-operator
       imagePullSecrets:
