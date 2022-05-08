@@ -16,11 +16,158 @@
        ENTANDOKI: "{{ ENTANDOKI.stdout }}"
            
     - name: Retrive clientsecret
-      shell: chdir=/home/{{ username }} hub-tool tag ls entando/entando-k8s-index --sort updated |awk 'FNR==2{print $2}' | while read  SHAENTANDOKI;do echo  "$SHAENTANDOKI";done
+      shell: chdir=/home/{{ username }} hub-tool tag ls entandobuilduser/entando-k8s-index --sort updated |awk 'FNR==2{print $2}' | while read  SHAENTANDOKI;do echo  "$SHAENTANDOKI";done
       register: SHAENTANDOKI
     - set_fact:
        SHAENTANDOKI: "{{ SHAENTANDOKI.stdout }}"
+ 
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} hub-tool tag ls entando/entando-component-manager --sort updated | awk 'FNR==2{print $1}' | sed 's/entando-component-manager://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDOCOMPONENTMANAGER; do echo "$ENTANDOCOMPONENTMANAGER";done
+      register: ENTANDOCOMPONENTMANAGER
+    - set_fact:
+       ENTANDOCOMPONENTMANAGER: "{{ ENTANDOCOMPONENTMANAGER.stdout }}"
+       
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} hub-tool tag ls entando/entando-component-manager --sort updated |awk 'FNR==2{print $2}' | while read  SHAENTANDOCOMPONENTMANAGER;do echo  "$SHAENTANDOCOMPONENTMANAGER";done
+      register: SHAENTANDOCOMPONENTMANAGER
+    - set_fact:
+       SHAENTANDOCOMPONENTMANAGER: "{{ SHAENTANDOCOMPONENTMANAGER.stdout }}"  
+           
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} hub-tool tag ls entando/entando-de-app-wildfly --sort updated | awk 'FNR==2{print $1}' | sed 's/entando-de-app-wildfly://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDODEAPPWILDFLY; do echo "$ENTANDODEAPPWILDFLY";done
+      register: ENTANDODEAPPWILDFLY
+    - set_fact:
+       ENTANDODEAPPWILDFLY: "{{ ENTANDODEAPPWILDFLY.stdout }}"
 
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} hub-tool tag ls entando/entando-de-app-wildfly --sort updated |awk 'FNR==2{print $2}' | while read  SHAENTANDODEAPPWILDFLY;do echo  "$SHAENTANDODEAPPWILDFLY";done
+      register: SHAENTANDODEAPPWILDFLY
+    - set_fact:
+       SHAENTANDODEAPPWILDFLY: "{{ SHAENTANDODEAPPWILDFLY.stdout }}"
+
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} hub-tool tag ls entando/entando-de-app-eap --sort updated | awk 'FNR==2{print $1}' | sed 's/entando-de-app-eap://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDODEAPPEAP; do echo "$ENTANDODEAPPEAP";done
+      register: ENTANDODEAPPEAP
+    - set_fact:
+       ENTANDODEAPPEAP: "{{ ENTANDODEAPPEAP.stdout }}"
+
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} hub-tool tag ls entando/entando-de-app-eap --sort updated |awk 'FNR==2{print $2}' | while read  SHAENTANDODEAPPEAP;do echo  "$SHAENTANDODEAPPEAP";done
+      register: SHAENTANDODEAPPEAP
+    - set_fact:
+       SHAENTANDODEAPPEAP: "{{ SHAENTANDODEAPPEAP.stdout }}"
+
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} hub-tool tag ls entando/entando-k8s-app-controller --sort updated | awk 'FNR==2{print $1}' | sed 's/entando-k8s-app-controller://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDOAPPCONTROLLER; do echo "$ENTANDOAPPCONTROLLER";done
+      register: ENTANDOAPPCONTROLLER
+    - set_fact:
+       ENTANDOAPPCONTROLLER: "{{ ENTANDOAPPCONTROLLER.stdout }}"
+
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} hub-tool tag ls entando/entando-k8s-app-controller --sort updated |awk 'FNR==2{print $2}' | while read  SHAENTANDOAPPCONTROLLER;do echo  "$SHAENTANDOAPPCONTROLLER";done
+      register: SHAENTANDOAPPCONTROLLER
+    - set_fact:
+       SHAENTANDOAPPCONTROLLER: "{{ SHAENTANDOAPPCONTROLLER.stdout }}"
+
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} hub-tool tag ls entando/entando-k8s-plugin-controller --sort updated | awk 'FNR==2{print $1}' | sed 's/entando-k8s-plugin-controller://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDOPLUGINCONTROLLER; do echo "$ENTANDOPLUGINCONTROLLER";done
+      register: ENTANDOPLUGINCONTROLLER
+    - set_fact:
+       ENTANDOPLUGINCONTROLLER: "{{ ENTANDOPLUGINCONTROLLER.stdout }}"
+
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} hub-tool tag ls entando/entando-k8s-plugin-controller --sort updated |awk 'FNR==2{print $2}' | while read  SHAENTANDOPLUGINCONTROLLER;do echo  "$SHAENTANDOPLUGINCONTROLLER";done
+      register: SHAENTANDOPLUGINCONTROLLER
+    - set_fact:
+       SHAENTANDOPLUGINCONTROLLER: "{{ SHAENTANDOPLUGINCONTROLLER.stdout }}"
+
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} hub-tool tag ls entando/entando-k8s-dbjob --sort updated | awk 'FNR==2{print $1}' | sed 's/entando-k8s-dbjob://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDODBJOB; do echo "$ENTANDODBJOB";done
+      register: ENTANDODBJOB
+    - set_fact:
+       ENTANDODBJOB: "{{ ENTANDODBJOB.stdout }}"
+
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} hub-tool tag ls entando/entando-k8s-dbjob --sort updated |awk 'FNR==2{print $2}' | while read  SHAENTANDODBJOB;do echo  "$SHAENTANDODBJOB";done
+      register: SHAENTANDODBJOB
+    - set_fact:
+       SHAENTANDODBJOB: "{{ SHAENTANDODBJOB.stdout }}"
+
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} hub-tool tag ls entando/entando-k8s-keycloak-controller --sort updated | awk 'FNR==2{print $1}' | sed 's/entando-k8s-keycloak-controller://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDOKKCONTROLLER; do echo "$ENTANDOKKCONTROLLER";done
+      register: ENTANDOKKCONTROLLER
+    - set_fact:
+       ENTANDOKKCONTROLLER: "{{ ENTANDOKKCONTROLLER.stdout }}"
+
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} hub-tool tag ls entando/entando-k8s-keycloak-controller --sort updated |awk 'FNR==2{print $2}' | while read  SHAENTANDOKKCONTROLLER;do echo  "$SHAENTANDOKKCONTROLLER";done
+      register: SHAENTANDOKKCONTROLLER
+    - set_fact:
+       SHAENTANDOKKCONTROLLER: "{{ SHAENTANDOKKCONTROLLER.stdout }}"
+
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} hub-tool tag ls entando/entando-k8s-database-service-controller --sort updated | awk 'FNR==2{print $1}' | sed 's/entando-k8s-database-service-controller://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDODBSVCCONTROLLER; do echo "$ENTANDODBSVCCONTROLLER";done
+      register: ENTANDODBSVCCONTROLLER
+    - set_fact:
+       ENTANDODBSVCCONTROLLER: "{{ ENTANDODBSVCCONTROLLER.stdout }}"
+
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} hub-tool tag ls entando/entando-k8s-database-service-controller --sort updated |awk 'FNR==2{print $2}' | while read  SHAENTANDODBSVCCONTROLLER;do echo  "$SHAENTANDODBSVCCONTROLLER";done
+      register: SHAENTANDODBSVCCONTROLLER
+    - set_fact:
+       SHAENTANDODBSVCCONTROLLER: "{{ SHAENTANDODBSVCCONTROLLER.stdout }}"
+
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} hub-tool tag ls entando/entando-k8s-app-plugin-link-controller --sort updated | awk 'FNR==2{print $1}' | sed 's/entando-k8s-app-plugin-link-controller://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDOAPPPLUGINCONTROLLER; do echo "$ENTANDOAPPPLUGINCONTROLLER";done
+      register: ENTANDOAPPPLUGINCONTROLLER
+    - set_fact:
+       ENTANDOAPPPLUGINCONTROLLER: "{{ ENTANDOAPPPLUGINCONTROLLER.stdout }}"
+
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} hub-tool tag ls entando/entando-k8s-app-plugin-link-controller --sort updated |awk 'FNR==2{print $2}' | while read  SHAENTANDOAPPPLUGINCONTROLLER;do echo  "$SHAENTANDOAPPPLUGINCONTROLLER";done
+      register: SHAENTANDOAPPPLUGINCONTROLLER
+    - set_fact:
+       SHAENTANDOAPPPLUGINCONTROLLER: "{{ SHAENTANDOAPPPLUGINCONTROLLER.stdout }}"
+
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} hub-tool tag ls entando/entando-k8s-service --sort updated | awk 'FNR==2{print $1}' | sed 's/entando-k8s-service://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDOSERVICE; do echo "$ENTANDOSERVICE";done
+      register: ENTANDOSERVICE
+    - set_fact:
+       ENTANDOSERVICE: "{{ ENTANDOSERVICE.stdout }}"
+
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} hub-tool tag ls entando/entando-k8s-service --sort updated |awk 'FNR==2{print $2}' | while read  SHAENTANDOSERVICE;do echo  "$SHAENTANDOSERVICE";done
+      register: SHAENTANDOSERVICE
+    - set_fact:
+       SHAENTANDOSERVICE: "{{ SHAENTANDOSERVICE.stdout }}"
+
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} hub-tool tag ls entando/entando-process-driven-plugin --sort updated | awk 'FNR==2{print $1}' | sed 's/entando-process-driven-plugin://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDOPDPLUGIN; do echo "$ENTANDOPDPLUGIN";done
+      register: ENTANDOPDPLUGIN
+    - set_fact:
+       ENTANDOPDPLUGIN: "{{ ENTANDOPDPLUGIN.stdout }}"
+
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} hub-tool tag ls entando/entando-process-driven-plugin --sort updated |awk 'FNR==2{print $2}' | while read  SHAENTANDOPDPLUGIN;do echo  "$ENTANDOPDPLUGIN";done
+      register: ENTANDOPDPLUGIN
+    - set_fact:
+       ENTANDOPDPLUGIN: "{{ ENTANDOPDPLUGIN.stdout }}"
+
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} hub-tool tag ls entando/entando-keycloak --sort updated | awk 'FNR==2{print $1}' | sed 's/entando-keycloak://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDOKK; do echo "$ENTANDOKK";done
+      register: ENTANDOKK
+    - set_fact:
+       ENTANDOKK: "{{ ENTANDOKK.stdout }}"
+       
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} hub-tool tag ls entando/entando-keycloak --sort updated |awk 'FNR==2{print $2}' | while read  SHAENTANDOKK;do echo  "$SHAENTANDOKK";done
+      register: SHAENTANDOKK
+    - set_fact:
+       SHAENTANDOKK: "{{ SHAENTANDOKK.stdout }}"       
+       
+       
+       
+       
 
      - name: Create catalog source
       template:
