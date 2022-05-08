@@ -163,11 +163,7 @@
       shell: chdir=/home/{{ username }} hub-tool tag ls entando/entando-keycloak --sort updated |awk 'FNR==2{print $2}' | while read  SHAENTANDOKK;do echo  "$SHAENTANDOKK";done
       register: SHAENTANDOKK
     - set_fact:
-       SHAENTANDOKK: "{{ SHAENTANDOKK.stdout }}"       
-       
-       
-       
-       
+       SHAENTANDOKK: "{{ SHAENTANDOKK.stdout }}"
 
      - name: Create catalog source
       template:
