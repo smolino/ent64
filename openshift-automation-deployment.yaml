@@ -165,7 +165,7 @@
     - set_fact:
        SHAENTANDOKK: "{{ SHAENTANDOKK.stdout }}"
 
-     - name: Create catalog source
+    - name: Create catalog source
       template:
         src: ./templates/entando-catalog-automation.j2
         dest: /home/{{ username }}/entando-catalog-automation.yaml
