@@ -24,3 +24,6 @@
       
     - name: Publish Logs 
       shell: mv -f /home/{{ username }}/log-collector/* /var/www/html/logs/{{ username }}1.21/
+      
+    - name: Publish namespace resource file
+      shell: mv -f /home/{{ username }}/namespace-resources_custom.yaml /var/www/html/logs/{{ username }}1.21/
