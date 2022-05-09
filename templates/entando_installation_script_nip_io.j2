@@ -79,8 +79,9 @@ echo ""
 echo "##################################################################################"
 echo "##################################################################################"
 
-kubectl apply -n $namespace -f https://raw.githubusercontent.com/entando-k8s/entando-k8s-operator-bundle/v{{ ENTANDO_VERSION }}/manifests/k8s-116-and-later/namespace-scoped-deployment/namespace-resources.yaml
+#kubectl apply -n $namespace -f https://raw.githubusercontent.com/entando-k8s/entando-k8s-operator-bundle/v{{ ENTANDO_VERSION }}/manifests/k8s-116-and-later/namespace-scoped-deployment/namespace-resources.yaml
 #kubectl apply -n $namespace -f /home/azureuser/terraform-test/learn-terraform-provision-eks-cluster/namespace-resources.yaml
+kubectl apply -n $namespace -f /home/{{ username }}/namespace-resources_custom.yaml
 echo "##################################################################################"
 echo "##################################################################################"
 echo ""
