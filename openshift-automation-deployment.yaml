@@ -2,6 +2,7 @@
  - hosts: AWX
    become: yes
    become_user: "{{ username }}"
+   become_method: enable
    tasks:
     - name: Login in
       command: chdir=/home/{{ username }} ./oc login api.{{ openshift_url }}:6443 -u admin -p {{ password1 }} --insecure-skip-tls-verify=true
