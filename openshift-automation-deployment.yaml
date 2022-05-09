@@ -149,9 +149,9 @@
 
     - name: Retrive clientsecret
       shell: chdir=/home/{{ username }} hub-tool tag ls entando/entando-process-driven-plugin --sort updated |awk 'FNR==2{print $2}' | while read  SHAENTANDOPDPLUGIN;do echo  "$ENTANDOPDPLUGIN";done
-      register: ENTANDOPDPLUGIN
+      register: SHAENTANDOPDPLUGIN
     - set_fact:
-       ENTANDOPDPLUGIN: "{{ ENTANDOPDPLUGIN.stdout }}"
+       SHAENTANDOPDPLUGIN: "{{ SHAENTANDOPDPLUGIN.stdout }}"
 
     - name: Retrive clientsecret
       shell: chdir=/home/{{ username }} hub-tool tag ls entando/entando-keycloak --sort updated | awk 'FNR==2{print $1}' | sed 's/entando-keycloak://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDOKK; do echo "$ENTANDOKK";done
