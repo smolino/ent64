@@ -195,6 +195,11 @@
 
     - name: Install catalog source
       shell: chdir=/home/{{ username }} ./oc apply -f entando-catalog-automation.yaml -n {{ namespaces }}
+      
+    - name: Sleep for 300 seconds and continue with play
+      wait_for:
+        timeout: 60
+      delegate_to: localhost
 
     - name: Install operatorscript on namespace scope
       shell: chdir=/home/{{ username }} ./oc scale deployment entando-operator -n {{ namespaces }} --replicas=0
