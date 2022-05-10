@@ -1,0 +1,14 @@
+---
+ - hosts: AWX
+   become_user: "{{ username }}"
+   tasks:
+                 
+   - name: Curl Entando website
+     shell: curl http://{{ appname }}.{{openshift_url }}/app-builder/
+     register: webpage
+   - debug: var=webpage.stdout
+   - name: Fail
+     fail:
+     when: "'entando' not in webpage.stdout" 
+   - name: Success
+     debug: msg="Entando App is up and running"
