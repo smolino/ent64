@@ -1,0 +1,43 @@
+---
+ - hosts: AWX
+   become: yes
+   become_user: "{{ username }}"
+   tasks:
+   
+    - name: Select working dir
+      command: cd /home/{{ username }}
+   
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} kubectl get secret {{ appname }}-de-secret -n {{ namespace }} -o jsonpath='{.data.clientSecret}'| awk '{print $1}' | while read CLIENTSECRET; do echo "$CLIENTSECRET"|base64 --decode;done
+      register: CLIENTSECRET
+    - set_fact:
+       CLIENTSECRET: "{{ CLIENTSECRET.stdout }}"
+       
+#    - debug:
+#        var: CLIENTSECRET
+      
+    - name: Retrive clientid
+      shell: chdir=/home/{{ username }} kubectl get secret {{ appname }}-de-secret -n {{ namespace }} -o jsonpath='{.data.clientId}'| awk '{print $1}' | while read CLIENTID; do echo "$CLIENTID"|base64 --decode;done
+      register: CLIENTID
+    - set_fact:
+       CLIENTID: "{{ CLIENTID.stdout }}"
+       
+#    - debug:
+#        var: CLIENTID     
+    
+    - name: Retrive Host
+      shell: chdir=/home/{{ username }} kubectl get ingress -n {{ namespace }} | grep default | awk '{print $3}' |while read HOST; do echo "$HOST";done
+      register: HOST      
+    - set_fact:
+       HOST: "{{ HOST.stdout }}"
+       
+#    - debug:
+#        var: HOST
+        
+    - name: Generate cypress config file
+      template:
+        src: ./templates/cypress_config.j2
+        dest: /home/{{ username }}/remoteconfig.json
+
+    - name: Copy Cypress configuration file to pod
+      shell: chdir=/home/{{ username }} kubectl cp /home/{{ username }}/remoteconfig.json cypress/cypress:/opt/entando-test-automation/ui-tests/configs/ent64azure/
