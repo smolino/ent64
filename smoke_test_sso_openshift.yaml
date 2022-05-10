@@ -8,7 +8,7 @@
      command: cd /home/{{ username }}   
             
    - name: Curl Keycloak website
-     shell: curl http://{{ appname }}.apps.{{ openshift_url }}/auth
+     shell: curl http://{{ appname }}.apps.{{ openshift_url }}/auth/
      register: webpage
    - debug: var=webpage.stdout
    - name: Fail
