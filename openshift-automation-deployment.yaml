@@ -177,13 +177,13 @@
     - set_fact:
        SHAENTANDOCONTROLLERCOORDINATOR: "{{ SHAENTANDOCONTROLLERCOORDINATOR.stdout }}"
 
-    - name: Create catalog source
-      template:
-        src: ./templates/entando-catalog-automation.j2
-        dest: /home/{{ username }}/entando-catalog-automation.yaml
+#    - name: Create catalog source
+#      template:
+#        src: ./templates/entando-catalog-automation.j2
+#        dest: /home/{{ username }}/entando-catalog-automation.yaml
 
-    - name: Install catalog source
-      shell: chdir=/home/{{ username }} ./oc apply -f entando-catalog-automation.yaml -n {{ namespaces }}
+#    - name: Install catalog source
+#      shell: chdir=/home/{{ username }} ./oc apply -f entando-catalog-automation.yaml -n {{ namespaces }}
 
     - name: Create subscription
       template:
