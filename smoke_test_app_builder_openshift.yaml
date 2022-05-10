@@ -4,7 +4,7 @@
    tasks:
                  
    - name: Curl Entando website
-     shell: curl http://{{ appname }}.{{openshift_url }}/app-builder/
+     shell: curl http://{{ appname }}.apps.{{openshift_url }}/app-builder/
      register: webpage
    - debug: var=webpage.stdout
    - name: Fail
