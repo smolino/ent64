@@ -1,0 +1,31 @@
+---
+ - hosts: AWX
+   become: yes
+   become_user: "{{ username }}"
+   tasks:
+   
+    - name: Select working dir
+      command: cd /home/{{ username }}
+   
+    - name: Retrive Keycloack Password
+      shell: kubectl get secret default-sso-in-namespace-admin-secret -n entando -o jsonpath='{.data.password}'| awk '{print $1}' | while read ADMINSECRET; do echo "$ADMINSECRET"|base64 --decode;done
+      register: ADMINSECRET
+    - set_fact:
+       PASSWORD: "{{ ADMINSECRET.stdout }}"
+       
+    - name: Retrive Host
+      shell: kubectl get ingress -n entando | grep sso | awk '{print $3}' |while read HOST; do echo "$HOST";done
+      register: HOST      
+    - set_fact:
+       HOST: "{{ HOST.stdout }}"
+        
+    - name: Copy script to change password
+      template:
+        src: ./templates/keycloak_change_password.j2
+        dest: /home/{{ username }}/changepassword.sh
+        
+    - name: Change Permission
+      shell: chdir=/home/{{ username }} chmod +x changepassword.sh
+      
+    - name: Eecute script
+      command: chdir=/home/{{ username }} ./changepassword.sh
