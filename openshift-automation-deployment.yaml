@@ -190,20 +190,20 @@
         src: ./templates/entando-subscription-automation.j2
         dest: /home/{{ username }}/entando-subscription-automation.yaml
 
-    - name: Install operatorscript on namespace scope
+    - name: Install operator on namespace scope
       shell: chdir=/home/{{ username }} ./oc apply -f entando-subscription-automation.yaml -n {{ namespaces }}
 
-    - name: Install catalog source
-      shell: chdir=/home/{{ username }} ./oc apply -f entando-catalog-automation.yaml -n {{ namespaces }}
+#    - name: Install catalog source
+#      shell: chdir=/home/{{ username }} ./oc apply -f entando-catalog-automation.yaml -n {{ namespaces }}
       
     - name: Sleep for 60 seconds and continue with play
       wait_for:
         timeout: 60
 
-    - name: Install operatorscript on namespace scope
+    - name: Scale down Operator deployment
       shell: chdir=/home/{{ username }} ./oc scale deployment entando-operator -n {{ namespaces }} --replicas=0
       
-    - name: Install operatorscript on namespace scope
+    - name: Build operator deployment with latest images
       shell: chdir=/home/{{ username }} ./oc get deployment entando-operator -n {{ namespaces }} -o yaml > entando-operator-openshift.yaml
       
     - name: Retrive clientsecret
@@ -233,10 +233,10 @@
     - name: Retrive clientsecret
       shell: chdir=/home/{{ username }} sed "s/entando-k8s-controller-coordinator@.*/entando-k8s-controller-coordinator@{{ SHAENTANDOCONTROLLERCOORDINATOR }}/g" entando-operator-opensift-modified11.yaml > entando-operator-opensift-complete.yaml
 
-    - name: Install operatorscript on namespace scope
+    - name: Apply operator deployment updated
       shell: chdir=/home/{{ username }} ./oc apply -f entando-operator-opensift-complete.yaml -n {{ namespaces }}
       
-    - name: Install operatorscript on namespace scope
+    - name: Scale up operator
       shell: chdir=/home/{{ username }} ./oc scale deployment entando-operator -n {{ namespaces }} --replicas=1
 
     - name: Copy Entando App Script
