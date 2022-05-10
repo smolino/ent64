@@ -1,0 +1,14 @@
+---
+ - hosts: AWX
+   become: yes
+   become_user: "{{ username }}"
+   tasks:
+   
+    - name: Create Dir Logs
+      shell: mkdir -p /home/{{ username }}/log-collector/{{ appname }}-v{{ ENTANDO_VERSION }}/results
+      
+    - name: Collect all Entando application logs from pods
+      shell: kubectl get pods -n entando --no-headers | awk '{print $1}' | while read PODS;do kubectl logs $PODS -n entando > /home/{{ username }}/log-collector/{{ appname }}-v{{ ENTANDO_VERSION }}/$PODS.log;done
+      
+    - name: Copy Cypress results
+      shell: kubectl cp cypress/cypress:/opt/entando-test-automation/ui-tests/cypress/results /home/{{ username }}/log-collector/{{ appname }}-v{{ ENTANDO_VERSION }}/results
