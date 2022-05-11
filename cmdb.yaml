@@ -1,0 +1,18 @@
+
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+    - name: gather facts from apps
+      setup:
+      register: find_output
+    
+    - name: save 
+      copy: 
+        content: "{{ find_output }}" 
+        dest: /home/azureuser/{{ inventory_hostname }}
+      delegate_to: AWX
+    
+    - name: Facts have been gathered
+      debug:
+        msg: "Facts are now gathered"
