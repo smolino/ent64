@@ -17,4 +17,4 @@
       shell: mv /home/{{ username }}/log-collector/* /var/www/html/logs/{{ username }}{{ kubeversion }}/
 
     - name: Publish entando operator config 
-      shell: mv /home/{{ username }}/entando-operator-opensift-complete.yaml /var/www/html/logs/{{ username }}{{ kubeversion }}/
+      shell: mv /home/{{ username }}/entando-operator-opensift-complete.yaml /var/www/html/logs/{{ username }}{{ kubeversion }}/{{ APPNAME }}-v{{ ENTANDO_VERSION }}/
