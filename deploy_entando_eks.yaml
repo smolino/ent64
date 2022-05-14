@@ -10,13 +10,13 @@
     - name: Copy Installation script Script
       template:
         src: ./templates/entando_installation_script.j2
-        dest: entando_installation_script.sh
+        dest: /home/{{ username }}/entando_installation_script.sh
         
     - name: Change Permission 
-      shell: chmod +x entando_installation_script.sh
+      shell: chdir=/home/{{ username }} chmod +x entando_installation_script.sh
       
     - name: Execute installation script
-      shell: ./entando_installation_script.sh entando {{ APPNAME }}
+      shell: chdir=/home/{{ username }} ./entando_installation_script.sh entando {{ APPNAME }}
       register: results
       
     - name: Print Results
