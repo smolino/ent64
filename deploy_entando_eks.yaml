@@ -1,0 +1,27 @@
+---
+ - hosts: AWX
+   become_user: "{{ username }}"
+   tasks:
+   
+    - name: Select working dir
+      command: cd /home/{{ username }}
+      
+    - name: Copy Installation script Script
+      template:
+        src: ./templates/entando_installation_script.j2
+        dest: entando_installation_script.sh
+        
+    - name: Change Permission 
+      shell: chmod +x entando_installation_script.sh
+      
+    - name: Execute installation script
+      shell: ./entando_installation_script.sh entando {{ APPNAME }}
+      register: results
+      
+    - name: Print Results
+      debug:
+        msg: "{{ results }}"
+        
+    - name: Wait untill the Application is up
+      wait_for: timeout=200
+      delegate_to: localhost
