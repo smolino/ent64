@@ -23,6 +23,3 @@
       debug:
         msg: "{{ results }}"
         
-    - name: Wait untill the Application is up
-      wait_for: timeout=200
-      delegate_to: localhost
