@@ -1,6 +1,8 @@
 ---
  - hosts: AWX
    become_user: "{{ username }}"
+   environment:
+     PATH: '{{ lookup(''env'', ''PATH'') }}:/home/{{ username }}/.local/bin/aws'
    tasks:
    
     - name: Retrive Keycloack Password
