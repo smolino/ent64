@@ -2,6 +2,8 @@
  - hosts: AWX
    become: yes
    become_user: "{{ username }}"
+   environment:
+     PATH: '{{ lookup(''env'', ''PATH'') }}:/home/{{ username }}/.local/bin/aws'
    tasks:
    
     - name: Create Dir Cypress results
