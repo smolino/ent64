@@ -1,0 +1,25 @@
+---
+ - hosts: AWX
+   become: yes
+   become_user: "{{ username }}"
+   environment:
+     PATH: '{{ lookup(''env'', ''PATH'') }}:/home/{{ username }}/.local/bin/aws'
+   tasks:
+   
+   - name: Select working dir
+     command: cd /home/{{ username }}
+   
+   - name: Get url
+     shell: kubectl get svc -n ingress-nginx |grep LoadBalancer | awk '{print $4}' | while read HOST;do 
+            echo "http://$HOST/app-builder/" > /home/{{ username }}/entando;done            
+     
+   - name: Curl Entando website
+     shell: cat /home/{{ username }}/entando | awk '{print $1}' | while read WEBPORTAL;do 
+            curl $WEBPORTAL;done
+     register: webpage
+   - debug: var=webpage.stdout
+   - name: Fail
+     fail:
+     when: "'entando' not in webpage.stdout" 
+   - name: Success
+     debug: msg="Entando App is up and running"
