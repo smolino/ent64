@@ -242,8 +242,10 @@
       shell: chdir=/home/{{ username }} sed "s/entando-process-driven-plugin@.*/entando-process-driven-plugi@{{ SHAENTANDOPDPLUGIN }}/g" entando-operator-opensift-modified9.yaml > entando-operator-opensift-modified10.yaml
     - name: Retrive clientsecret
       shell: chdir=/home/{{ username }} sed "s/entando-keycloak@.*/entando-keycloak@{{ SHAENTANDOKK }}/g" entando-operator-opensift-modified10.yaml > entando-operator-opensift-modified11.yaml
+     - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} sed "s/app-builder@.*/app-builder@{{ SHAENTANDOAPPBUILDER }}/g" entando-operator-opensift-modified11.yaml > entando-operator-opensift-modified12.yaml
     - name: Retrive clientsecret
-      shell: chdir=/home/{{ username }} sed "s/entando-k8s-controller-coordinator@.*/entando-k8s-controller-coordinator@{{ SHAENTANDOCONTROLLERCOORDINATOR }}/g" entando-operator-opensift-modified11.yaml > entando-operator-opensift-complete.yaml
+      shell: chdir=/home/{{ username }} sed "s/entando-k8s-controller-coordinator@.*/entando-k8s-controller-coordinator@{{ SHAENTANDOCONTROLLERCOORDINATOR }}/g" entando-operator-opensift-modified12.yaml > entando-operator-opensift-complete.yaml
 
     - name: Apply operator deployment updated
       shell: chdir=/home/{{ username }} ./oc apply -f entando-operator-opensift-complete.yaml -n {{ namespaces }}
