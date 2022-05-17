@@ -7,6 +7,12 @@
    tasks:
    
     - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} hub-tool tag ls entando/app-builder --sort updated | awk 'FNR==2{print $1}' | sed 's/app-builder://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDOAPPBUILDER; do echo "$ENTANDOAPPBUILDER";done
+      register: ENTANDOAPPBUILDER
+    - set_fact:
+       ENTANDOAPPBUILDER: "{{ ENTANDOAPPBUILDER.stdout }}"
+   
+    - name: Retrive clientsecret
       shell: chdir=/home/{{ username }} hub-tool tag ls entando/entando-component-manager --sort updated | awk 'FNR==2{print $1}' | sed 's/entando-component-manager://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDOCOMPONENTMANAGER; do echo "$ENTANDOCOMPONENTMANAGER";done
       register: ENTANDOCOMPONENTMANAGER
     - set_fact:
