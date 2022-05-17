@@ -8,6 +8,18 @@
 
     - name: Create Project
       shell: chdir=/home/{{ username }} ./oc create namespace {{ namespaces }}
+      
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} hub-tool tag ls entando/app-builder --sort updated | awk 'FNR==2{print $1}' | sed 's/appbuilder://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDOAPPBUILDER; do echo "$ENTANDOAPPBUILDER";done
+      register: appbuilder
+    - set_fact:
+       ENTANDOAPPBUILDER: "{{ ENTANDOAPPBUILDER.stdout }}"
+           
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} hub-tool tag ls entando/app-builder --sort updated |awk 'FNR==2{print $2}' | while read  SHAENTANDOAPPBUILDER;do echo  "$SHAENTANDOAPPBUILDER";done
+      register: SHAENTANDOAPPBUILDER
+    - set_fact:
+       SHAENTANDOAPPBUILDER: "{{ SHAENTANDOAPPBUILDER.stdout }}"
 
     - name: Retrive clientsecret
       shell: chdir=/home/{{ username }} hub-tool tag ls entandobuilduser/entando-k8s-index --sort updated | awk 'FNR==2{print $1}' | sed 's/entando-k8s-index://g' | sed 's/entandobuilduser//g' |sed 's/\///g' | while read  ENTANDOKI; do echo "$ENTANDOKI";done
