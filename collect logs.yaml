@@ -8,9 +8,10 @@
    tasks:
    
     - name: Collect all Entando application logs with ent
-      shell: |
-        - source /home/{{ username }}/.entando/activate --quiet --force 2>/dev/null
-        - ent diag
+      shell:
+        cmd:
+          source /home/{{ username }}/.entando/activate --quiet --force 2>/dev/null
+          ent diag
    
     - name: Create Dir Logs
       shell: mkdir -p /home/{{ username }}/log-collector/{{ APPNAME }}-v{{ ENTANDO_VERSION }}/results
