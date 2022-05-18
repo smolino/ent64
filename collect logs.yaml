@@ -6,6 +6,9 @@
      PATH: '{{ lookup(''env'', ''PATH'') }}:/home/{{ username }}/.local/bin/aws'
    tasks:
    
+    - name: Collect all Entando application logs with ent
+      shell: ent diag
+   
     - name: Create Dir Logs
       shell: mkdir -p /home/{{ username }}/log-collector/{{ APPNAME }}-v{{ ENTANDO_VERSION }}/results
       
@@ -14,3 +17,6 @@
       
     - name: Copy Cypress results
       shell: kubectl cp cypress/cypress:/opt/entando-test-automation/ui-tests/cypress/results /home/{{ username }}/log-collector/{{ APPNAME }}-v{{ ENTANDO_VERSION }}/results
+      
+    - name: Copy Ent results
+      shell: mv /home/{{ username }}/.entando/reports/* /home/{{ username }}/log-collector/{{ APPNAME }}-v{{ ENTANDO_VERSION }}
