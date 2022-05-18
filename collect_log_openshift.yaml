@@ -4,6 +4,9 @@
    become_user: "{{ username }}"
    tasks:
    
+    - name: Collect all Entando application logs with ent
+      shell: ent diag
+   
     - name: Create Dir Logs
       shell: mkdir -p /home/{{ username }}/log-collector/{{ appname }}-v{{ ENTANDO_VERSION }}/results
       
@@ -12,3 +15,6 @@
       
     - name: Copy Cypress results
       shell: kubectl cp cypress/cypress:/opt/entando-test-automation/ui-tests/cypress/results /home/{{ username }}/log-collector/{{ appname }}-v{{ ENTANDO_VERSION }}/results
+      
+    - name: Copy ent results
+      shell: mv /home/{{ username }}/.entando/reports/* /home/{{ username }}/log-collector/{{ APPNAME }}-v{{ ENTANDO_VERSION }}
