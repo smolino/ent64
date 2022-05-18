@@ -17,3 +17,9 @@
       
     - name: Publish Logs 
       shell: mv /home/{{ username }}/log-collector/* /var/www/html/logs/{{ username }}/
+      
+    - name: extract Ent results
+      shell: tar -xvf /var/www/html/logs/{{ username }}/{{ APPNAME }}-v{{ ENTANDO_VERSION }}/*.tgz
+      
+ #   - name: Copy Ent results
+ #     shell: rm /var/www/html/logs/{{ username }}/{{ APPNAME }}-v{{ ENTANDO_VERSION }}/*.tgz
