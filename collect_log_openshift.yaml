@@ -28,4 +28,4 @@
       shell: mv /home/{{ username }}/.entando/reports/* /home/{{ username }}/log-collector/{{ APPNAME }}-v{{ ENTANDO_VERSION }}
       
      - name: Copy Ent results
-      shell: mv /home/{{ username }}/.entando/reports/* /home/{{ username }}/log-collector/{{ APPNAME }}-v{{ ENTANDO_VERSION }}
+       shell: mv /home/{{ username }}/.entando/reports/* /home/{{ username }}/log-collector/{{ APPNAME }}-v{{ ENTANDO_VERSION }}
