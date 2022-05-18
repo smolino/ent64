@@ -11,7 +11,7 @@
       
     - name: Retrive clientsecret
       shell: chdir=/home/{{ username }} hub-tool tag ls entando/app-builder --sort updated | awk 'FNR==2{print $1}' | sed 's/appbuilder://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDOAPPBUILDER; do echo "$ENTANDOAPPBUILDER";done
-      register: appbuilder
+      register: ENTANDOAPPBUILDER
     - set_fact:
        ENTANDOAPPBUILDER: "{{ ENTANDOAPPBUILDER.stdout }}"
            
