@@ -26,7 +26,7 @@
       shell: mv /home/{{ username }}/.entando/reports/* /home/{{ username }}/log-collector/{{ APPNAME }}-v{{ ENTANDO_VERSION }}
       
     - name: Copy Ent results
-      shell: tar -xvf /home/{{ username }}/log-collector/{{ APPNAME }}-v{{ ENTANDO_VERSION }}/*.tgz
+      shell: chdir=/home/{{ username }}/log-collector/{{ APPNAME }}-v{{ ENTANDO_VERSION }}  tar -xvf *.tgz
       
 #    - name: Copy Ent results
 #      shell: rm /home/{{ username }}/log-collector/{{ APPNAME }}-v{{ ENTANDO_VERSION }}/*.tgz
