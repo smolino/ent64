@@ -1,0 +1,10 @@
+---
+ - hosts: AWX
+   become: yes
+   become_user: "{{ username }}"
+   environment:
+     PATH: '{{ lookup(''env'', ''PATH'') }}:/home/{{ username }}/.local/bin/aws'
+   tasks:
+   
+    - name: Scale down eks cluster
+      shell: eksctl scale nodegroup --cluster eks-1-22 --name node-group --nodes 0
