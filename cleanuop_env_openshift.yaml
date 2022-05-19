@@ -13,8 +13,8 @@
     - name: Delete namespace cypress 
       shell: chdir=/home/{{ username }} kubectl delete ns cypress
       
-    - name: extract Ent results
-      shell: tar -xvf /var/www/html/logs/{{ username }}/{{ appname }}-v{{ ENTANDO_VERSION }}/*.tgz
+#    - name: extract Ent results
+#      shell: tar -xvf /var/www/html/logs/{{ username }}/{{ appname }}-v{{ ENTANDO_VERSION }}/*.tgz
       
     - name: Publish Logs 
       shell: mv /home/{{ username }}/log-collector/* /var/www/html/logs/{{ username }}{{ kubeversion }}/
