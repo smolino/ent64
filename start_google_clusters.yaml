@@ -1,0 +1,12 @@
+---
+ - hosts: AWX
+   become: yes
+   become_user: "{{ username }}"
+   environment:
+     PATH: '{{ lookup(''env'', ''PATH'') }}:/home/{{ username }}/.local/bin/aws'
+   tasks:
+   
+    - name: Scsale down gcloud cluster
+      shell: | 
+        gcloud container clusters resize migration-testgke --num-nodes=1 --async --zone europe-west1-b -q
+        gcloud container clusters resize gke-1-22 --num-nodes=1 --async --zone europe-west1-b -q
