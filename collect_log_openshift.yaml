@@ -13,16 +13,16 @@
           ent diag
    
     - name: Create Dir Logs
-      shell: mkdir -p /home/{{ username }}/log-collector/$(date +%Y%m%d)/{{ appname }}-v{{ ENTANDO_VERSION }}/results
+      shell: mkdir -p /home/{{ username }}/log-collector/{{ appname }}-v{{ ENTANDO_VERSION }}/results
       
     - name: Collect all Entando application logs from pods
-      shell: kubectl get pods -n entando --no-headers | awk '{print $1}' | while read PODS;do kubectl logs $PODS -n entando > /home/{{ username }}/log-collector/$(date +%Y%m%d)/{{ appname }}-v{{ ENTANDO_VERSION }}/$PODS.log;done
+      shell: kubectl get pods -n entando --no-headers | awk '{print $1}' | while read PODS;do kubectl logs $PODS -n entando > /home/{{ username }}/log-collector/{{ appname }}-v{{ ENTANDO_VERSION }}/$PODS.log;done
       
     - name: Copy Cypress results
-      shell: kubectl cp cypress/cypress:/opt/entando-test-automation/ui-tests/cypress/results /home/{{ username }}/log-collector/$(date +%Y%m%d)/{{ appname }}-v{{ ENTANDO_VERSION }}/results
+      shell: kubectl cp cypress/cypress:/opt/entando-test-automation/ui-tests/cypress/results /home/{{ username }}/log-collector/{{ appname }}-v{{ ENTANDO_VERSION }}/results
       
     - name: Copy ent results
-      shell: mv /home/{{ username }}/.entando/reports/* /home/{{ username }}/log-collector/$(date +%Y%m%d)/{{ appname }}-v{{ ENTANDO_VERSION }}
+      shell: mv /home/{{ username }}/.entando/reports/* /home/{{ username }}/log-collector/{{ appname }}-v{{ ENTANDO_VERSION }}
       
     - name: Extract Ent results
-      shell: chdir=/home/{{ username }}/log-collector/$(date +%Y%m%d)/{{ appname }}-v{{ ENTANDO_VERSION }}  tar -xvf *.tgz
+      shell: chdir=/home/{{ username }}/log-collector/{{ appname }}-v{{ ENTANDO_VERSION }}  tar -xvf *.tgz
