@@ -7,16 +7,16 @@
    tasks:
    
     - name: Create Dir Cypress results
-      shell: mkdir -p /home/{{ username }}/log-collector/$(date +%Y%m%d)/{{ APPNAME }}-v{{ ENTANDO_VERSION }}/results
+      shell: mkdir -p /home/{{ username }}/log-collector/{{ APPNAME }}-v{{ ENTANDO_VERSION }}/results
       
     - name: Publish namespace resource file
-      shell: mv -f /home/{{ username }}/namespace-resources_custom.yaml /home/{{ username }}/log-collector/$(date +%Y%m%d)/{{ APPNAME }}-v{{ ENTANDO_VERSION }}/
+      shell: mv -f /home/{{ username }}/namespace-resources_custom.yaml /home/{{ username }}/log-collector/{{ APPNAME }}-v{{ ENTANDO_VERSION }}/
       
     - name: Collect all Cypress logs to local
       shell: chdir=/home/{{ username }} kubectl get pods -n cypress --no-headers | awk '//{print $1}' | while read PODS;do kubectl logs $PODS -n cypress > /home/{{ username }}/log-collector/{{ APPNAME }}-v{{ ENTANDO_VERSION }}/$PODS.log;done
 
     - name: Copy Cypress results
-      shell: chdir=/home/{{ username }} kubectl cp cypress/cypress:/opt/entando-test-automation/ui-tests/cypress/results /home/{{ username }}/log-collector/$(date +%Y%m%d)/{{ APPNAME }}-v{{ ENTANDO_VERSION }}/results
+      shell: chdir=/home/{{ username }} kubectl cp cypress/cypress:/opt/entando-test-automation/ui-tests/cypress/results /home/{{ username }}/log-collector/{{ APPNAME }}-v{{ ENTANDO_VERSION }}/results
       
     - name: Select working dir
       command: cd /home/{{ username }}
