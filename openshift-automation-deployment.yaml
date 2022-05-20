@@ -248,7 +248,7 @@
       shell: chdir=/home/{{ username }} sed "s/entando-k8s-controller-coordinator@.*/entando-k8s-controller-coordinator@{{ SHAENTANDOCONTROLLERCOORDINATOR }}/g" entando-operator-opensift-modified12.yaml > entando-operator-opensift-complete.yaml
 
     - name: Apply operator deployment updated
-      shell: chdir=/home/{{ username }} ./oc apply -f entando-operator-opensift-complete.yaml -n {{ namespaces }}
+      shell: chdir=/home/{{ username }} ./oc replace -f entando-operator-opensift-complete.yaml -n {{ namespaces }}
       
     - name: Scale up operator
       shell: chdir=/home/{{ username }} ./oc scale deployment entando-operator -n {{ namespaces }} --replicas=1
