@@ -12,7 +12,3 @@
     - name: Start cypress test
       command: kubectl exec -ti cypress -n cypress -- npm run cypress:smoke -- --config-file configs/ent64azure/remoteconfig.json
       register: output
-      
-#    - name: Start cypress test
-#      command: kubectl exec -ti cypress -n cypress -- npm run cypress:smoke
-#      register: output 

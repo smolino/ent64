@@ -12,4 +12,4 @@
         dest: simple_bundle.yaml
         
     - name: Install bundle
-      shell: kubectl apply -f simple_bundle.yaml -n entando
+      shell: kubectl apply -f simple_bundle.yaml -n {{ namespaces }}
