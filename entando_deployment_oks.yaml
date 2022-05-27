@@ -20,7 +20,7 @@
       shell: chmod +x entando_installation_script.sh
       
     - name: Execute installation script
-      shell: ./entando_installation_script.sh {{ namespaces }} {{ APPNAME }}
+      shell: ./entando_installation_script.sh {{ namespace }} {{ APPNAME }}
       register: results
       
     - name: Print Results

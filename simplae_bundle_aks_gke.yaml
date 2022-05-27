@@ -15,4 +15,4 @@
         dest: /home/{{ username }}/simple_bundle.yaml
         
     - name: Install bundle
-      shell: chdir=/home/{{ username }} kubectl apply -f /home/{{ username }}/simple_bundle.yaml -n {{ namespaces }}
+      shell: chdir=/home/{{ username }} kubectl apply -f /home/{{ username }}/simple_bundle.yaml -n {{ namespace }}

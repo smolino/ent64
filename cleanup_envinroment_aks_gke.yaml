@@ -10,7 +10,7 @@
       command: cd /home/{{ username }}
 
     - name: Delete namespace entando 
-      shell: chdir=/home/{{ username }} kubectl delete ns entando
+      shell: chdir=/home/{{ username }} kubectl delete ns {{ namespace }}
       
     - name: Delete namespace cypress 
       shell: chdir=/home/{{ username }} kubectl delete ns cypress

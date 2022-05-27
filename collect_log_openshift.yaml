@@ -9,14 +9,14 @@
     - name: Collect all Entando application logs with ent
       shell: |
           source /home/{{ username }}/.entando/activate --quiet --force 2>/dev/null
-          ent namespace {{ namespaces }}
+          ent namespace {{ namespace }}
           ent diag
    
     - name: Create Dir Logs
       shell: mkdir -p /home/{{ username }}/log-collector/{{ appname }}-v{{ ENTANDO_VERSION }}/results
       
     - name: Collect all Entando application logs from pods
-      shell: kubectl get pods -n {{ namespaces }} --no-headers | awk '{print $1}' | while read PODS;do kubectl logs $PODS -n entando > /home/{{ username }}/log-collector/{{ appname }}-v{{ ENTANDO_VERSION }}/$PODS.log;done
+      shell: kubectl get pods -n {{ namespace }} --no-headers | awk '{print $1}' | while read PODS;do kubectl logs $PODS -n entando > /home/{{ username }}/log-collector/{{ appname }}-v{{ ENTANDO_VERSION }}/$PODS.log;done
       
     - name: Copy Cypress results
       shell: kubectl cp cypress/cypress:/opt/entando-test-automation/ui-tests/cypress/results /home/{{ username }}/log-collector/{{ appname }}-v{{ ENTANDO_VERSION }}/results
