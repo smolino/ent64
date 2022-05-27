@@ -10,7 +10,7 @@
      command: cd /home/{{ username }}
    
    - name: Get url
-     shell: kubectl get ingress -n {{ namespaces }} |grep default | awk '{print $3}' | while read HOST;do 
+     shell: kubectl get ingress -n {{ namespace }} |grep default | awk '{print $3}' | while read HOST;do 
             echo "http://$HOST/auth/" > /home/{{ username }}/keycloak;done
             
    - name: Curl Keycloak website
