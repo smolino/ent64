@@ -16,7 +16,7 @@
        PASSWORD: "{{ ADMINSECRET.stdout }}"
        
     - name: Retrive Host
-      shell: kubectl get ingress -n {{ namespaces }} | grep default | awk '{print $3}' |while read HOST; do echo "$HOST";done
+      shell: kubectl get ingress -n {{ namespace }} | grep default | awk '{print $3}' |while read HOST; do echo "$HOST";done
       register: HOST      
     - set_fact:
        HOST: "{{ HOST.stdout }}"

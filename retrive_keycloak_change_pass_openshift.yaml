@@ -8,13 +8,13 @@
       command: cd /home/{{ username }}
    
     - name: Retrive Keycloack Password
-      shell: kubectl get secret default-sso-in-namespace-admin-secret -n {{ namespaces }} -o jsonpath='{.data.password}'| awk '{print $1}' | while read ADMINSECRET; do echo "$ADMINSECRET"|base64 --decode;done
+      shell: kubectl get secret default-sso-in-namespace-admin-secret -n {{ namespace }} -o jsonpath='{.data.password}'| awk '{print $1}' | while read ADMINSECRET; do echo "$ADMINSECRET"|base64 --decode;done
       register: ADMINSECRET
     - set_fact:
        PASSWORD: "{{ ADMINSECRET.stdout }}"
        
     - name: Retrive Host
-      shell: kubectl get ingress -n {{ namespaces }} | grep sso | awk '{print $3}' |while read HOST; do echo "$HOST";done
+      shell: kubectl get ingress -n {{ namespace }} | grep sso | awk '{print $3}' |while read HOST; do echo "$HOST";done
       register: HOST      
     - set_fact:
        HOST: "{{ HOST.stdout }}"

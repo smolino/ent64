@@ -7,7 +7,7 @@
       command: chdir=/home/{{ username }} ./oc login api.{{ openshift_url }}:6443 -u admin -p {{ password1 }} --insecure-skip-tls-verify=true
 
     - name: Create Project
-      shell: chdir=/home/{{ username }} ./oc create namespace {{ namespaces }}
+      shell: chdir=/home/{{ username }} ./oc create namespace {{ namespace }}
       
     - name: Retrive clientsecret
       shell: chdir=/home/{{ username }} hub-tool tag ls entando/app-builder --sort updated | awk 'FNR==2{print $1}' | sed 's/appbuilder://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDOAPPBUILDER; do echo "$ENTANDOAPPBUILDER";done
@@ -203,7 +203,7 @@
         dest: /home/{{ username }}/entando-subscription-automation.yaml
 
     - name: Install operator on namespace scope
-      shell: chdir=/home/{{ username }} ./oc apply -f entando-subscription-automation.yaml -n {{ namespaces }}
+      shell: chdir=/home/{{ username }} ./oc apply -f entando-subscription-automation.yaml -n {{ namespace }}
 
 #    - name: Install catalog source
 #      shell: chdir=/home/{{ username }} ./oc apply -f entando-catalog-automation.yaml -n {{ namespaces }}
@@ -213,10 +213,10 @@
         timeout: 60
 
     - name: Scale down Operator deployment
-      shell: chdir=/home/{{ username }} ./oc scale deployment entando-operator -n {{ namespaces }} --replicas=0
+      shell: chdir=/home/{{ username }} ./oc scale deployment entando-operator -n {{ namespace }} --replicas=0
       
     - name: Build operator deployment with latest images
-      shell: chdir=/home/{{ username }} ./oc get clusterserviceversion -n {{ namespaces }} -o yaml > entando-operator-openshift.yaml
+      shell: chdir=/home/{{ username }} ./oc get clusterserviceversion -n {{ namespace }} -o yaml > entando-operator-openshift.yaml
       
     - name: Retrive clientsecret
       shell: chdir=/home/{{ username }} sed "s/entando-component-manager@.*/entando-component-manager@{{ SHAENTANDOCOMPONENTMANAGER }}/g" entando-operator-openshift.yaml > entando-operator-opensift-modified.yaml
@@ -248,10 +248,10 @@
       shell: chdir=/home/{{ username }} sed "s/entando-k8s-controller-coordinator@.*/entando-k8s-controller-coordinator@{{ SHAENTANDOCONTROLLERCOORDINATOR }}/g" entando-operator-opensift-modified12.yaml > entando-operator-opensift-complete.yaml
 
     - name: Apply operator deployment updated
-      shell: chdir=/home/{{ username }} ./oc replace -f entando-operator-opensift-complete.yaml -n {{ namespaces }}
+      shell: chdir=/home/{{ username }} ./oc replace -f entando-operator-opensift-complete.yaml -n {{ namespace }}
       
     - name: Scale up operator
-      shell: chdir=/home/{{ username }} ./oc scale deployment entando-operator -n {{ namespaces }} --replicas=1
+      shell: chdir=/home/{{ username }} ./oc scale deployment entando-operator -n {{ namespace }} --replicas=1
 
     - name: Copy Entando App Script
       template:
@@ -259,7 +259,7 @@
         dest: /home/{{ username }}/entando-app.yaml
 
     - name: Install Entando App on namespace scope
-      shell: chdir=/home/{{ username }} ./oc apply -f entando-app.yaml -n {{ namespaces }}
+      shell: chdir=/home/{{ username }} ./oc apply -f entando-app.yaml -n {{ namespace }}
       
     - name: Sleep for 400 seconds and continue with play
       wait_for:

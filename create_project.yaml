@@ -7,7 +7,7 @@
       command: chdir=/home/openshift ./oc login api.{{ openshift_url }}:6443 -u admin -p {{ password1 }} --insecure-skip-tls-verify=true
 
     - name: Create Project
-      shell: chdir=/home/openshift ./oc create namespace {{ namespaces }}
+      shell: chdir=/home/openshift ./oc create namespace {{ namespace }}
       
     - name: Copy certificate-script Script
       template:
@@ -35,7 +35,7 @@
         dest: /home/openshift/{{operatorconfig}}.yaml
 
     - name: Install operatorscript on namespace scope
-      shell: chdir=/home/openshift ./oc apply -f {{operatorconfig}}.yaml -n {{ namespaces }}      
+      shell: chdir=/home/openshift ./oc apply -f {{operatorconfig}}.yaml -n {{ namespace }}      
 
     - name: Copy Operator Script
       template:
@@ -43,7 +43,7 @@
         dest: /home/openshift/entando-subscription.yaml
 
     - name: Install operatorscript on namespace scope
-      shell: chdir=/home/openshift ./oc apply -f entando-subscription.yaml -n {{ namespaces }}
+      shell: chdir=/home/openshift ./oc apply -f entando-subscription.yaml -n {{ namespace }}
 
     - name: Copy Entando App Script
       template:
@@ -51,4 +51,4 @@
         dest: /home/openshift/{{entandoappconfig}}.yaml
 
     - name: Install Entando App on namespace scope
-      shell: chdir=/home/openshift ./oc apply -f {{entandoappconfig}}.yaml -n {{ namespaces }}
+      shell: chdir=/home/openshift ./oc apply -f {{entandoappconfig}}.yaml -n {{ namespace }}
