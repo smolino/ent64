@@ -38,6 +38,10 @@ spec:
           ports:
             - containerPort: 3306
               protocol: TCP
+            - containerPort: 33060
+              protocol: TCP
+            - containerPort: 33061
+              protocol: TCP
           volumeMounts:
             - name: mysql8
               mountPath: /var/lib/mysql/data
@@ -108,4 +112,4 @@ spec:
       key: password
       name: mysql-cred
       optional: false
-  ingressHostName: {{ namespace }}.apps.{{ openshift_url }}
+  ingressHostName: {{ appname }}.apps.{{ openshift_url }}
