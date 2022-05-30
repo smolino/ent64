@@ -16,10 +16,9 @@ apiVersion: apps/v1
 metadata:
   annotations:
     image.openshift.io/triggers: >-
-      [{"from":{"kind":"ImageStreamTag","name":"entando-mysql-rocky:8.0.28","namespace":"test-sergio"},"fieldPath":"spec.template.spec.containers[?(@.name==\"entando-mysql-rocky\")].image","pause":"false"}]
   name: entando-mysql-rocky
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: entando-mysql-rocky
@@ -58,7 +57,7 @@ apiVersion: entando.org/v1
 kind: EntandoApp
 metadata:
   name: {{ appname }}
-  namespace: {{ namespaces }}
+  namespace: {{ namespace }}
 spec:
   dbms: mysql
   entandoAppVersion: "7.0"
