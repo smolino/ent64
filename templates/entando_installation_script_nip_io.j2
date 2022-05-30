@@ -28,7 +28,7 @@ echo "##########################################################################
 #kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.41.2/deploy/static/provider/aws/deploy.yaml
 # This works
 #kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.49.3/deploy/static/provider/aws/deploy.yaml
-sleep 30
+# sleep 30
 echo ""
 echo "##################################################################################"
 echo "##################################################################################"
@@ -58,7 +58,6 @@ metadata:
 data:
   entando.requires.filesystem.group.override: 'true'
   entando.ingress.class: 'nginx'" | kubectl apply -f -
-
 
 echo ""
 echo "##################################################################################"
