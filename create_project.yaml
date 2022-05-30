@@ -29,6 +29,9 @@
     - name: Remove certificates from host
       shell: chdir=/home/openshift rm  {{ appname }}.apps.{{ openshift_url }}*.pem
 
+    - name: Create mysql secret
+      shell: chdir=/home/openshift ./oc create secret generic mysql-cred --from-literal MYSQL_USER=admin --from-literal MYSQL_PASSWORD=admin --from-literal MYSQL_ROOT_PASSWORD=admin --from-literal MYSQL_DATABASE=entando -n {{ namespaces }}
+
     - name: Copy operator-config
       template:
         src: ./templates/{{operatorconfig}}.j2
