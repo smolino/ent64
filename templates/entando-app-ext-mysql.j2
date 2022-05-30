@@ -60,65 +60,52 @@ spec:
   dbms: mysql
   entandoAppVersion: "7.0"
   environmentVariables:
-	-
-  	name: PORTDB_URL
-	-
-  	name: PORTDB_USERNAME
-  	value: "jdbc:mysql://entando-mysql-rocky.{{ namespace }}.svc.cluster.local:3306/PORTuser"
-  	valueFrom:
+	- name: PORTDB_URL
+  	  value: "jdbc:mysql://entando-mysql-rocky.{{ namespace }}.svc.cluster.local:3306/PORTuser"
+	- name: PORTDB_USERNAME
+  	  valueFrom:
     	secretKeyRef:
       	key: username
       	name: mysql-cred
       	optional: false
-	-
-  	name: PORTDB_PASSWORD
-  	valueFrom:
+	- name: PORTDB_PASSWORD
+  	  valueFrom:
     	secretKeyRef:
       	key: password
       	name: mysql-cred
       	optional: false
-	-
-  	name: PORTDB_CONNECTION_CHECKER
-  	value: org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLValidConnectionChecker
-	-
-  	name: PORTDB_EXCEPTION_SORTER
-  	value: org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLExceptionSorter
-	-
-  	name: SERVDB_URL
-  	value: "jdbc:mysql://entando-mysql-rocky.{{ namespace }}.svc.cluster.local:3306/SERVuser"
-	-
-  	name: SERVDB_USERNAME
-  	valueFrom:
+	- name: PORTDB_CONNECTION_CHECKER
+  	  value: org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLValidConnectionChecker
+	- name: PORTDB_EXCEPTION_SORTER
+  	  value: org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLExceptionSorter
+	- name: SERVDB_URL
+  	  value: "jdbc:mysql://entando-mysql-rocky.{{ namespace }}.svc.cluster.local:3306/SERVuser"
+	- name: SERVDB_USERNAME
+  	  valueFrom:
     	secretKeyRef:
       	key: username
       	name: mysql-cred
       	optional: false
-	-
-  	name: SERVDB_PASSWORD
-  	valueFrom:
+	- name: SERVDB_PASSWORD
+  	  valueFrom:
     	secretKeyRef:
       	key: password
       	name: mysql-cred
       	optional: false
-	-
-  	name: SERVDB_CONNECTION_CHECKER
-  	value: org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLValidConnectionChecker
-	-
-  	name: SERVDB_EXCEPTION_SORTER
-  	value: org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLExceptionSorter
-	-
-  	name: SPRING_DATASOURCE_URL
-  	value: "jdbc:mysql://entando-mysql-rocky.{{ namespace }}.svc.cluster.local:3306/DEuser"
-	-
-  	name: SPRING_DATASOURCE_USERNAME
-  	valueFrom:
+	- name: SERVDB_CONNECTION_CHECKER
+  	  value: org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLValidConnectionChecker
+	- name: SERVDB_EXCEPTION_SORTER
+  	  value: org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLExceptionSorter
+	- name: SPRING_DATASOURCE_URL
+  	  value: "jdbc:mysql://entando-mysql-rocky.{{ namespace }}.svc.cluster.local:3306/DEuser"
+	- name: SPRING_DATASOURCE_USERNAME
+  	  valueFrom:
     	secretKeyRef:
       	key: username
       	name: mysql-cred
       	optional: false
-	-
-  	name: SPRING_DATASOURCE_PASSWORD
-  	valueFrom:
+	- name: SPRING_DATASOURCE_PASSWORD
+  	  valueFrom:
     	secretKeyRef:
       	key: password
       	name: mysql-cred
