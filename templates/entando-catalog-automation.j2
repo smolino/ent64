@@ -2,7 +2,7 @@ apiVersion: operators.coreos.com/v1alpha1
 kind: CatalogSource
 metadata:
   name: entando-catalog-automation
-  namespace: {{ namespaces }}
+  namespace: {{ namespace }}
 spec:
   displayName: Entando Catalog pre
   image: registry.hub.docker.com/entandobuilduser/entando-k8s-index@{{ SHAENTANDOKI }}
