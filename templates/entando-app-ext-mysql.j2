@@ -18,8 +18,7 @@ metadata:
     image.openshift.io/triggers: >-
   name: entando-mysql-rocky
 spec:
-      [{"from":{"kind":"ImageStreamTag","name":"entando-mysql-rocky:8.0.28","namespace":"{{ namespace }}"","fieldPath":"spec.template.spec.containers[?(@.name==\"entando-mysql-rocky\")].image","pause":"false"}]
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: entando-mysql-rocky
