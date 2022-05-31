@@ -85,9 +85,9 @@ spec:
   - name: PORTDB_PASSWORD
     valueFrom:
       secretKeyRef:
-      key: password
-      name: {{appname}}-portdb-secret
-      optional: false
+       key: password
+       name: {{appname}}-portdb-secret
+       optional: false
   - name: PORTDB_CONNECTION_CHECKER
     value: org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLValidConnectionChecker
   - name: PORTDB_EXCEPTION_SORTER
@@ -97,15 +97,15 @@ spec:
   - name: SERVDB_USERNAME
     valueFrom:
       secretKeyRef:
-      key: username
-      name: {{appname}}-servdb-secret
-      optional: false
+       key: username
+       name: {{appname}}-servdb-secret
+       optional: false
   - name: SERVDB_PASSWORD
     valueFrom:
       secretKeyRef:
-      key: password
-      name: {{appname}}-servdb-secret
-      optional: false
+       key: password
+       name: {{appname}}-servdb-secret
+       optional: false
   - name: SERVDB_CONNECTION_CHECKER
     value: org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLValidConnectionChecker
   - name: SERVDB_EXCEPTION_SORTER
@@ -115,13 +115,13 @@ spec:
   - name: SPRING_DATASOURCE_USERNAME
     valueFrom:
       secretKeyRef:
-      key: username
-      name: {{appname}}-dedb-secret
-      optional: false
+       key: username
+       name: {{appname}}-dedb-secret
+       optional: false
   - name: SPRING_DATASOURCE_PASSWORD
     valueFrom:
       secretKeyRef:
-      key: password
-      name: {{appname}}-dedb-secret
-      optional: false
+       key: password
+       name: {{appname}}-dedb-secret
+       optional: false
   ingressHostName: {{ appname }}.apps.{{ openshift_url }}
