@@ -56,8 +56,6 @@ kind: EntandoDatabaseService
 metadata:
   namespace: {{ namespace }}
   name: {{ appname }}-database-service
-  annotations:
-    entando.org/processing-instruction: defer
 spec:
   provisioningStrategy: UseExternal
   port: 32528
@@ -70,8 +68,6 @@ apiVersion: entando.org/v1
 kind: EntandoApp
 metadata:
  name: {{ appname }}
-annotations:
-  entando.org/processing-instruction: defer
 replicas: 1
 standardServerImage: eap
 spec:
