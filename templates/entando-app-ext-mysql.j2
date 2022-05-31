@@ -1,56 +1,68 @@
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: mysql8
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
+#---
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: mysql8
+#spec:
+#  accessModes:
+#    - ReadWriteOnce
+#  resources:
+#    requests:
+#      storage: 1Gi
 
+#---
+#kind: Deployment
+#apiVersion: apps/v1
+#metadata:
+#  annotations:
+#  name: entando-mysql-rocky
+#spec:
+#  replicas: 1
+#  selector:
+#    matchLabels:
+#      app: entando-mysql-rocky
+#  template:
+#    metadata:
+#      labels:
+#        app: entando-mysql-rocky
+#        deploymentconfig: entando-mysql-rocky
+#    spec:
+#      volumes:
+#        - name: mysql8
+#          persistentVolumeClaim:
+#            claimName: mysql8
+#      containers:
+#        - resources: {}
+#          name: entando-mysql-rocky
+#          image: docker.io/entando/entando-mysql-rocky:8.0.28
+#          ports:
+#            - containerPort: 3306
+#              protocol: TCP
+#            - containerPort: 33060
+#              protocol: TCP
+#            - containerPort: 33061
+#              protocol: TCP
+#          volumeMounts:
+#            - name: mysql8
+#              mountPath: /var/lib/mysql/data
+#          envFrom:
+#            - secretRef:
+#                name: mysql-cred
+#      securityContext: {}
+#      schedulerName: default-scheduler
 ---
-kind: Deployment
-apiVersion: apps/v1
+apiVersion: entando.org/v1
+kind: EntandoDatabaseService
 metadata:
-  annotations:
-  name: entando-mysql-rocky
+  namespace: {{ namespace }}
+  name: {{ appname }}-database-service
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: entando-mysql-rocky
-  template:
-    metadata:
-      labels:
-        app: entando-mysql-rocky
-        deploymentconfig: entando-mysql-rocky
-    spec:
-      volumes:
-        - name: mysql8
-          persistentVolumeClaim:
-            claimName: mysql8
-      containers:
-        - resources: {}
-          name: entando-mysql-rocky
-          image: docker.io/entando/entando-mysql-rocky:8.0.28
-          ports:
-            - containerPort: 3306
-              protocol: TCP
-            - containerPort: 33060
-              protocol: TCP
-            - containerPort: 33061
-              protocol: TCP
-          volumeMounts:
-            - name: mysql8
-              mountPath: /var/lib/mysql/data
-          envFrom:
-            - secretRef:
-                name: mysql-cred
-      securityContext: {}
-      schedulerName: default-scheduler
-
+  provisioningStrategy: UseExternal
+  port: 32528
+  dbms: {{ dbms }}
+  host: 20.79.239.35
+  providedCapabilityScope: Namespace
+  secretName: mysql-secret
 ---
 apiVersion: entando.org/v1
 kind: EntandoApp
@@ -63,7 +75,7 @@ spec:
   entandoAppVersion: "7.0"
   environmentVariables:
   - name: PORTDB_URL
-    value: "jdbc:mysql://entando-mysql-rocky.{{ namespace }}.svc.cluster.local:3306/PORTuser"
+    value: "jdbc:mysql://20.79.239.35:32528/automation_PORTuser"
   - name: PORTDB_USERNAME
     valueFrom:
       secretKeyRef:
@@ -81,7 +93,7 @@ spec:
   - name: PORTDB_EXCEPTION_SORTER
     value: org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLExceptionSorter
   - name: SERVDB_URL
-    value: "jdbc:mysql://entando-mysql-rocky.{{ namespace }}.svc.cluster.local:3306/SERVuser"
+    value: "jdbc:mysql://20.79.239.35:32528/automation_SERVuser"
   - name: SERVDB_USERNAME
     valueFrom:
       secretKeyRef:
@@ -99,7 +111,7 @@ spec:
   - name: SERVDB_EXCEPTION_SORTER
     value: org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLExceptionSorter
   - name: SPRING_DATASOURCE_URL
-    value: "jdbc:mysql://entando-mysql-rocky.{{ namespace }}.svc.cluster.local:3306/DEuser"
+    value: "jdbc:mysql://20.79.239.35:32528/automation_DEuser"
   - name: SPRING_DATASOURCE_USERNAME
     valueFrom:
       secretKeyRef:
