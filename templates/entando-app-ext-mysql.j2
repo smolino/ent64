@@ -80,13 +80,13 @@ spec:
     valueFrom:
       secretKeyRef:
        key: username
-       name: mysql-cred
+       name: {{appname}}-portdb-secret
        optional: false
   - name: PORTDB_PASSWORD
     valueFrom:
       secretKeyRef:
       key: password
-      name: mysql-cred
+      name: {{appname}}-portdb-secret
       optional: false
   - name: PORTDB_CONNECTION_CHECKER
     value: org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLValidConnectionChecker
@@ -98,13 +98,13 @@ spec:
     valueFrom:
       secretKeyRef:
       key: username
-      name: mysql-cred
+      name: {{appname}}-servdb-secret
       optional: false
   - name: SERVDB_PASSWORD
     valueFrom:
       secretKeyRef:
       key: password
-      name: mysql-cred
+      name: {{appname}}-servdb-secret
       optional: false
   - name: SERVDB_CONNECTION_CHECKER
     value: org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLValidConnectionChecker
@@ -116,12 +116,12 @@ spec:
     valueFrom:
       secretKeyRef:
       key: username
-      name: mysql-cred
+      name: {{appname}}-dedb-secret
       optional: false
   - name: SPRING_DATASOURCE_PASSWORD
     valueFrom:
       secretKeyRef:
       key: password
-      name: mysql-cred
+      name: {{appname}}-dedb-secret
       optional: false
   ingressHostName: {{ appname }}.apps.{{ openshift_url }}
