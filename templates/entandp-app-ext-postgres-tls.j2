@@ -20,7 +20,7 @@ metadata:
  standardServerImage: {{ appused }}
 replicas: 1
 spec:
-  dbms: postgresql
+  dbms: {{ dbms }}
   entandoAppVersion: "7.0"
   tlsSecretName: entando-tls-secret
   environmentVariables:

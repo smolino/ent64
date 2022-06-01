@@ -19,7 +19,7 @@ metadata:
 replicas: 1
 standardServerImage: {{ appused }}
 spec:
-  dbms: mysql
+  dbms: {{ dbms }}
   entandoAppVersion: "7.0"
   tlsSecretName: entando-tls-secret
   environmentVariables:
