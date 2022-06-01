@@ -20,8 +20,8 @@ metadata:
  standardServerImage: {{ appused }}
 replicas: 1
 spec:
-  dbms: mysql
-  entandoAppVersion: "7.0"
+  dbms: postgresql
+#  entandoAppVersion: "7.0"
   environmentVariables:
   - name: PORTDB_URL
     value: "jdbc:postgresql://20.79.239.35:32227/automation"
