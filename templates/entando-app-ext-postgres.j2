@@ -1,0 +1,76 @@
+---
+apiVersion: entando.org/v1
+kind: EntandoDatabaseService
+metadata:
+  namespace: {{ namespace }}
+  name: {{ appname }}-database-service
+spec:
+  provisioningStrategy: UseExternal
+  port: 32227
+  dbms: postgresql
+  host: 20.79.239.35
+  databaseName: automation_test
+  providedCapabilityScope: Namespace
+  secretName: postgres-secret
+---
+apiVersion: entando.org/v1
+kind: EntandoApp
+metadata:
+ name: {{ appname }}
+replicas: 1
+standardServerImage: eap
+spec:
+  dbms: mysql
+  entandoAppVersion: "7.0"
+  environmentVariables:
+  - name: PORTDB_URL
+    value: "jdbc:postgresql://20.79.239.35:32227/automation_PORTuser"
+  - name: PORTDB_USERNAME
+    valueFrom:
+      secretKeyRef:
+       key: username
+       name: postgres-secret
+       optional: false
+  - name: PORTDB_PASSWORD
+    valueFrom:
+      secretKeyRef:
+       key: password
+       name: postgres-secret
+       optional: false
+  - name: PORTDB_CONNECTION_CHECKER
+    value: org.jboss.jca.adapters.jdbc.extensions.postgresql.PostgreSQLValidConnectionChecker
+  - name: PORTDB_EXCEPTION_SORTER
+    value: org.jboss.jca.adapters.jdbc.extensions.postgresql.PostgreSQLExceptionSorter
+  - name: SERVDB_URL
+    value: "jdbc:postgresql://20.79.239.35:32227/automation_SERVuser"
+  - name: SERVDB_USERNAME
+    valueFrom:
+      secretKeyRef:
+       key: username
+       name: postgres-secret
+       optional: false
+  - name: SERVDB_PASSWORD
+    valueFrom:
+      secretKeyRef:
+       key: password
+       name: postgres-secret
+       optional: false
+  - name: SERVDB_CONNECTION_CHECKER
+    value: org.jboss.jca.adapters.jdbc.extensions.postgresql.PostgreSQLValidConnectionChecker
+  - name: SERVDB_EXCEPTION_SORTER
+    value: org.jboss.jca.adapters.jdbc.extensions.postgresql.PostgreSQLExceptionSorter
+  - name: SPRING_DATASOURCE_URL
+    value: "jdbc:postgresql://20.79.239.35:32227/automation_DEuser"
+  - name: SPRING_DATASOURCE_USERNAME
+    valueFrom:
+      secretKeyRef:
+       key: username
+       name: postgres-secret
+       optional: false
+  - name: SPRING_DATASOURCE_PASSWORD
+    valueFrom:
+      secretKeyRef:
+       key: password
+       name: postgres-secret
+       optional: false
+  ingressHostName: {{ appname }}.apps.{{ openshift_url }}
