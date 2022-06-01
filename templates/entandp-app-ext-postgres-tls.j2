@@ -21,6 +21,7 @@ replicas: 1
 spec:
   dbms: mysql
   entandoAppVersion: "7.0"
+  tlsSecretName: entando-tls-secret
 standardServerImage: {{ appused }}
   environmentVariables:
   - name: PORTDB_URL
