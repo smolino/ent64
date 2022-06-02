@@ -23,7 +23,7 @@ spec:
   entandoAppVersion: "7.0"
   environmentVariables:
   - name: PORTDB_URL
-    value: "jdbc:mysql://20.79.239.35:32528/automation_PORTuser"
+    value: "jdbc:mysql://20.79.239.35:32528/automation_portuser"
   - name: PORTDB_USERNAME
     valueFrom:
       secretKeyRef:
@@ -41,7 +41,7 @@ spec:
   - name: PORTDB_EXCEPTION_SORTER
     value: org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLExceptionSorter
   - name: SERVDB_URL
-    value: "jdbc:mysql://20.79.239.35:32528/automation_SERVuser"
+    value: "jdbc:mysql://20.79.239.35:32528/automation_servuser"
   - name: SERVDB_USERNAME
     valueFrom:
       secretKeyRef:
@@ -59,7 +59,7 @@ spec:
   - name: SERVDB_EXCEPTION_SORTER
     value: org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLExceptionSorter
   - name: SPRING_DATASOURCE_URL
-    value: "jdbc:mysql://20.79.239.35:32528/automation_DEuser"
+    value: "jdbc:mysql://20.79.239.35:32528/automation_deuser"
   - name: SPRING_DATASOURCE_USERNAME
     valueFrom:
       secretKeyRef:
