@@ -31,7 +31,7 @@
 
     - name: Create mysql-secrets
       shell: |
-        chdir=/home/openshift ./oc create secret generic mysql-secret --from-literal username=automationtest --from-literal password=myP4ssw0rd -n {{ namespace }}
+        chdir=/home/openshift ./oc create secret generic mysql-secret --from-literal username=automationentando --from-literal password=myP4ssw0rd -n {{ namespace }}
         chdir=/home/openshift ./oc create secret generic postgres-secret --from-literal username=automation --from-literal password=myP4ssw0rd -n {{ namespace }}
         chdir=/home/openshift ./oc create secret generic default-sso-in-namespace-db-secret --from-literal username=automationkcuser --from-literal password=myP4ssw0rd -n {{ namespace }}
         chdir=/home/openshift ./oc create secret generic {{appname}}-portdb-secret --from-literal username=automationportuser --from-literal password=myP4ssw0rd -n {{ namespace }}
