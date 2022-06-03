@@ -21,6 +21,5 @@ standardServerImage: {{ appused }}
 spec:
   dbms: {{ dbms }}
 #  entandoAppVersion: "7.0"
-  environmentVariables[]
+  environmentVariables: []
   ingressHostName: {{ appname }}.apps.{{ openshift_url }}
-  
