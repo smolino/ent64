@@ -1,32 +1,32 @@
----
-apiVersion: entando.org/v1
-kind: EntandoDatabaseService
-metadata:
-  namespace: {{ namespace }}
-  name: {{ appname }}-database-service
-spec:
-  provisioningStrategy: UseExternal
-  port: 32528
-  dbms: mysql
-  host: 20.79.239.35
-  providedCapabilityScope: Namespace
-  secretName: mysql-secret
----
-apiVersion: entando.org/v1
-kind: EntandoKeycloakServer
-metadata:
-  namespace: {{ namespace }}
-  name: {{ appname }}
-spec:
-  provisioningStrategy: DeployDirectly
-  environmentVariables: []
-  dbms: mysql
-  ingressHostName: {{ appname }}.apps.{{ openshift_url }}
-  defaultRealm: entando
-  providedCapabilityScope: Namespace
-  replicas: 1
-  frontEndUrl: 'http://{{ appname }}.apps.{{ openshift_url }}/auth/'
-  standardImage: redhat-sso
+#---
+#apiVersion: entando.org/v1
+#kind: EntandoDatabaseService
+#metadata:
+#  namespace: {{ namespace }}
+#  name: {{ appname }}-database-service
+#spec:
+#  provisioningStrategy: UseExternal
+#  port: 32528
+#  dbms: mysql
+#  host: 20.79.239.35
+#  providedCapabilityScope: Namespace
+#  secretName: mysql-secret
+#---
+#apiVersion: entando.org/v1
+#kind: EntandoKeycloakServer
+#metadata:
+#  namespace: {{ namespace }}
+#  name: {{ appname }}
+#spec:
+#  provisioningStrategy: DeployDirectly
+#  environmentVariables: []
+#  dbms: mysql
+#  ingressHostName: {{ appname }}.apps.{{ openshift_url }}
+#  defaultRealm: entando
+#  providedCapabilityScope: Namespace
+#  replicas: 1
+#  frontEndUrl: 'http://{{ appname }}.apps.{{ openshift_url }}/auth/'
+#  standardImage: redhat-sso
 ---
 apiVersion: entando.org/v1
 kind: EntandoApp
