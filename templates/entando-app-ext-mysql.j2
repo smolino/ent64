@@ -1,16 +1,16 @@
-#---
-#apiVersion: entando.org/v1
-#kind: EntandoDatabaseService
-#metadata:
-#  namespace: {{ namespace }}
-#  name: {{ appname }}-database-service
-#spec:
-#  provisioningStrategy: UseExternal
-#  port: 32528
-#  dbms: mysql
-#  host: 20.79.239.35
-#  providedCapabilityScope: Namespace
-#  secretName: mysql-secret
+---
+apiVersion: entando.org/v1
+kind: EntandoDatabaseService
+metadata:
+  namespace: {{ namespace }}
+  name: {{ appname }}-database-service
+spec:
+  provisioningStrategy: UseExternal
+  port: 32528
+  dbms: mysql
+  host: 20.79.239.35
+  providedCapabilityScope: Namespace
+  secretName: mysql-secret
 #---
 #apiVersion: entando.org/v1
 #kind: EntandoKeycloakServer
