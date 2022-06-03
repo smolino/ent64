@@ -31,12 +31,12 @@
 
     - name: Create mysql-secrets
       shell: |
-        chdir=/home/openshift ./oc create secret generic mysql-secret --from-literal username=automation_test --from-literal password=myP4ssw0rd -n {{ namespace }}
+        chdir=/home/openshift ./oc create secret generic mysql-secret --from-literal username=automationtest --from-literal password=myP4ssw0rd -n {{ namespace }}
         chdir=/home/openshift ./oc create secret generic postgres-secret --from-literal username=automation --from-literal password=myP4ssw0rd -n {{ namespace }}
-        chdir=/home/openshift ./oc create secret generic default-sso-in-namespace-db-secret --from-literal username=automation_kcuser --from-literal password=myP4ssw0rd -n {{ namespace }}
-        chdir=/home/openshift ./oc create secret generic {{appname}}-portdb-secret --from-literal username=automation_portuser --from-literal password=myP4ssw0rd -n {{ namespace }}
-        chdir=/home/openshift ./oc create secret generic {{appname}}-servdb-secret --from-literal username=automation_servuser --from-literal password=myP4ssw0rd -n {{ namespace }}
-        chdir=/home/openshift ./oc create secret generic {{appname}}-dedb-secret --from-literal username=automation_deuser --from-literal password=myP4ssw0rd -n {{ namespace }}
+        chdir=/home/openshift ./oc create secret generic default-sso-in-namespace-db-secret --from-literal username=automationkcuser --from-literal password=myP4ssw0rd -n {{ namespace }}
+        chdir=/home/openshift ./oc create secret generic {{appname}}-portdb-secret --from-literal username=automationportuser --from-literal password=myP4ssw0rd -n {{ namespace }}
+        chdir=/home/openshift ./oc create secret generic {{appname}}-servdb-secret --from-literal username=automationservuser --from-literal password=myP4ssw0rd -n {{ namespace }}
+        chdir=/home/openshift ./oc create secret generic {{appname}}-dedb-secret --from-literal username=automationdeuser --from-literal password=myP4ssw0rd -n {{ namespace }}
     - name: Copy operator-config
       template:
         src: ./templates/{{operatorconfig}}.j2
