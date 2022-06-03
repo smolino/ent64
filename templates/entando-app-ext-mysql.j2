@@ -17,15 +17,12 @@ kind: EntandoKeycloakServer
 metadata:
   namespace: {{ namespace }}
   name: {{ appname }}
-  annotations:
-      	entando.org/processing-instruction: defer
 spec:
   provisioningStrategy: DeployDirectly
   environmentVariables: []
   dbms: mysql
   ingressHostName: {{ appname }}.apps.{{ openshift_url }}
   defaultRealm: entando
-# tlsSecretName: entando-tls-secret
   providedCapabilityScope: Namespace
   replicas: 1
   frontEndUrl: 'http://{{ appname }}.apps.{{ openshift_url }}/auth/'
