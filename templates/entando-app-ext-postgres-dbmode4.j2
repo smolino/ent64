@@ -9,7 +9,7 @@ spec:
   port: 32227
   dbms: postgresql
   host: 20.79.239.35
-  databaseName: automation_test
+  databaseName: automationtest
   providedCapabilityScope: Namespace
   secretName: postgres-secret
 ---
@@ -24,7 +24,7 @@ spec:
 #  entandoAppVersion: "7.0"
   environmentVariables:
   - name: PORTDB_URL
-    value: "jdbc:postgresql://20.79.239.35:32227/automation"
+    value: "jdbc:postgresql://20.79.239.35:32227/automationportuser"
   - name: PORTDB_USERNAME
     valueFrom:
       secretKeyRef:
