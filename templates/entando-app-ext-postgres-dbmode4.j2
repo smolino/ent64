@@ -20,11 +20,11 @@ metadata:
  standardServerImage: {{ appused }}
 replicas: 1
 spec:
-  dbms: postgresql
+  dbms: {{ dbms }}
 #  entandoAppVersion: "7.0"
   environmentVariables:
   - name: PORTDB_URL
-    value: "jdbc:postgresql://20.79.239.35:32227/automationportuser"
+    value: "jdbc:postgresql://20.79.239.35:32227/automation"
   - name: PORTDB_USERNAME
     valueFrom:
       secretKeyRef:
