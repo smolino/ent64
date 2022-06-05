@@ -29,13 +29,13 @@ spec:
     valueFrom:
       secretKeyRef:
        key: username
-       name: {{ appname }}-portdb-secret
+       name: {{ appname }}-portdb-{{ dbmode }}
        optional: false
   - name: PORTDB_PASSWORD
     valueFrom:
       secretKeyRef:
        key: password
-       name: {{ appname }}-portdb-secret
+       name: {{ appname }}-portdb-{{ dbmode }}
        optional: false
   - name: PORTDB_CONNECTION_CHECKER
     value: org.jboss.jca.adapters.jdbc.extensions.postgresql.PostgreSQLValidConnectionChecker
@@ -47,13 +47,13 @@ spec:
     valueFrom:
       secretKeyRef:
        key: username
-       name: {{ appname }}-servdb-secret
+       name: {{ appname }}-servdb-{{ dbmode }}
        optional: false
   - name: SERVDB_PASSWORD
     valueFrom:
       secretKeyRef:
        key: password
-       name: {{ appname }}-servdb-secret
+       name: {{ appname }}-servdb-{{ dbmode }}
        optional: false
   - name: SERVDB_CONNECTION_CHECKER
     value: org.jboss.jca.adapters.jdbc.extensions.postgresql.PostgreSQLValidConnectionChecker
@@ -65,12 +65,12 @@ spec:
     valueFrom:
       secretKeyRef:
        key: username
-       name: {{ appname }}-dedb-secret
+       name: {{ appname }}-dedb-{{ dbmode }}
        optional: false
   - name: SPRING_DATASOURCE_PASSWORD
     valueFrom:
       secretKeyRef:
        key: password
-       name: {{ appname }}-dedb-secret
+       name: {{ appname }}-dedb-{{ dbmode }}
        optional: false
   ingressHostName: {{ appname }}.apps.{{ openshift_url }}
