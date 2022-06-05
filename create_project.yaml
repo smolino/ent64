@@ -33,7 +33,7 @@
       shell: |
         chdir=/home/openshift ./oc create secret generic mysql-secret --from-literal username=automation --from-literal password=myP4ssw0rd -n {{ namespace }}
         chdir=/home/openshift ./oc create secret generic postgres-secret --from-literal username=automation --from-literal password=myP4ssw0rd -n {{ namespace }}
-        chdir=/home/openshift ./oc create secret generic default-sso-in-namespace-db-{{ dbmode }} --from-literal username=automationkcuser --from-literal password=myP4ssw0rd -n {{ namespace }}
+        chdir=/home/openshift ./oc create secret generic default-sso-in-namespace-db-secret --from-literal username=automationkcuser --from-literal password=myP4ssw0rd -n {{ namespace }}
         chdir=/home/openshift ./oc create secret generic {{appname}}-portdb-{{ dbmode }} --from-literal username=automationportuser --from-literal password=myP4ssw0rd -n {{ namespace }}
         chdir=/home/openshift ./oc create secret generic {{appname}}-servdb-{{ dbmode }} --from-literal username=automationservuser --from-literal password=myP4ssw0rd -n {{ namespace }}
         chdir=/home/openshift ./oc create secret generic {{appname}}-dedb-{{ dbmode }} --from-literal username=automationdeuser --from-literal password=myP4ssw0rd -n {{ namespace }}
