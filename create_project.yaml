@@ -64,8 +64,8 @@
         src: ./templates/dbms-{{ dbms }}.j2
         dest: /home/openshift/dbms-{{ dbms }}.yaml
 
-#    - name: Install dbms svc
-#      shell: chdir=/home/openshift ./oc apply -f dbms-{{ dbms }}.yaml -n {{ namespace }}
+    - name: Install dbms svc
+      shell: chdir=/home/openshift ./oc apply -f dbms-{{ dbms }}.yaml -n {{ namespace }}
 
     - name: sleep for 10 seconds and continue with play
       wait_for: timeout=40
