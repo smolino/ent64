@@ -9,7 +9,6 @@ spec:
   port: 32227
   dbms: postgresql
   host: 20.79.239.35
- # createDeployment: true
   databaseName: automation
   providedCapabilityScope: Namespace
   secretName: postgres-secret
@@ -22,7 +21,6 @@ metadata:
 replicas: 1
 spec:
   dbms: {{ dbms }}
-#  entandoAppVersion: "7.0"
   environmentVariables:
   - name: PORTDB_URL
     value: "jdbc:postgresql://20.79.239.35:32227/automationport"
