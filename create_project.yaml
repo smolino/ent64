@@ -68,7 +68,10 @@
       shell: chdir=/home/openshift ./oc apply -f dbms-{{ dbms }}.yaml -n {{ namespace }}
 
     - name: sleep for 10 seconds and continue with play
-      wait_for: timeout=10
+      wait_for: timeout=20
 
     - name: Install Entando App on namespace scope
       shell: chdir=/home/openshift ./oc apply -f {{entandoappconfig}}.yaml -n {{ namespace }}
+
+    - name: sleep for 10 seconds and continue with play
+      wait_for: timeout=20
