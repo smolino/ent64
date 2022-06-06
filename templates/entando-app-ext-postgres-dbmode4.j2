@@ -24,7 +24,7 @@ spec:
 #  entandoAppVersion: "7.0"
   environmentVariables:
   - name: PORTDB_URL
-    value: "jdbc:postgresql://20.79.239.35:32227/automationportuser"
+    value: "jdbc:postgresql://20.79.239.35:32227/automationport"
   - name: PORTDB_USERNAME
     valueFrom:
       secretKeyRef:
@@ -42,7 +42,7 @@ spec:
   - name: PORTDB_EXCEPTION_SORTER
     value: org.jboss.jca.adapters.jdbc.extensions.postgresql.PostgreSQLExceptionSorter
   - name: SERVDB_URL
-    value: "jdbc:postgresql://20.79.239.35:32227/automationservuser"
+    value: "jdbc:postgresql://20.79.239.35:32227/automationserv"
   - name: SERVDB_USERNAME
     valueFrom:
       secretKeyRef:
@@ -60,7 +60,7 @@ spec:
   - name: SERVDB_EXCEPTION_SORTER
     value: org.jboss.jca.adapters.jdbc.extensions.postgresql.PostgreSQLExceptionSorter
   - name: SPRING_DATASOURCE_URL
-    value: "jdbc:postgresql://20.79.239.35:32227/automationdeuser"
+    value: "jdbc:postgresql://20.79.239.35:32227/automationecr"
   - name: SPRING_DATASOURCE_USERNAME
     valueFrom:
       secretKeyRef:
