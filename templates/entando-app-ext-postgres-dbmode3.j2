@@ -1,18 +1,18 @@
----
-apiVersion: entando.org/v1
-kind: EntandoDatabaseService
-metadata:
-  namespace: {{ namespace }}
-  name: {{ appname }}-database-service
-spec:
-  provisioningStrategy: UseExternal
-  port: 32227
-  dbms: postgresql
-  host: 20.79.239.35
-  databaseName: automation
-  createDeployment: true
-  providedCapabilityScope: Namespace
-  secretName: postgres-secret
+#---
+#apiVersion: entando.org/v1
+#kind: EntandoDatabaseService
+#metadata:
+#  namespace: {{ namespace }}
+#  name: {{ appname }}-database-service
+#spec:
+#  provisioningStrategy: UseExternal
+#  port: 32227
+#  dbms: postgresql
+#  host: 20.79.239.35
+#  databaseName: automation
+#  createDeployment: true
+#  providedCapabilityScope: Namespace
+#  secretName: postgres-secret
 ---
 apiVersion: entando.org/v1
 kind: EntandoApp
