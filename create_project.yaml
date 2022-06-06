@@ -37,6 +37,15 @@
         chdir=/home/openshift ./oc create secret generic {{appname}}-portdb-{{ dbmode }} --from-literal username=automationport --from-literal password=myP4ssw0rd -n {{ namespace }}
         chdir=/home/openshift ./oc create secret generic {{appname}}-servdb-{{ dbmode }} --from-literal username=automationserv --from-literal password=myP4ssw0rd -n {{ namespace }}
         chdir=/home/openshift ./oc create secret generic {{appname}}-dedb-{{ dbmode }} --from-literal username=automationecr --from-literal password=myP4ssw0rd -n {{ namespace }}
+
+    - name: Copy dbms external svc
+      template:
+        src: ./templates/dbms-{{ dbms }}.j2
+        dest: /home/openshift/dbms-{{ dbms }}.yaml
+
+    - name: Install dbms svc
+      shell: chdir=/home/openshift ./oc apply -f dbms-{{ dbms }}.yaml -n {{ namespace }}
+
     - name: Copy operator-config
       template:
         src: ./templates/{{operatorconfig}}.j2
