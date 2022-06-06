@@ -58,9 +58,5 @@
         src: ./templates/{{entandoappconfig}}.j2
         dest: /home/openshift/{{entandoappconfig}}.yaml
 
-    - name: Wait to apply config
-      wait_for: timeout=10
-      delegate_to: localhost
-
     - name: Install Entando App on namespace scope
       shell: chdir=/home/openshift ./oc apply -f {{entandoappconfig}}.yaml -n {{ namespace }}
