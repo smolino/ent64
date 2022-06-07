@@ -1,0 +1,11 @@
+---
+apiVersion: entando.org/v1
+kind: EntandoApp
+metadata:
+ name: {{ appname }}
+ standardServerImage: {{ appused }}
+replicas: 1
+spec:
+  dbms: {{ dbms }}
+  environmentVariables: []
+  ingressHostName: {{ appname }}.apps.{{ openshift_url }}
