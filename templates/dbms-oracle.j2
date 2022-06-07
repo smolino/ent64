@@ -1,25 +1,25 @@
----
-apiVersion: entando.org/v1
-kind: EntandoDatabaseService
-metadata:
-  namespace: {{ namespace }}
-  name: {{ appname }}-database-service
-spec:
-  provisioningStrategy: UseExternal
-  port: 1521
-  dbms: oracle
-  host: 20.113.34.11
-  databaseName: xe
-  tablespace: AUTOMATION
-  providedCapabilityScope: Namespace
-  secretName: oracle-secret
 #---
-#kind: Secret
-#apiVersion: v1
+#apiVersion: entando.org/v1
+#kind: EntandoDatabaseService
 #metadata:
-#  name: example-secret
 #  namespace: {{ namespace }}
-#data:
-#  password: bXlQNHNzdzByZA==
-#  username: YXV0b21hdGlvbnBvcnQ=
-#type: Opaque
+#  name: {{ appname }}-database-service
+#spec:
+#  provisioningStrategy: UseExternal
+#  port: 1521
+#  dbms: oracle
+#  host: 20.113.34.11
+#  databaseName: xe
+#  tablespace: AUTOMATION
+#  providedCapabilityScope: Namespace
+#  secretName: oracle-secret
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: example-secret
+  namespace: {{ namespace }}
+data:
+  password: bXlQNHNzdzByZA==
+  username: YXV0b21hdGlvbnBvcnQ=
+type: Opaque
