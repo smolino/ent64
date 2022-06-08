@@ -7,7 +7,6 @@ metadata:
 replicas: 1
 spec:
   dbms: {{ dbms }}
-  tlsSecretName: entando-tls-secret
   environmentVariables:
   - name: PORTDB_URL
     value: "jdbc:postgresql://20.113.34.11:5432/automationport"
