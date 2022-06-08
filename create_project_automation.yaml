@@ -1,0 +1,79 @@
+---
+ - hosts: AWX
+   become: yes
+   become_user: {{ username }}
+   tasks:
+    - name: Login in
+      command: chdir=/home/openshift ./oc login api.{{ openshift_url }}:6443 -u admin -p {{ password1 }} --insecure-skip-tls-verify=true
+
+    - name: Create Project
+      shell: chdir=/home/openshift ./oc create namespace {{ namespace }}
+      
+    - name: Copy certificate-script Script
+      template:
+        src: ./templates/selfsign-certificate-script.js
+        dest: /home/openshift/selfsign-certificate-script.sh
+ 
+    - name: Make script executable
+      shell: chdir=/home/openshift chmod +x selfsign-certificate-script.sh
+
+    - name: Run certificates script
+      shell: chdir=/home/openshift ./selfsign-certificate-script.sh
+      
+    - name: Create secret
+      shell: chdir=/home/openshift ./oc create secret tls entando-tls-secret --key="{{ appname }}.apps.{{ openshift_url }}-server-key.pem" --cert="{{ appname }}.apps.{{ openshift_url }}-server-cert.pem" -n {{ namespace }}
+    
+    - name: Create ca secret
+      shell: chdir=/home/openshift ./oc create secret generic entando-ca-cert-secret --from-file="{{ appname }}.apps.{{ openshift_url }}-ca-cert.pem" -n {{ namespace }}
+    
+    - name: Remove certificates from host
+      shell: chdir=/home/openshift rm  {{ appname }}.apps.{{ openshift_url }}*.pem
+
+    - name: Create mysql-secrets
+      shell: |
+        chdir=/home/openshift ./oc create secret generic mysql-secret --from-literal username=automation --from-literal password=myP4ssw0rd -n {{ namespace }}
+        chdir=/home/openshift ./oc create secret generic oracle-secret --from-literal username=sys --from-literal password=8cfhGt465ks -n {{ namespace }}
+        chdir=/home/openshift ./oc create secret generic postgres-secret --from-literal username=automation --from-literal password=myP4ssw0rd -n {{ namespace }}
+        chdir=/home/openshift ./oc create secret generic default-sso-in-namespace-db-secret --from-literal username=automationsso --from-literal password=myP4ssw0rd -n {{ namespace }}
+        chdir=/home/openshift ./oc create secret generic {{appname}}-portdb-{{ dbmode }} --from-literal username=automationport --from-literal password=myP4ssw0rd -n {{ namespace }}
+        chdir=/home/openshift ./oc create secret generic {{appname}}-servdb-{{ dbmode }} --from-literal username=automationserv --from-literal password=myP4ssw0rd -n {{ namespace }}
+        chdir=/home/openshift ./oc create secret generic {{appname}}-dedb-{{ dbmode }} --from-literal username=automationecr --from-literal password=myP4ssw0rd -n {{ namespace }}
+
+    - name: Copy operator-config
+      template:
+        src: ./templates/{{operatorconfig}}.j2
+        dest: /home/openshift/{{operatorconfig}}.yaml
+
+    - name: Install operatorscript on namespace scope
+      shell: chdir=/home/openshift ./oc apply -f {{operatorconfig}}.yaml -n {{ namespace }}      
+
+    - name: Copy Operator Script
+      template:
+        src: ./templates/entando-subscription.j2
+        dest: /home/openshift/entando-subscription.yaml
+
+    - name: Install operatorscript on namespace scope
+      shell: chdir=/home/openshift ./oc apply -f entando-subscription.yaml -n {{ namespace }}
+
+    - name: Copy Entando App Script
+      template:
+        src: ./templates/{{entandoappconfig}}.j2
+        dest: /home/openshift/{{entandoappconfig}}.yaml
+
+    - name: Copy dbms external svc
+      template:
+        src: ./templates/dbms-{{ dbms }}.j2
+        dest: /home/openshift/dbms-{{ dbms }}.yaml
+
+    - name: Install dbms svc
+      shell: chdir=/home/openshift ./oc apply -f dbms-{{ dbms }}.yaml -n {{ namespace }}
+
+    - name: sleep for 10 seconds and continue with play
+      wait_for: timeout=40
+
+    - name: Install Entando App on namespace scope
+      shell: chdir=/home/openshift ./oc apply -f {{entandoappconfig}}.yaml -n {{ namespace }}
+
+    - name: Sleep for 400 seconds and continue with play
+      wait_for:
+        timeout: 400
