@@ -1,0 +1,64 @@
+---
+apiVersion: entando.org/v1
+kind: EntandoApp
+metadata:
+  name: {{ appname }}
+spec:
+  dbms: none
+  tlsSecretName: entando-tls-secret
+  environmentVariables:
+  - name: PORTDB_URL
+    value: "jdbc:oracle:thin:@//20.113.34.11:1521/xe"
+  - name: PORTDB_USERNAME
+    valueFrom:
+      secretKeyRef:
+       key: username
+       name: {{appname}}-portdb-secret
+       optional: false
+  - name: PORTDB_PASSWORD
+    valueFrom:
+      secretKeyRef:
+       key: password
+       name: {{appname}}-portdb-secret
+       optional: false
+  - name: PORTDB_CONNECTION_CHECKER
+    value: org.jboss.jca.adapters.jdbc.extensions.oracle.OracleValidConnectionChecker
+  - name: PORTDB_EXCEPTION_SORTER
+    value: org.jboss.jca.adapters.jdbc.extensions.oracle.OracleExceptionSorter
+  - name: SERVDB_URL
+    value: "jdbc:oracle:thin:@//20.113.34.11:1521/xe"
+  - name: SERVDB_USERNAME
+    valueFrom:
+      secretKeyRef:
+       key: username
+       name: {{appname}}-servdb-secret
+       optional: false
+  - name: SERVDB_PASSWORD
+    valueFrom:
+      secretKeyRef:
+       key: password
+       name: {{appname}}-servdb-secret
+       optional: false
+  - name: SPRING_DATASOURCE_URL
+    value: "jdbc:oracle:thin:@//20.113.34.11:1521/xe"
+  - name: SPRING_DATASOURCE_USERNAME
+    valueFrom:
+      secretKeyRef:
+       key: username
+       name: {{appname}}-dedb-secret
+       optional: false
+  - name: SPRING_DATASOURCE_PASSWORD
+    valueFrom:
+      secretKeyRef:
+       key: password
+       name: {{appname}}-dedb-secret
+       optional: false
+  - name: SPRING_JPA_DATABASE_PLATFORM
+    value: org.hibernate.dialect.Oracle12cDialect
+  - name: SERVDB_CONNECTION_CHECKER
+    value: org.jboss.jca.adapters.jdbc.extensions.oracle.OracleValidConnectionChecker
+  - name: SERVDB_EXCEPTION_SORTER
+    value: org.jboss.jca.adapters.jdbc.extensions.oracle.OracleExceptionSorter
+  ingressHostName: {{ appname }}.apps.{{ openshift_url }}
+  replicas: 1
+  standardServerImage: {{ appused }}
