@@ -1,0 +1,63 @@
+---
+apiVersion: entando.org/v1
+kind: EntandoApp
+metadata:
+ name: {{ appname }}
+replicas: 1
+standardServerImage: {{ appused }}
+spec:
+  dbms: {{ dbms }}
+  tlsSecretName: entando-tls-secret
+#  entandoAppVersion: "7.0"
+  environmentVariables:
+  - name: PORTDB_URL
+    value: "jdbc:mysql://20.79.239.35:32528/automationport"
+  - name: PORTDB_USERNAME
+    valueFrom:
+      secretKeyRef:
+       key: username
+       name: {{appname}}-portdb-secret
+       optional: false
+  - name: PORTDB_PASSWORD
+    valueFrom:
+      secretKeyRef:
+       key: password
+       name: {{appname}}-portdb-secret
+       optional: false
+  - name: PORTDB_CONNECTION_CHECKER
+    value: org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLValidConnectionChecker
+  - name: PORTDB_EXCEPTION_SORTER
+    value: org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLExceptionSorter
+  - name: SERVDB_URL
+    value: "jdbc:mysql://20.79.239.35:32528/automationserv"
+  - name: SERVDB_USERNAME
+    valueFrom:
+      secretKeyRef:
+       key: username
+       name: {{appname}}-servdb-secret
+       optional: false
+  - name: SERVDB_PASSWORD
+    valueFrom:
+      secretKeyRef:
+       key: password
+       name: {{appname}}-servdb-secret
+       optional: false
+  - name: SERVDB_CONNECTION_CHECKER
+    value: org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLValidConnectionChecker
+  - name: SERVDB_EXCEPTION_SORTER
+    value: org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLExceptionSorter
+  - name: SPRING_DATASOURCE_URL
+    value: "jdbc:mysql://20.79.239.35:32528/automationecr"
+  - name: SPRING_DATASOURCE_USERNAME
+    valueFrom:
+      secretKeyRef:
+       key: username
+       name: {{appname}}-dedb-secret
+       optional: false
+  - name: SPRING_DATASOURCE_PASSWORD
+    valueFrom:
+      secretKeyRef:
+       key: password
+       name: {{appname}}-dedb-secret
+       optional: false
+  ingressHostName: {{ appname }}.apps.{{ openshift_url }}
