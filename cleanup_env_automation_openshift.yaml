@@ -11,4 +11,4 @@
       shell: chdir=/home/{{ username }} kubectl delete ns {{ namespace }}
  
     - name: Publish Logs 
-      shell: mv /home/{{ username }}/log-collector/* /var/www/html/automation/
+      shell: mv /home/{{ username }}/log-collector/* /var/www/html/logs/automation/
