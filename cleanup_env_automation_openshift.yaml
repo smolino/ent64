@@ -1,0 +1,15 @@
+---
+ - hosts: AWX
+   become: yes
+   become_user: "{{ username }}"
+   tasks:
+   
+    - name: Select working dir
+      command: cd /home/{{ username }}
+
+    - name: Delete namespace entando 
+      shell: chdir=/home/{{ username }} kubectl delete ns {{ namespace }}
+ 
+    - name: Publish Logs 
+      shell: mv /home/{{ username }}/log-collector/* /var/www/html/automation/{{ username }}-{{ source }}-{{ dbms }}/
+
