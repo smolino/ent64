@@ -12,4 +12,3 @@
  
     - name: Publish Logs 
       shell: mv /home/{{ username }}/log-collector/* /var/www/html/automation/{{ username }}-{{ source }}-{{ dbms }}/
-
