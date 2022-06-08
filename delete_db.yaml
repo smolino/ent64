@@ -1,0 +1,12 @@
+---
+ - hosts: AWX
+   become_user: azureuser
+   tasks:
+
+    - name: Run db preparation script script
+      shell: chdir=/home/azureuser ./dbscript_delete_{{ dbms }}_automation.sh
+      register: results
+      
+    - name: Print Results
+      debug:
+        msg: "{{ results }}"
