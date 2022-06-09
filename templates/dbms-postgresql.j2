@@ -12,13 +12,3 @@ spec:
   databaseName: automation
   providedCapabilityScope: Namespace
   secretName: postgres-secret
----
-kind: Secret
-apiVersion: v1
-metadata:
-  name: example-secret
-  namespace: {{ namespace }}
-data:
-  password: bXlQNHNzdzByZA==
-  username: YXV0b21hdGlvbnBvcnQ=
-type: Opaque
