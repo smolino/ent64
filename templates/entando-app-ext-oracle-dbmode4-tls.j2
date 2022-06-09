@@ -4,7 +4,7 @@ kind: EntandoApp
 metadata:
   name: {{ appname }}
 spec:
-  dbms: {{ dbms }}
+  dbms: postgres
   tlsSecretName: entando-tls-secret
   environmentVariables:
   - name: PORTDB_URL
