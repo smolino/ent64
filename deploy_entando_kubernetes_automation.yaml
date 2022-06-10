@@ -18,7 +18,7 @@
       shell: chdir=/home/{{ username }} chmod +x entando_installation_script.sh
       
     - name: Execute installation script
-      command: /home/{{ username }}/./entando_installation_script.sh {{ namespace }} {{ APPNAME }}
+      command: /home/{{ username }}/./entando_installation_script.sh {{ namespace }} {{ appname }}
       register: results
       
     - name: Print Results

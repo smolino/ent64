@@ -2,7 +2,7 @@
 #  Author
 #  Sergio Molino
 #
-#  This script install Entando application on EKS
+#  This script install Entando application on Kubernetes
 #
 namespace=$1
 appname=$2
@@ -15,20 +15,7 @@ if [[ -z "$appname" ]]; then
         echo "Use "$(basename "$0")" APPNAME";
         exit 1;
 fi
-echo ""
-echo "##################################################################################"
-echo "##################################################################################"
-echo ""
-echo "Installing ingress"
-echo ""
-echo "##################################################################################"
-echo "##################################################################################"
-#kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.0.2/deploy/static/provider/aws/deploy.yaml
-# Old version not supported anymore / does not work with entando.ingress.class: 'nginx'
-#kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.41.2/deploy/static/provider/aws/deploy.yaml
-# This works
-#kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.49.3/deploy/static/provider/aws/deploy.yaml
-#sleep 30
+
 echo ""
 echo "##################################################################################"
 echo "##################################################################################"
@@ -69,7 +56,7 @@ echo ""
 echo "##################################################################################"
 echo "##################################################################################"
 
-kubectl apply -f https://raw.githubusercontent.com/entando-k8s/entando-k8s-operator-bundle/v7.0.2/manifests/k8s-116-and-later/namespace-scoped-deployment/cluster-resources.yaml
+kubectl apply -f https://raw.githubusercontent.com/entando-k8s/entando-k8s-operator-bundle/v{{ entver }}/manifests/k8s-116-and-later/namespace-scoped-deployment/cluster-resources.yaml
 
 echo "##################################################################################"
 echo "##################################################################################"
@@ -98,12 +85,11 @@ spec:
   databaseName: automation
   providedCapabilityScope: Namespace
   secretName: postgres-secret"  | kubectl apply -f -
-kubectl apply -n $namespace -f https://raw.githubusercontent.com/entando-k8s/entando-k8s-operator-bundle/v7.0.2/manifests/k8s-116-and-later/namespace-scoped-deployment/namespace-resources.yaml
-#kubectl apply -n $namespace -f /home/azureuser/terraform-test/learn-terraform-provision-eks-cluster/namespace-resources.yaml
-# kubectl apply -n $namespace -f /home/aks/namespace-resources_custom.yaml
+
 echo "##################################################################################"
 echo "##################################################################################"
 echo ""
+kubectl apply -n $namespace -f https://raw.githubusercontent.com/entando-k8s/entando-k8s-operator-bundle/v{{ entver }}/manifests/k8s-116-and-later/namespace-scoped-deployment/namespace-resources.yaml
 echo "Deploying Applicaton $appname"
 echo ""
 echo "##################################################################################"
@@ -161,10 +147,10 @@ spec:
       secretKeyRef:
        key: password
        name: $appname-dedb-secret
-  ingressHostName: $appname.aks1-21.eng-entando.com
-  standardServerImage: eap
+  ingressHostName: $appname.{{ urlingress }}
   replicas: 1" | kubectl apply -n $namespace -f -
 echo ""
+  standardServerImage: {{ servimage }}
 echo "##################################################################################"
 echo "##################################################################################"
 echo ""
