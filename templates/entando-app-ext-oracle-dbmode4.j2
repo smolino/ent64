@@ -38,6 +38,10 @@ spec:
        key: password
        name: {{appname}}-servdb-secret
        optional: false
+  - name: SERVDB_CONNECTION_CHECKER
+    value: org.jboss.jca.adapters.jdbc.extensions.oracle.OracleValidConnectionChecker
+  - name: SERVDB_EXCEPTION_SORTER
+    value: org.jboss.jca.adapters.jdbc.extensions.oracle.OracleExceptionSorter
   - name: SPRING_DATASOURCE_URL
     value: "jdbc:oracle:thin:@//20.113.34.11:1521/xe"
   - name: SPRING_DATASOURCE_USERNAME
