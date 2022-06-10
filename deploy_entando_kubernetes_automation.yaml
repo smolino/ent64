@@ -1,0 +1,26 @@
+---
+ - hosts: AWX
+   become: yes
+   become_user: "{{ username }}"
+   environment:
+     PATH: '{{ lookup(''env'', ''PATH'') }}:/home/{{ username }}/.local/bin/aws'
+   tasks:
+   
+    - name: Select working dir
+      command: cd /home/{{ username }}
+      
+    - name: Copy Installation script Script
+      template:
+        src: ./templates/entando_installation_script.j2
+        dest: /home/{{ username }}/entando_installation_script.sh
+        
+    - name: Change Permission 
+      shell: chdir=/home/{{ username }} chmod +x entando_installation_script.sh
+      
+    - name: Execute installation script
+      command: /home/{{ username }}/./entando_installation_script.sh {{ namespace }} {{ APPNAME }}
+      register: results
+      
+    - name: Print Results
+      debug:
+        msg: "{{ results }}"

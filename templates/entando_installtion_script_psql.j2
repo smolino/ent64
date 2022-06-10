@@ -1,0 +1,179 @@
+#!/bin/bash
+#  Author
+#  Sergio Molino
+#
+#  This script install Entando application on EKS
+#
+namespace=$1
+appname=$2
+
+if [[ -z "$namespace" ]]; then
+        echo "Use "$(basename "$0")" NAMESPACE";
+        exit 1;
+fi
+if [[ -z "$appname" ]]; then
+        echo "Use "$(basename "$0")" APPNAME";
+        exit 1;
+fi
+echo ""
+echo "##################################################################################"
+echo "##################################################################################"
+echo ""
+echo "Installing ingress"
+echo ""
+echo "##################################################################################"
+echo "##################################################################################"
+#kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.0.2/deploy/static/provider/aws/deploy.yaml
+# Old version not supported anymore / does not work with entando.ingress.class: 'nginx'
+#kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.41.2/deploy/static/provider/aws/deploy.yaml
+# This works
+#kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.49.3/deploy/static/provider/aws/deploy.yaml
+#sleep 30
+echo ""
+echo "##################################################################################"
+echo "##################################################################################"
+echo ""
+echo "Creating Namespace $namespace"
+echo ""
+echo "##################################################################################"
+echo "##################################################################################"
+kubectl create namespace $namespace
+
+
+echo ""
+echo "##################################################################################"
+echo "##################################################################################"
+echo ""
+echo "Applying Config Map"
+echo ""
+echo "##################################################################################"
+echo "##################################################################################"
+
+echo -e "
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: entando-operator-config
+  namespace: $namespace
+data:
+  entando.requires.filesystem.group.override: 'true'
+  entando.ingress.class: 'nginx'" | kubectl apply -f -
+
+
+echo ""
+echo "##################################################################################"
+echo "##################################################################################"
+echo ""
+echo "Creating Cluster Resources"
+echo ""
+echo "##################################################################################"
+echo "##################################################################################"
+
+kubectl apply -f https://raw.githubusercontent.com/entando-k8s/entando-k8s-operator-bundle/v7.0.2/manifests/k8s-116-and-later/namespace-scoped-deployment/cluster-resources.yaml
+
+echo "##################################################################################"
+echo "##################################################################################"
+echo ""
+echo "Creating Namespace Resources"
+echo ""
+echo "##################################################################################"
+echo "##################################################################################"
+kubectl create secret generic mysql-secret --from-literal username=automation --from-literal password=myP4ssw0rd -n $namespace
+kubectl create secret generic oracle-secret --from-literal username=automation --from-literal password=myP4ssw0rd -n $namespace
+kubectl create secret generic postgres-secret --from-literal username=automation --from-literal password=myP4ssw0rd -n $namespace
+kubectl create secret generic default-sso-in-namespace-db-secret --from-literal username=automationsso --from-literal password=myP4ssw0rd -n $namespace
+kubectl create secret generic $appname-portdb-secret --from-literal username=automationport --from-literal password=myP4ssw0rd -n $namespace
+kubectl create secret generic $appname-servdb-secret --from-literal username=automationserv --from-literal password=myP4ssw0rd -n $namespace
+kubectl create secret generic $appname-dedb-secret --from-literal username=automationecr --from-literal password=myP4ssw0rd -n $namespace
+echo -e "
+apiVersion: entando.org/v1
+kind: EntandoDatabaseService
+metadata:
+  namespace: $namespace
+  name: $appname-database-service
+spec:
+  port: 5432
+  dbms: postgresql
+  host: 20.113.34.11
+  databaseName: automation
+  providedCapabilityScope: Namespace
+  secretName: postgres-secret"  | kubectl apply -f -
+kubectl apply -n $namespace -f https://raw.githubusercontent.com/entando-k8s/entando-k8s-operator-bundle/v7.0.2/manifests/k8s-116-and-later/namespace-scoped-deployment/namespace-resources.yaml
+#kubectl apply -n $namespace -f /home/azureuser/terraform-test/learn-terraform-provision-eks-cluster/namespace-resources.yaml
+# kubectl apply -n $namespace -f /home/aks/namespace-resources_custom.yaml
+echo "##################################################################################"
+echo "##################################################################################"
+echo ""
+echo "Deploying Applicaton $appname"
+echo ""
+echo "##################################################################################"
+echo "##################################################################################"
+sleep 10
+echo -e "
+apiVersion: entando.org/v1
+kind: EntandoApp
+metadata:
+ name: $appname
+spec:
+  dbms: postgresql
+  environmentVariables:
+  - name: PORTDB_URL
+    value: 'jdbc:postgresql://20.113.34.11:5432/automation'
+  - name: PORTDB_USERNAME
+    valueFrom:
+      secretKeyRef:
+       key: username
+       name: $appname-portdb-secret
+  - name: PORTDB_PASSWORD
+    valueFrom:
+      secretKeyRef:
+       key: password
+       name: $appname-portdb-secret
+  - name: PORTDB_CONNECTION_CHECKER
+    value: org.jboss.jca.adapters.jdbc.extensions.postgresql.PostgreSQLValidConnectionChecker
+  - name: PORTDB_EXCEPTION_SORTER
+    value: org.jboss.jca.adapters.jdbc.extensions.postgresql.PostgreSQLExceptionSorter
+  - name: SERVDB_URL
+    value: 'jdbc:postgresql://20.113.34.11:5432/automation'
+  - name: SERVDB_USERNAME
+    valueFrom:
+      secretKeyRef:
+       key: username
+       name: $appname-servdb-secret
+  - name: SERVDB_PASSWORD
+    valueFrom:
+      secretKeyRef:
+       key: password
+       name: $appname-servdb-secret
+  - name: SERVDB_CONNECTION_CHECKER
+    value: org.jboss.jca.adapters.jdbc.extensions.postgresql.PostgreSQLValidConnectionChecker
+  - name: SERVDB_EXCEPTION_SORTER
+    value: org.jboss.jca.adapters.jdbc.extensions.postgresql.PostgreSQLExceptionSorter
+  - name: SPRING_DATASOURCE_URL
+    value: 'jdbc:postgresql://20.113.34.11:5432/automation'
+  - name: SPRING_DATASOURCE_USERNAME
+    valueFrom:
+      secretKeyRef:
+       key: username
+       name: $appname-dedb-secret
+  - name: SPRING_DATASOURCE_PASSWORD
+    valueFrom:
+      secretKeyRef:
+       key: password
+       name: $appname-dedb-secret
+  ingressHostName: $appname.aks1-21.eng-entando.com
+  standardServerImage: eap
+  replicas: 1" | kubectl apply -n $namespace -f -
+echo ""
+echo "##################################################################################"
+echo "##################################################################################"
+echo ""
+echo "Namespace $namespace is created and $appname application is deploying"
+echo "Wait around 10 minutes, when application is deployed it is available at:"
+echo ""
+# kubectl get svc -n ingress-nginx | grep LoadBalancer | awk '{print $4}' |while read HOST;do
+#echo "http://$HOST.nip.io/app-builder/";done
+echo ""
+echo "##################################################################################"
+echo "##################################################################################"
+# sleep 200
