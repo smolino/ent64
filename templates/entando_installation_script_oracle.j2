@@ -116,6 +116,7 @@ metadata:
  name: $appname
 spec:
   dbms: posgresql
+  {{ cert }}
   environmentVariables:
   - name: PORTDB_URL
     value: 'jdbc:oracle:thin:@//20.113.34.11:1521/xe'
