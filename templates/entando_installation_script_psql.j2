@@ -43,6 +43,7 @@ metadata:
   name: entando-operator-config
   namespace: $namespace
 data:
+  {{ confmap }}
   entando.requires.filesystem.group.override: 'true'
   entando.ingress.class: 'nginx'" | kubectl apply -f -
 
@@ -102,6 +103,7 @@ metadata:
  name: $appname
 spec:
   dbms: postgresql
+  {{ cert }}
   environmentVariables:
   - name: PORTDB_URL
     value: 'jdbc:postgresql://20.113.34.11:5432/automation'
