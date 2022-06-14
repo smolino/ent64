@@ -56,6 +56,7 @@ metadata:
   name: entando-operator-config
   namespace: $namespace
 data:
+  {{ confmap }}
   entando.requires.filesystem.group.override: 'true'
   entando.ingress.class: 'nginx'" | kubectl apply -f -
 
@@ -117,6 +118,7 @@ metadata:
  name: $appname
 spec:
   dbms: mysql
+  {{ cert }}
   environmentVariables:
   - name: PORTDB_URL
     value: 'jdbc:mysql://20.79.239.35:32528/automationport'
