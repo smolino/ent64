@@ -9,6 +9,17 @@
     - name: Select working dir
       command: cd /home/{{ username }}
       
+    - name: Copy certificate-script Script
+      template:
+        src: ./templates/selfsign-certificate-script-kubernetes.j2
+        dest: /home/{{ username }}/selfsign-certificate-script-kubernetes.sh
+ 
+    - name: Make script executable
+      shell: chdir=/home/{{ username }} chmod +x selfsign-certificate-script-kubernetes.sh
+
+    - name: Run certificates script
+      shell: chdir=/home/{{ username }} ./selfsign-certificate-script-kubernetes.sh
+      
     - name: Copy Installation script Script
       template:
         src: ./templates/entando_installation_script_{{ dbmode }}.j2
@@ -24,17 +35,6 @@
     - name: Print Results
       debug:
         msg: "{{ results }}"
-
-    - name: Copy certificate-script Script
-      template:
-        src: ./templates/selfsign-certificate-script-kubernetes.j2
-        dest: /home/{{ username }}/selfsign-certificate-script-kubernetes.sh
- 
-    - name: Make script executable
-      shell: chdir=/home/{{ username }} chmod +x selfsign-certificate-script-kubernetes.sh
-
-    - name: Run certificates script
-      shell: chdir=/home/{{ username }} ./selfsign-certificate-script-kubernetes.sh
       
     - name: Create secret
       shell: chdir=/home/{{ username }} kubectl create secret tls entando-tls-secret --key="{{ appname }}.{{ urlingress }}-server-key.pem" --cert="{{ appname }}.{{ urlingress }}-server-cert.pem" -n {{ namespace }}
