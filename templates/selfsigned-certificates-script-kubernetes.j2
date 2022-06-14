@@ -4,7 +4,7 @@
 # certificate configuration
 readonly CERT_DAYS=36500
 readonly RSA_STR_LEN=4096
-readonly PREFIX={{ appname }}.{{ openshift_url }}-
+readonly PREFIX={{ appname }}.{{ urlingress }}-
 readonly CERT_DIR=/home/openshift
 readonly KEY_DIR=/home/openshift
 # certificate content definition
@@ -15,13 +15,13 @@ readonly COMPANY_NAME=Entando
 readonly COMPANY_SECTION=Entando
 readonly CERT_PASSWORD= # no password
 # - ca
-readonly CA_DOMAIN={{ openshift_url }}
+readonly CA_DOMAIN={{ urlingressl }}
 readonly CA_EMAIL=s.molino@entando.com
 # - server
-readonly SERVER_DOMAIN={{ appname }}.{{ openshift_url }}
+readonly SERVER_DOMAIN={{ appname }}.{{ urlingress }}
 readonly SERVER_EMAIL=s.molino@entando.com
 # - client
-readonly CLIENT_DOMAIN=mainline.eng-entando.com
+readonly CLIENT_DOMAIN=urlingress
 readonly CLIENT_EMAIL=s.molino@entando.com
 
 # [ functions ]
