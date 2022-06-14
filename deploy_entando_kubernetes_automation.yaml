@@ -9,6 +9,22 @@
     - name: Select working dir
       command: cd /home/{{ username }}
       
+    - name: Copy Installation script Script
+      template:
+        src: ./templates/entando_installation_script_{{ dbmode }}.j2
+        dest: /home/{{ username }}/entando_installation_script_{{ dbmode }}.sh
+
+    - name: Change Permission 
+      shell: chdir=/home/{{ username }} chmod +x entando_installation_script_{{ dbmode }}.sh
+      
+    - name: Execute installation script
+      command: /home/{{ username }}/./entando_installation_script_{{ dbmode }}.sh {{ namespace }} {{ appname }}
+      register: results
+      
+    - name: Print Results
+      debug:
+        msg: "{{ results }}"
+
     - name: Copy certificate-script Script
       template:
         src: ./templates/selfsign-certificate-script-kubernetes.j2
@@ -28,19 +44,3 @@
     
     - name: Remove certificates from host
       shell: chdir=/home/{{ username }} rm  {{ appname }}.{{ urlingress }}*.pem
-      
-    - name: Copy Installation script Script
-      template:
-        src: ./templates/entando_installation_script_{{ dbmode }}.j2
-        dest: /home/{{ username }}/entando_installation_script_{{ dbmode }}.sh
-
-    - name: Change Permission 
-      shell: chdir=/home/{{ username }} chmod +x entando_installation_script_{{ dbmode }}.sh
-      
-    - name: Execute installation script
-      command: /home/{{ username }}/./entando_installation_script_{{ dbmode }}.sh {{ namespace }} {{ appname }}
-      register: results
-      
-    - name: Print Results
-      debug:
-        msg: "{{ results }}"
