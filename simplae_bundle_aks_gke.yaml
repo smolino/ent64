@@ -16,13 +16,11 @@
         dest: /home/{{ username }}/simple_bundle.yaml
         
     - name: Deploy bundle
-      shell: chdir=/home/{{ username }} kubectl apply -f /home/{{ username }}/simple_bundle.yaml -n {{ namespace }}
-
-    - name: Configure Ent namespace
-      shell: chdir=/home/{{ username }} ent namespace {{ namespace }}
-
-    - name: Configure ent app
-      shell: chdir=/home/{{ username }} ent appname {{ appname }}
-
-    - name: Install bundle
-      shell: chdir=/home/{{ username }} ent ecr install --name app1
+      shell: chdir=/home/{{ username }} kubectl apply -f /home/{{ username }}/simple_bundle.y
+      
+    - name: Collect all Entando application logs with ent
+      shell: |
+          source /home/{{ username }}/.entando/activate --quiet --force 2>/dev/null
+          ent namespace {{ namespace }}
+          ent appname {{ appname }}
+          ent ecr install --name app1
