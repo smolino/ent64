@@ -22,5 +22,5 @@
       shell: |
           source /home/{{ username }}/.entando/activate --quiet --force 2>/dev/null
           ent namespace {{ namespace }}
-          ent appname {{ appname }}
+          ent appname {{ APPNAME }}
           ent ecr install --name app1
