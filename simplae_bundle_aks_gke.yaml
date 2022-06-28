@@ -3,7 +3,8 @@
    become: yes
    become_user: "{{ username }}"
    environment:
-     PATH: '{{ lookup(''env'', ''PATH'') }}:/home/{{ username }}/.local/bin/aws'
+     - PATH: '{{ lookup(''env'', ''PATH'') }}:/home/{{ username }}/.local/bin/aws'
+     - PATH: '{{ lookup(''env'', ''PATH'') }}:/home/{{ username }}/.entando/ent/v7.0.1/cli/v7.0.0/bin'
    tasks:
    
     - name: Select working dir
