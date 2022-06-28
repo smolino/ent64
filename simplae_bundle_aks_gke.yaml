@@ -16,7 +16,7 @@
         dest: /home/{{ username }}/simple_bundle.yaml
         
     - name: Deploy bundle
-      shell: chdir=/home/{{ username }} kubectl apply -f /home/{{ username }}/simple_bundle.y
+      shell: chdir=/home/{{ username }} kubectl apply -f /home/{{ username }}/simple_bundle.yaml -n {{ namespace }}
       
     - name: Collect all Entando application logs with ent
       shell: |
