@@ -6,7 +6,6 @@
      PATH: '{{ lookup(''env'', ''PATH'') }}:/home/{{ username }}/.local/bin/aws'
    tasks:
    
-    - name: Scale down eks cluster
+    - name: Scale down cypress cluster
       shell: |
-         az aks stop -n aks-k8s-1-22 --resource-group akk8s-1-22_group
-         az aks stop -n migration_test --resource-group migration_test_group
+         az aks stop -n cypress --resource-group cypress
