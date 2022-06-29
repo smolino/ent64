@@ -104,7 +104,9 @@ metadata:
   namespace: $namespace
   name: $appname
 spec:
-  environmentVariables: []
+  environmentVariables:
+    - name: SPRING_PROFILES_ACTIVE
+      value: "default,swagger"
   entandoAppVersion: '7.0'
   dbms: postgresql
   ingressHostName: $HOST.nip.io
