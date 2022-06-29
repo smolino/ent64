@@ -81,6 +81,13 @@ echo "##########################################################################
 #kubectl apply -n $namespace -f https://raw.githubusercontent.com/entando-k8s/entando-k8s-operator-bundle/v{{ ENTANDO_VERSION }}/manifests/k8s-116-and-later/namespace-scoped-deployment/namespace-resources.yaml
 #kubectl apply -n $namespace -f /home/azureuser/terraform-test/learn-terraform-provision-eks-cluster/namespace-resources.yaml
 kubectl apply -n $namespace -f /home/{{ username }}/namespace-resources_custom.yaml
+kubectl create secret generic mysql-secret --from-literal username=automation --from-literal password=myP4ssw0rd -n $namespace
+kubectl create secret generic oracle-secret --from-literal username=automation --from-literal password=myP4ssw0rd -n $namespace
+kubectl create secret generic postgres-secret --from-literal username=automation --from-literal password=myP4ssw0rd -n $namespace
+kubectl create secret generic default-sso-in-namespace-db-secret --from-literal username=automationsso --from-literal password=myP4ssw0rd -n $namespace
+kubectl create secret generic $appname-portdb-secret --from-literal username=automationport --from-literal password=myP4ssw0rd -n $namespace
+kubectl create secret generic $appname-servdb-secret --from-literal username=automationserv --from-literal password=myP4ssw0rd -n $namespace
+kubectl create secret generic $appname-dedb-secret --from-literal username=automationecr --from-literal password=myP4ssw0rd -n $namespace
 echo "##################################################################################"
 echo "##################################################################################"
 echo ""
