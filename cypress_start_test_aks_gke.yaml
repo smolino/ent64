@@ -10,5 +10,5 @@
       command: cd /home/{{ username }}
    
     - name: Start cypress test
-      command: kubectl exec -ti cypress -n cypress -- npm run cypress:smoke -- --config-file configs/remoteconfig.json
+      command: kubectl exec -ti cypress -n cypress -- npm run cypress:smoke -- --env configFile=configs/remoteconfig.json
       register: output
