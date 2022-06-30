@@ -26,3 +26,6 @@
       
     - name: Extract Ent results
       shell: chdir=/home/{{ username }}/log-collector/{{ appname }}-v{{ ENTANDO_VERSION }}  tar -xvf *.tgz
+
+    - name: Publish Logs 
+      shell: mv /home/{{ username }}/log-collector/* /var/www/html/logs/{{ username }}{{ kubeversion }}/
