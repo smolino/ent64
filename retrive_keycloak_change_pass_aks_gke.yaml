@@ -31,3 +31,6 @@
       
     - name: Eecute script
       command: chdir=/home/{{ username }} ./changepassword.sh
+
+    - name: Eecute script
+      command: chdir=/home/{{ username }} ./changepassword.sh
