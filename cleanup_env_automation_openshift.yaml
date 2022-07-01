@@ -9,9 +9,10 @@
 
     - name: Delete namespace entando 
       shell: chdir=/home/{{ username }} kubectl delete ns {{ namespace }}
- 
-    - name: Publish Logs 
-      shell: mv /home/{{ username }}/log-collector/* /var/www/html/logs/automation/
 
     - name: Rename dir 
-      shell: mv /var/www/html/logs/automation/{{ namespace }}-v1.22 /var/www/html/logs/automation/$(date +'%m_%d_%y-%I_%M_%p')-{{ namespace }}-v1.22
+      shell: mv /home/{{ username }}/log-collector/{{ namespace }}-v1.22 /var/www/html/logs/automation/$(date +'%m_%d_%y-%I_%M_%p')-{{ namespace }}-v1.22
+
+#    - name: Publish Logs 
+#      shell: mv /home/{{ username }}/log-collector/* /var/www/html/logs/automation/
+
