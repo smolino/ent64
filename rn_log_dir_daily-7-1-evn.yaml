@@ -1,0 +1,10 @@
+---
+ - hosts: AWX
+   become: yes
+   become_user: "{{ username }}"
+   environment:
+     - PATH: '{{ lookup(''env'', ''PATH'') }}:/home/{{ username }}/.entando/ent/v7.0.2/cli/v7.0.0/bin'
+   tasks:
+   
+    - name: Rename dir 
+      shell: mv /var/www/html/logs/{{ username }}{{ kubeversion }}/daily-7-1-evn-v7.0.2 /var/www/html/logs/{{ username }}{{ kubeversion }}/$(date +'%m_%d')-daily-7-1-evn-v7.0.2
