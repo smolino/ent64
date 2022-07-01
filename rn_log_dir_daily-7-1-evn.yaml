@@ -9,8 +9,8 @@
     - name: Rename dir 
       shell: mv /var/www/html/logs/{{ username }}{{ kubeversion }}/{{ appname }}-v{{ ENTANDO_VERSION }} /var/www/html/logs/{{ username }}{{ kubeversion }}/$(date +'%m_%d_%y-%I_%M_%p')-{{ appname }}-v{{ ENTANDO_VERSION }}
 
-    - name: Login in
-      shell: oc login api.{{ openshift_url }}:6443 -u admin -p {{ password }} --insecure-skip-tls-verify=true
+# #   - name: Login in
+# #     shell: oc login api.{{ openshift_url }}:6443 -u admin -p {{ password }} --insecure-skip-tls-verify=true
 
-    - name: Scale Down test projects
-      shell: oc get deploy -A --no-headers | grep 'daily-' | awk '{print $2,$1}' | while read DEPLOY NAMESPACE;do oc scale --replicas=0 deployment/$DEPLOY -n $NAMESPACE; done
+#    - name: Scale Down test projects
+#      shell: oc get deploy -A --no-headers | grep 'daily-' | awk '{print $2,$1}' | while read DEPLOY NAMESPACE;do oc scale --replicas=0 deployment/$DEPLOY -n $NAMESPACE; done
