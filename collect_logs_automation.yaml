@@ -11,8 +11,9 @@
       shell: |
           source /home/{{ username }}/.entando/activate --quiet --force 2>/dev/null
           ent namespace {{ namespace }}
+          ent appname {{ appname }}
           ent diag
-   
+          
     - name: Create Dir Logs
       shell: mkdir -p /home/{{ username }}/log-collector/{{ appname }}-v{{ source }}/results
       
