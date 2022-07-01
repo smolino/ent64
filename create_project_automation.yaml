@@ -55,6 +55,10 @@
     - name: Install operatorscript on namespace scope
       shell: chdir=/home/openshift ./oc apply -f entando-subscription.yaml -n {{ namespace }}
 
+    - name: Sleep for 400 seconds and continue with play
+      wait_for:
+        timeout: 100
+
     - name: Scale down Operator deployment
       shell: chdir=/home/{{ username }} ./oc scale deployment entando-operator -n {{ namespace }} --replicas=0
       
