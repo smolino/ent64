@@ -1,0 +1,13 @@
+---
+apiVersion: entando.org/v1
+kind: EntandoApp
+metadata:
+ name: {{ appname }}
+replicas: 1
+standardServerImage: {{ appused }}
+spec:
+  dbms: {{ dbms }}
+  tlsSecretName: entando-tls-secret
+#  entandoAppVersion: "7.0"
+  environmentVariables: []
+  ingressHostName: {{ appname }}.apps.{{ openshift_url }}
