@@ -14,4 +14,4 @@
       shell: mv /home/{{ username }}/log-collector/* /var/www/html/logs/automation/
 
     - name: Rename dir 
-      shell: mv /var/www/html/logs/automation/* /var/www/html/logs/automation/$(date +'%m_%d_%y-%I_%M_%p')-{{ namespace }}
+      shell: mv /var/www/html/logs/automation/{{ namespace }} /var/www/html/logs/automation/$(date +'%m_%d_%y-%I_%M_%p')-{{ namespace }}
