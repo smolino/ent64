@@ -6,6 +6,6 @@ metadata:
  standardServerImage: {{ appused }}
 replicas: 1
 spec:
-  dbms: "none"
+  dbms: {{ dbms }}
   environmentVariables: []
   ingressHostName: {{ appname }}.apps.{{ openshift_url }}
