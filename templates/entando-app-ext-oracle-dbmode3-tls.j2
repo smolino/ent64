@@ -6,7 +6,7 @@ metadata:
  standardServerImage: {{ appused }}
 replicas: 1
 spec:
-  dbms: none
+  dbms: postgresql
   tlsSecretName: entando-tls-secret
   environmentVariables: []
   ingressHostName: {{ appname }}.apps.{{ openshift_url }}
