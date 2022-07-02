@@ -212,7 +212,7 @@
       wait_for:
         timeout: 60
 
-   - name: Retrive clientsecret
+    - name: Retrive clientsecret
       shell: chdir=/home/{{ username }} hub-tool tag ls entando/app-builder --sort updated | awk 'FNR==2{print $1}' | sed 's/app-builder://g' | sed 's/entando//g' |sed 's/\///g' | while read  ENTANDOAPPBUILDER; do echo "$ENTANDOAPPBUILDER";done
       register: ENTANDOAPPBUILDER
     - set_fact:
