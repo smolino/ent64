@@ -1,6 +1,7 @@
 ---
  - hosts: AWX
-   become_user: openshift
+   become_user: azureuser
+   become: yes
    tasks:
 
     - name: Archive automation logs
