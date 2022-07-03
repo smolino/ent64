@@ -6,7 +6,9 @@
 
     - name: Archive automation logs
       shell: |
+          chdir=/var/www/html/logs/automation/ chmod -R 777 *
           chdir=/var/www/html/logs/automation/ tar -cvzf /var/www/html/logs/archive/$(date +'%m_%d_%y-%I_%M_%p')-dailycrd7-1.tar * --remove-files
+
       register: results
       
     - name: Print Results
