@@ -11,7 +11,7 @@
       shell: chdir=/home/{{ username }} kubectl delete ns {{ namespace }}
 
     - name: Rename dir 
-      shell: mv /home/{{ username }}/log-collector/{{ namespace }}-v1.22 /var/www/html/logs/automation/$(date +'%m_%d_%y-%I_%M_%p')-{{ namespace }}-v1.22
+      shell: mv /home/{{ username }}/log-collector/{{ namespace }}-v{{ source }} /var/www/html/logs/automation/$(date +'%m_%d_%y-%I_%M_%p')-{{ namespace }}-v{{ source }}
 
 #    - name: Publish Logs 
 #      shell: mv /home/{{ username }}/log-collector/* /var/www/html/logs/automation/
