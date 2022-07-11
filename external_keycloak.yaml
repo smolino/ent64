@@ -9,7 +9,7 @@
     - name: Select working dir
       command: cd /home/{{ username }}
 
-    - name: Sleep for 20 seconds and continue with play
+    - name: Sleep for 20 seconds and continue
       wait_for:
         timeout: 20
       
