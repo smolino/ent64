@@ -14,4 +14,4 @@
         timeout: 20
       
     - name: Create external secret for keycloak 
-      shell: chdir=/home/{{ username }} kubectl create secret generic keycloak-admin-secret --from-literal name=keycloak-admin-secret --from-literal password=Anp7JH9hgT4BOQ== --from-literal url=http://automation-external-keycloak-keycloak1511.apps.mainline.eng-entando.com/auth -n {{ namespace }}
+      shell: chdir=/home/{{ username }} kubectl create secret generic keycloak-admin-secret --from-literal name=admin --from-literal password=Anp7JH9hgT4BOQ== --from-literal url=http://automation-external-keycloak-keycloak1511.apps.mainline.eng-entando.com/auth -n {{ namespace }}
