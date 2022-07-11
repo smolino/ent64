@@ -55,9 +55,9 @@ echo ""
 echo "##################################################################################"
 echo "##################################################################################"
 
-sudo kubectl apply -f https://raw.githubusercontent.com/entando/entando-releases/v7.0.2/dist/ge-1-1-6/namespace-scoped-deployment/cluster-resources.yaml
+kubectl apply -f https://raw.githubusercontent.com/entando/entando-releases/v7.0.2/dist/ge-1-1-6/namespace-scoped-deployment/cluster-resources.yaml
 
-sudo kubectl apply -n entando -f https://raw.githubusercontent.com/entando/entando-releases/v7.0.2/dist/ge-1-1-6/namespace-scoped-deployment/namespace-resources.yaml
+kubectl apply -n $namespace -f https://raw.githubusercontent.com/entando/entando-releases/v7.0.2/dist/ge-1-1-6/namespace-scoped-deployment/namespace-resources.yaml
 
 echo "##################################################################################"
 echo "##################################################################################"
