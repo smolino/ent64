@@ -15,3 +15,11 @@
       
     - name: Create external secret for keycloak 
       shell: chdir=/home/{{ username }} kubectl create secret generic keycloak-admin-secret --from-literal username=admin --from-literal password=Anp7JH9hgT4BOQ== --from-literal ADMIN_USERNAME=admin --from-literal ADMIN_PASSWORD=Anp7JH9hgT4BOQ== --from-literal KEYCLOAK_USER=admin --from-literal KEYCLOAK_PASSWORD=Anp7JH9hgT4BOQ== --from-literal url=http://automation-external-keycloak-keycloak1511.apps.mainline.eng-entando.com/auth -n {{ namespace }}
+
+    - name: Generate external keycloak yaml file
+      template:
+        src: ./templates/external_keycloak_svc.j2
+        dest: /home/{{ username }}/external_keycloak_svc.yaml
+
+    - name: Desploy keycloak external service
+      shell: chdir=/home/{{ username }} ./oc apply -f external_keycloak_svc.yaml -n {{ namespace }}

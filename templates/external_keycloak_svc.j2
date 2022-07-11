@@ -1,0 +1,11 @@
+apiVersion: entando.org/v1
+kind: EntandoKeycloakServer
+metadata:
+  name: external-keycloak
+  namespace: {{ namespace }}
+spec:
+  environmentVariables: []
+  provisioningStrategy: UseExternal
+  adminSecretName: keycloak-admin-secret
+  frontEndUrl: >-
+    http://automation-external-keycloak-keycloak1511.apps.mainline.eng-entando.com/auth
