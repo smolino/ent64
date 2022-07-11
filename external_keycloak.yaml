@@ -1,0 +1,13 @@
+---
+ - hosts: AWX
+   become: yes
+   become_user: "{{ username }}"
+   environment:
+     PATH: '{{ lookup(''env'', ''PATH'') }}:/home/{{ username }}/.local/bin/aws'
+   tasks:
+   
+    - name: Select working dir
+      command: cd /home/{{ username }}
+      
+    - name: Create external secret for keycloak 
+      shell: chdir=/home/{{ username }} kubectl create secret keycloack-admin-secret --from-literal name=keycloak-admin-secret --from-literal password=Anp7JH9hgT4BOQ== --from-literal url=http://entando-keycloak-keycloak1511.apps.mainline.eng-entando.com/auth/ -n $namespace
