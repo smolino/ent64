@@ -111,7 +111,7 @@ spec:
       value: "default,swagger"
   entandoAppVersion: '7.0'
   dbms: embedded
-  ingressHostName: k3s.k3sautomation.eng-entando.com
+  ingressHostName: {{ ihn }}
   standardServerImage: {{ appused }}
   replicas: 1" | kubectl apply -f -; done
 echo ""
