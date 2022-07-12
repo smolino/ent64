@@ -11,16 +11,16 @@
       wait_for:
         timeout: 5
       
-    - name: Generate external keycloak yaml file
+    - name: Generate external keycloak yaml file or embedded
       template:
-        src: ./templates/entando_installation_k3s_extkc.j2
-        dest: /home/{{ username }}/entando_installation_k3s_extkc.sh
+        src: ./templates/entando_installation_k3s_{{ appmode }}.j2
+        dest: /home/{{ username }}/entando_installation_k3s_{{ appmode }}.sh
 
     - name: Change Permission 
-      shell: chdir=/home/{{ username }} chmod +x entando_installation_k3s_extkc.sh
+      shell: chdir=/home/{{ username }} chmod +x entando_installation_k3s_{{ appmode }}.sh
       
     - name: Execute installation script
-      shell: chdir=/home/{{ username }} ./entando_installation_k3s_extkc.sh {{ namespace }} {{ APPNAME }}
+      shell: chdir=/home/{{ username }} ./entando_installation_k3s_{{ appmode }}.sh {{ namespace }} {{ APPNAME }}
       register: results
       
     - name: Print Results
