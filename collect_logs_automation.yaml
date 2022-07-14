@@ -28,7 +28,7 @@
             echo "http://$HOST.nip.io/app-builder/" > /home/{{ username }}/entando;done            
      
     - name: Curl Entando website
-      shell: curl {{ ign }}/app-builder/
+      shell: curl {{ ihn }}/app-builder/
       register: webpage
     - debug: var=webpage.stdout
     - name: Fail
