@@ -38,7 +38,7 @@
       debug: msg="Entando App is up and running"
 
     - name: Print Results
-      shell: chdir=/home/{{ username }} echo -e {{ webpage }} /home/{{ username }}/log-collector/{{ appname }}-v{{ source }}/appbuilder
+      shell: chdir=/home/{{ username }} echo -e {{ debug }} /home/{{ username }}/log-collector/{{ appname }}-v{{ source }}/appbuilder
       
     - name: Extract Ent results
       shell: chdir=/home/{{ username }}/log-collector/{{ appname }}-v{{ source }}  tar -xvf *.tgz
