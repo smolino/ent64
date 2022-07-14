@@ -22,6 +22,24 @@
       
     - name: Copy Ent results
       shell: mv /home/{{ username }}/.entando/reports/* /home/{{ username }}/log-collector/{{ appname }}-v{{ source }}
+
+    - name: Get url
+      shell: kubectl get svc -A |grep LoadBalancer | awk '{print $5}' | while read HOST;do 
+            echo "http://$HOST.nip.io/app-builder/" > /home/{{ username }}/entando;done            
+     
+    - name: Curl Entando website
+      shell: cat /home/{{ username }}/entando | awk '{print $1}' | while read WEBPORTAL;do 
+             curl $WEBPORTAL;done
+      register: webpage
+    - debug: var=webpage.stdout
+    - name: Fail
+      fail:
+      when: "'entando' not in webpage.stdout" 
+    - name: Success
+      debug: msg="Entando App is up and running"
+
+    - name: Print Results
+      shell: chdir=/home/{{ username }} touch /home/{{ username }}/log-collector/{{ appname }}-v{{ source }}/{{ webpage }}
       
     - name: Extract Ent results
       shell: chdir=/home/{{ username }}/log-collector/{{ appname }}-v{{ source }}  tar -xvf *.tgz
