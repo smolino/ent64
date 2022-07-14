@@ -1,0 +1,18 @@
+---
+ - hosts: AWX
+   become: yes
+   become_user: "{{ username }}"
+   tasks:
+   
+   - name: Select working dir
+     command: cd /home/{{ username }}   
+            
+   - name: Curl Keycloak website
+     shell: curl https://{{ appname }}.apps.{{ openshift_url }}/auth/
+     register: webpage
+   - debug: var=webpage.stdout
+   - name: Fail
+     fail:
+     when: "'keycloak' not in webpage.stdout" 
+   - name: Success
+     debug: msg="Keycloak is up and running"
