@@ -28,8 +28,7 @@
             echo "http://$HOST.nip.io/app-builder/" > /home/{{ username }}/entando;done            
      
     - name: Curl Entando website
-      shell: cat /home/{{ username }}/entando | awk '{print $1}' | while read WEBPORTAL;do 
-             curl $WEBPORTAL;done
+      shell: curl {{ ign }}/app-builder/
       register: webpage
     - debug: var=webpage.stdout
     - name: Fail
