@@ -220,32 +220,32 @@
       
     - name: Retrive clientsecret
       shell: chdir=/home/{{ username }} sed "s/entando-component-manager@.*/entando-component-manager@{{ SHAENTANDOCOMPONENTMANAGER }}/g" entando-operator-openshift.yaml > entando-operator-opensift-modified.yaml
-#    - name: Retrive clientsecret
-#      shell: chdir=/home/{{ username }} sed "s/entando-de-app-wildfly@.*/entando-de-app-wildfly@{{ SHAENTANDODEAPPWILDFLY }}/g" entando-operator-opensift-modified.yaml > entando-operator-opensift-modified1.yaml
-#    - name: Retrive clientsecret
-#      shell: chdir=/home/{{ username }} sed "s/entando-de-app-eap@.*/entando-de-app-eap@{{ SHAENTANDODEAPPEAP }}/g" entando-operator-opensift-modified1.yaml > entando-operator-opensift-modified2.yaml
-#    - name: Retrive clientsecret
-#      shell: chdir=/home/{{ username }} sed "s/entando-k8s-app-controller@.*/entando-k8s-app-controller@{{ SHAENTANDOAPPCONTROLLER }}/g" entando-operator-opensift-modified2.yaml > entando-operator-opensift-modified3.yaml
-#    - name: Retrive clientsecret
-#      shell: chdir=/home/{{ username }} sed "s/entando-k8s-plugin-controller@.*/entando-k8s-plugin-controller@{{ SHAENTANDOPLUGINCONTROLLER }}/g" entando-operator-opensift-modified3.yaml > entando-operator-opensift-modified4.yaml
-#    - name: Retrive clientsecret
-#      shell: chdir=/home/{{ username }} sed "s/entando-k8s-dbjob@.*/entando-k8s-dbjob@{{ SHAENTANDODBJOB }}/g" entando-operator-opensift-modified4.yaml > entando-operator-opensift-modified5.yaml
-#    - name: Retrive clientsecret
-#      shell: chdir=/home/{{ username }} sed "s/entando-k8s-keycloak-controller@.*/entando-k8s-keycloak-controller@{{ SHAENTANDOKKCONTROLLER }}/g" entando-operator-opensift-modified5.yaml > entando-operator-opensift-modified6.yaml
-#    - name: Retrive clientsecret
-#      shell: chdir=/home/{{ username }} sed "s/entando-k8s-database-service-controller@.*/entando-k8s-database-service-controller@{{ SHAENTANDODBSVCCONTROLLER }}/g" entando-operator-opensift-modified6.yaml > entando-operator-opensift-modified7.yaml
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} sed "s/entando-de-app-wildfly@.*/entando-de-app-wildfly@{{ SHAENTANDODEAPPWILDFLY }}/g" entando-operator-opensift-modified.yaml > entando-operator-opensift-modified1.yaml
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} sed "s/entando-de-app-eap@.*/entando-de-app-eap@{{ SHAENTANDODEAPPEAP }}/g" entando-operator-opensift-modified1.yaml > entando-operator-opensift-modified2.yaml
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} sed "s/entando-k8s-app-controller@.*/entando-k8s-app-controller@{{ SHAENTANDOAPPCONTROLLER }}/g" entando-operator-opensift-modified2.yaml > entando-operator-opensift-modified3.yaml
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} sed "s/entando-k8s-plugin-controller@.*/entando-k8s-plugin-controller@{{ SHAENTANDOPLUGINCONTROLLER }}/g" entando-operator-opensift-modified3.yaml > entando-operator-opensift-modified4.yaml
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} sed "s/entando-k8s-dbjob@.*/entando-k8s-dbjob@{{ SHAENTANDODBJOB }}/g" entando-operator-opensift-modified4.yaml > entando-operator-opensift-modified5.yaml
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} sed "s/entando-k8s-keycloak-controller@.*/entando-k8s-keycloak-controller@{{ SHAENTANDOKKCONTROLLER }}/g" entando-operator-opensift-modified5.yaml > entando-operator-opensift-modified6.yaml
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} sed "s/entando-k8s-database-service-controller@.*/entando-k8s-database-service-controller@{{ SHAENTANDODBSVCCONTROLLER }}/g" entando-operator-opensift-modified6.yaml > entando-operator-opensift-modified7.yaml
     - name: Retrive clientsecret
       shell: chdir=/home/{{ username }} sed "s/entando-k8s-app-plugin-link-controller@.*/entando-k8s-app-plugin-link-controller@{{ SHAENTANDOAPPPLUGINCONTROLLER }}/g" entando-operator-opensift-modified.yaml > entando-operator-opensift-modified8.yaml
     - name: Retrive clientsecret
       shell: chdir=/home/{{ username }} sed "s/entando-k8s-service@.*/entando-k8s-service@{{ SHAENTANDOSERVICE }}/g" entando-operator-opensift-modified8.yaml > entando-operator-opensift-complete.yaml
-#    - name: Retrive clientsecret
-#      shell: chdir=/home/{{ username }} sed "s/entando-process-driven-plugin@.*/entando-process-driven-plugi@{{ SHAENTANDOPDPLUGIN }}/g" entando-operator-opensift-modified9.yaml > entando-operator-opensift-modified10.yaml
-#    - name: Retrive clientsecret
-#      shell: chdir=/home/{{ username }} sed "s/entando-keycloak@.*/entando-keycloak@{{ SHAENTANDOKK }}/g" entando-operator-opensift-modified10.yaml > entando-operator-opensift-modified11.yaml
-#    - name: Retrive clientsecret
-#      shell: chdir=/home/{{ username }} sed "s/app-builder@.*/app-builder@{{ SHAENTANDOAPPBUILDER }}/g" entando-operator-opensift-modified11.yaml > entando-operator-opensift-modified12.yaml
-#    - name: Retrive clientsecret
-#      shell: chdir=/home/{{ username }} sed "s/entando-k8s-controller-coordinator@.*/entando-k8s-controller-coordinator@{{ SHAENTANDOCONTROLLERCOORDINATOR }}/g" entando-operator-opensift-modified12.yaml > entando-operator-opensift-complete.yaml
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} sed "s/entando-process-driven-plugin@.*/entando-process-driven-plugi@{{ SHAENTANDOPDPLUGIN }}/g" entando-operator-opensift-modified9.yaml > entando-operator-opensift-modified10.yaml
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} sed "s/entando-keycloak@.*/entando-keycloak@{{ SHAENTANDOKK }}/g" entando-operator-opensift-modified10.yaml > entando-operator-opensift-modified11.yaml
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} sed "s/app-builder@.*/app-builder@{{ SHAENTANDOAPPBUILDER }}/g" entando-operator-opensift-modified11.yaml > entando-operator-opensift-modified12.yaml
+    - name: Retrive clientsecret
+      shell: chdir=/home/{{ username }} sed "s/entando-k8s-controller-coordinator@.*/entando-k8s-controller-coordinator@{{ SHAENTANDOCONTROLLERCOORDINATOR }}/g" entando-operator-opensift-modified12.yaml > entando-operator-opensift-complete.yaml
 
     - name: Apply operator deployment updated
       shell: chdir=/home/{{ username }} ./oc replace -f entando-operator-opensift-complete.yaml -n {{ namespace }}
