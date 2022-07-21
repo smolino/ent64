@@ -210,7 +210,7 @@
       
     - name: Sleep for 60 seconds and continue with play
       wait_for:
-        timeout: 60
+        timeout: 50
 
     - name: Scale down Operator deployment
       shell: chdir=/home/{{ username }} ./oc scale deployment entando-operator -n {{ namespace }} --replicas=0
