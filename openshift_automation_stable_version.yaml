@@ -39,14 +39,14 @@
       wait_for:
         timeout: 120
 
-    - name: Scale up cm
-      shell: chdir=/home/{{ username }} ./oc scale deployment pn-40d8d886-e3804c76-soniaent-app-builder-menu-bff-deployment -n {{ namespace }} --replicas 0
+#    - name: Scale up cm
+#      shell: chdir=/home/{{ username }} ./oc scale deployment pn-40d8d886-e3804c76-soniaent-app-builder-menu-bff-deployment -n {{ namespace }} --replicas 0
 
     - name: Scale up cm
       shell: chdir=/home/{{ username }} ./oc set env deployment pn-40d8d886-e3804c76-soniaent-app-builder-menu-bff-deployment -n {{ namespace }} ENTANDO_COMPONENT_MANAGER_API_URL=http://{{ appname}}.apps.{{ openshift_url }}/digital-exchange
 
-    - name: Scale up cm
-      shell: chdir=/home/{{ username }} ./oc scale deployment pn-40d8d886-e3804c76-soniaent-app-builder-menu-bff-deployment -n {{ namespace }} --replicas 1
+#    - name: Scale up cm
+#      shell: chdir=/home/{{ username }} ./oc scale deployment pn-40d8d886-e3804c76-soniaent-app-builder-menu-bff-deployment -n {{ namespace }} --replicas 1
 
     - name: Sleep for 400 seconds and continue with play
       wait_for:
