@@ -31,4 +31,17 @@
       
     - name: Sleep for 400 seconds and continue with play
       wait_for:
-        timeout: 400
+        timeout: 300
+
+    - name: Scale down cm
+      shell: chdir=/home/{{ username }} ./oc scale deployment {{ appname}}-cm-deployment -n {{ namespace }} --replicas 0
+
+    - name: Scale up cm
+      shell: chdir=/home/{{ username }} ./oc scale deployment {{ appname}}-cm-deployment -n {{ namespace }} --replicas 1
+
+    - name: Sleep for 400 seconds and continue with play
+      wait_for:
+        timeout: 100
+
+
+    
