@@ -1,0 +1,34 @@
+---
+ - hosts: AWX
+   become: yes
+   become_user: "{{ username }}"
+   tasks:
+    - name: Login in
+      command: chdir=/home/{{ username }} ./oc login api.{{ openshift_url }}:6443 -u admin -p {{ password1 }} --insecure-skip-tls-verify=true
+
+    - name: Create Project
+      shell: chdir=/home/{{ username }} ./oc create namespace {{ namespace }}
+      
+    - name: Create subscription
+      template:
+        src: ./templates/entando-subscription-automation.j2
+        dest: /home/{{ username }}/entando-subscription-automation.yaml
+
+    - name: Install operator on namespace scope
+      shell: chdir=/home/{{ username }} ./oc apply -f entando-subscription-automation.yaml -n {{ namespace }}
+  
+    - name: Sleep for 60 seconds and continue with play
+      wait_for:
+        timeout: 60
+
+    - name: Copy Entando App Script
+      template:
+        src: ./templates/entando-app.j2
+        dest: /home/{{ username }}/entando-app.yaml
+
+    - name: Install Entando App on namespace scope
+      shell: chdir=/home/{{ username }} ./oc apply -f entando-app.yaml -n {{ namespace }}
+      
+    - name: Sleep for 400 seconds and continue with play
+      wait_for:
+        timeout: 400
