@@ -16,10 +16,6 @@
 
     - name: Install operator on namespace scope
       shell: chdir=/home/{{ username }} ./oc apply -f entando-subscription-automation.yaml -n {{ namespace }}
-  
-    - name: Sleep for 60 seconds and continue with play
-      wait_for:
-        timeout: 60
 
     - name: Copy Entando App Script
       template:
@@ -38,6 +34,10 @@
 
     - name: Scale up cm
       shell: chdir=/home/{{ username }} ./oc scale deployment {{ namespace }}-cm-deployment -n {{ namespace }} --replicas 1
+
+    - name: Sleep for 400 seconds and continue with play
+      wait_for:
+        timeout: 120
 
     - name: Scale up cm
       shell: chdir=/home/{{ username }} ./oc scale deployment pn-40d8d886-e3804c76-soniaent-app-builder-menu-bff-deployment -n {{ namespace }} --replicas 0
