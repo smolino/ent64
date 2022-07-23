@@ -15,13 +15,13 @@
           ent diag
           
     - name: Create Dir Logs
-      shell: mkdir -p /home/{{ username }}/log-collector/{{ appname }}-v{{ source }}/results
+      shell: mkdir -p /home/{{ username }}/log-collector/{{ appname }}-v{{ k8s }}/results
       
     - name: Collect all Entando application logs from pods
-      shell: kubectl get pods -n {{ namespace }} --no-headers | awk '{print $1}' | while read PODS;do kubectl logs $PODS -n {{ namespace }} > /home/{{ username }}/log-collector/{{ appname }}-v{{ source }}/$PODS.log;done
+      shell: kubectl get pods -n {{ namespace }} --no-headers | awk '{print $1}' | while read PODS;do kubectl logs $PODS -n {{ namespace }} > /home/{{ username }}/log-collector/{{ appname }}-v{{ k8s }}/$PODS.log;done
       
     - name: Copy Ent results
-      shell: mv /home/{{ username }}/.entando/reports/* /home/{{ username }}/log-collector/{{ appname }}-v{{ source }}
+      shell: mv /home/{{ username }}/.entando/reports/* /home/{{ username }}/log-collector/{{ appname }}-v{{ k8s }}
      
     - name: Extract Ent results
-      shell: chdir=/home/{{ username }}/log-collector/{{ appname }}-v{{ source }}  tar -xvf *.tgz
+      shell: chdir=/home/{{ username }}/log-collector/{{ appname }}-v{{ k8s }}  tar -xvf *.tgz
