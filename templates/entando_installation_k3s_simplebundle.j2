@@ -118,7 +118,7 @@ spec:
     version: 0.0.2
   - tarball: docker://registry.hub.docker.com/cecchisandrone/jeff-bundle
     version: 0.0.1" | kubectl apply -f -
-.entando/activate --quiet --force
+source /home/{{ username }}/.entando/activate --quiet --force 2>/dev/null
 ent namespace {{ namespace }}
 ent appname {{ appname }}
 ent ecr list
