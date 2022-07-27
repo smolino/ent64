@@ -8,16 +8,6 @@
    
     - name: Select working dir
       command: cd /home/{{ username }}
-
-    - name: Enable ent
-      shell: |
-          source /home/{{ username }}/.entando/activate --quiet --force 2>/dev/null
-          ent namespace {{ namespace }}
-          ent appname {{ appname }}
-
-    - name: Sleep for 20 seconds and continue
-      wait_for:
-        timeout: 5
       
     - name: Generate external keycloak yaml file or embedded
       template:
