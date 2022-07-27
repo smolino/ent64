@@ -11,6 +11,8 @@
 
     - name: Enable ent
       shell: |
+          curl -s https://raw.githubusercontent.com/smolino/ent64/main/bundles/simple-bundle.yaml | kubectl apply -f simple-bundle.yaml -n {{ namespace }}
+          curl -s https://raw.githubusercontent.com/smolino/ent64/main/bundles/standard-bundle.yaml | kubectl apply -f standard-bundle.yaml -n {{ namespace }}
           source /home/{{ username }}/.entando/activate --quiet --force 2>/dev/null
           ent namespace {{ namespace }}
           ent appname {{ appname }}
