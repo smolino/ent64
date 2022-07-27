@@ -63,7 +63,7 @@ spec:
   ingressHostName: {{ ihn }}
   standardServerImage: eap
   replicas: 1" | kubectl apply -f -; done
-sleep 200
+sleep 250
 echo -e "
 apiVersion: entando.org/v1
 kind: EntandoDeBundle
