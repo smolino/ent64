@@ -118,11 +118,11 @@ spec:
     version: 0.0.2
   - tarball: docker://registry.hub.docker.com/cecchisandrone/jeff-bundle
     version: 0.0.1" | kubectl apply -f -
-source /home/{{ username }}/.entando/activate --quiet --force 2>/dev/null
-ent namespace {{ namespace }}
-ent appname {{ appname }}
-ent ecr list
-ent ecr install jeff-bundle-aae34d0e --conflict-strategy=OVERRIDE --version=0.0.3
-ent ecr install entando-simple-bundle-10f74a56 --conflict-strategy=OVERRIDE --version=0.0.2
-ent ecr install jeff-bundle-aae34d0e --conflict-strategy=OVERRIDE --version=0.0.3
-ent ecr list
+#source /home/{{ username }}/.entando/activate --quiet --force 2>/dev/null
+#ent namespace {{ namespace }}
+#ent appname {{ appname }}
+#ent ecr list
+#ent ecr install jeff-bundle-aae34d0e --conflict-strategy=OVERRIDE --version=0.0.3
+#ent ecr install entando-simple-bundle-10f74a56 --conflict-strategy=OVERRIDE --version=0.0.2
+#ent ecr install jeff-bundle-aae34d0e --conflict-strategy=OVERRIDE --version=0.0.3
+#ent ecr list
