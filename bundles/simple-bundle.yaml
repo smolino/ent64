@@ -1,0 +1,23 @@
+apiVersion: entando.org/v1
+kind: EntandoDeBundle
+metadata:
+  labels:
+    bundle-type: standard-bundle
+    plugin: "true"
+    widget: "false"
+  name: entando-simple-bundle-10f74a56
+spec:
+  details:
+    description: This is a very simple bundle with one MS
+    dist-tags:
+      latest: 0.0.2
+    name: entando-simple-bundle
+    thumbnail: data:image/png;base64,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
+    versions:
+    - 0.0.2
+    - 0.0.1
+  tags:
+  - tarball: docker://registry.hub.docker.com/cecchisandrone/entando-simple-bundle
+    version: 0.0.2
+  - tarball: docker://registry.hub.docker.com/cecchisandrone/entando-simple-bundle
+    version: 0.0.1
