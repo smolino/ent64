@@ -7,6 +7,9 @@
     - name: Select working dir
       command: cd /home/{{ username }}
 
+    - name: Delete all entando resources 
+      shell: chdir=/home/{{ username }} kubectl delete "$(kubectl api-resources --namespaced=true --verbs=delete -o name -n {{ namespace }} | tr "\n" "," | sed -e 's/,$//')" --all -n {{ namespace }}
+
     - name: Delete namespace entando 
       shell: chdir=/home/{{ username }} kubectl delete ns {{ namespace }}
 
