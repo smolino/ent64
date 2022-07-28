@@ -10,9 +10,6 @@
     - name: Delete namespace entando 
       shell: chdir=/home/{{ username }} kubectl delete ns {{ namespace }}
 
-    - name: Delete namespace entando 
-      shell: chdir=/home/{{ username }} kubectl get namespace {{ namespace }} -o json | jq '.spec.finalizers= []' | kubectl replace --raw "/api/v1/namespaces/$namespace/finalize" -f -
-
     - name: Rename dir 
       shell: mv /home/{{ username }}/log-collector/{{ appname }}-v{{ k8s }} /var/www/html/logs/automation/$(date +'%m_%d_%y-%I_%M_%p')-{{ appname }}-v{{ k8s }}
 
